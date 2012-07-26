@@ -1,6 +1,6 @@
 % Copyright © 2012 Martin Ueding <dev@martin-ueding.de>
 %
-\documentclass[11pt]{article}
+\documentclass[11pt,german]{article}
 \usepackage[T1]{fontenc}
 \usepackage[a4paper, left=3cm, right=2cm, top=2cm, bottom=2cm]{geometry}
 \usepackage[activate]{pdfcprot}
@@ -17,6 +17,7 @@
 \usepackage{setspace}
 \usepackage{units}
 
+
 \definecolor{darkblue}{rgb}{0,0,.5}
 
 \hypersetup{
@@ -32,6 +33,7 @@
 \newcommand{\arcsinh}{\mathrm{arcsinh}}
 \newcommand{\asinh}{\mathrm{arcsinh}}
 \newcommand{\messwert}{\textcolor{blue}{\square}}
+\newcommand{\emesswert}{\left(\messwert \pm \messwert \right)}
 \newcommand{\card}{\mathrm{card}}
 \newcommand{\diam}{\mathrm{diam}}
 \newcommand{\e}[1]{\cdot 10^{#1}}
@@ -206,8 +208,9 @@ Wir bestimmen den Widerstand mit einem Multimeter auf
 \label{durchführung-d}
 
 Wir benutzen einen Spannungsteiler an einer $\unit[4]V$ Stromquelle. Dort sind
-$R_1$ und $R_2$ beliebig eingestellt. An den Abnehmer des Potentiometers hängen
-wir parallel Voltmeter und die Last aus Ampèremeter und Lastwiderstand $R_a$.
+$R_1$ und $R_2$ beliebig vorgegeben. An den Abnehmer des Spannungsteilers
+hängen wir parallel Voltmeter und die Last aus Ampèremeter und Lastwiderstand
+$R_a$.
 
 Wir messen mit einem Mavometer für 10 verschiedene Lastwiderstände $R_a$ den
 Strom $I$ und die Spannung $U$.
@@ -235,6 +238,54 @@ Dabei sind die Fehler in der Spannung und Strom:
 \textcolor{red}{Mir ist an dieser Stelle nicht klar, wie ich den
 Innenwiderstand des Mavometers benutzen soll.}
 
+\subsection{Aufgabe f: Helipot}
+
+\label{durchführung-f}
+
+Wir ersetzen nun den Spannungsteiler mit seinen beiden Widerständen durch ein Helipot.
+
+Nun messen wir für einige Einstellungen $x$ die Spannung. Dafür klemmen wir an den Abgriff des Helipots ein Mavometer als Voltmeter. Das Helipot hat $l = \messwert$ Skalenteilen.
+
+\begin{center}
+	\begin{tabular}{cc}
+		$x$ & $U_1$ in $\unit A$ \\
+		\hline
+		$\messwert$ & $\messwert$ \\
+		$\messwert$ & $\messwert$ \\
+		$\messwert$ & $\messwert$ \\
+			 \vdots & \vdots
+	\end{tabular}
+\end{center}
+
+Wir wiederholen die Messung mit einem Lastwiderstand von $R_a = \unit[20] \Omega$.
+
+\begin{center}
+	\begin{tabular}{cc}
+		$x$ & $U_1$ in $\unit A$ \\
+		\hline
+		$\messwert$ & $\messwert$ \\
+		$\messwert$ & $\messwert$ \\
+		$\messwert$ & $\messwert$ \\
+			 \vdots & \vdots
+	\end{tabular}
+\end{center}
+
+Wir wiederholen die Messung mit einem Lastwiderstand von $R_a = \unit[50] \Omega$.
+
+\begin{center}
+	\begin{tabular}{cc}
+		$x$ & $U_1$ in $\unit A$ \\
+		\hline
+		$\messwert$ & $\messwert$ \\
+		$\messwert$ & $\messwert$ \\
+		$\messwert$ & $\messwert$ \\
+			 \vdots & \vdots
+	\end{tabular}
+\end{center}
+
+Dabei ist der Fehler in der Spannungsmessung für in dieser Aufgabe:
+\[ \Delta U_1 = \unit[\messwert] \Omega \]
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                 Auswertung                                  %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -255,13 +306,21 @@ Mit den Daten aus \ref{durchführung-d} errechne ich hier den Innenwiderstand
 $R_i^s$ und Leerlaufspannung $U_0^s$ der neuen Spannungsquelle, die das
 Potentiometer einschließt.
 
-Dazu erzeuge ich ein $U$-$I$-Diagramm der Messwerte:
+Dazu erzeuge ich ein $U$-$I$-Diagramm der Messwerte und fitte diese mit einem linearen Modell:
+\[ U = U_0^s - R_i^s I \]
 
 \begin{figure}[h!]
 	\centering
 	\fehlt
 	\caption{$U$-$I$-Diagramm}
 \end{figure}
+
+Die Steigung gibt mir $R_i^s$, der Schnittpunkt mit der $U$-Achse gibt mir $U_0^s$. Der Fit liefert:
+\[
+	U_0^s = \unit[\emesswert] V,
+	\quad
+	R_i^s = \unit[\emesswert] \Omega
+\]
 
 Das Verhältnis von $R_2$ zum Gesamtwiderstand $R_1 + R_2$ soll ja konstant
 bleiben. Somit kann man nur beide Widerstände um einen gemeinsamen Faktor
@@ -277,6 +336,41 @@ $\lambda \in (0, 1)$ verkleinern:
 Wählt man $\lambda$ allerdings zu klein, kann man mit dem Potentiometer nicht
 mehr fein einstellen, außerdem würde die neue Spannungsquelle in sich
 kurzgeschlossen.
+
+\subsection{Aufgabe f: Helipot}
+
+Hier werte ich die Daten, die in \ref{durchführung-f} gemessen worden sind, aus. Ich stelle die drei Messreihen in einem $U_1$-$x$-Diagramm dar.
+
+\begin{figure}[h!]
+	\centering
+	\fehlt
+	\caption{$U_1$-$x$-Diagramm}
+\end{figure}
+
+\fehlt
+
+\subsection{Aufgabe g: Leistung}
+
+Die Leistung im Widerstand ist:
+\[ P(x) = U I = \frac{U^2}R \]
+
+Dies trage ich in einem Plot auf.
+
+\begin{figure}[h!]
+	\centering
+	\fehlt
+	\caption{$P$-$x$-Diagramm}
+\end{figure}
+
+Das Maximum liegt bei $x = \messwert$. Für die Widerstände $R_1$ und $R_2$ gilt:
+\begin{align*}
+	\frac{R_1}{R_1 + R_2} &= \frac{x}{l} \\
+	R_1 \left( 1 - \frac{x}{l} \right) &= \frac{x}{l} R_2 \\
+		   \left( \frac{l}{x} - 1 \right) &= \frac{R_2}{R_1}
+\end{align*}
+
+Für das Maximale $x = \messwert$ gilt dann:
+\[ \frac{R_1}{R_2} = \messwert \]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                  Resultat                                   %
