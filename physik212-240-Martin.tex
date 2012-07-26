@@ -1,0 +1,299 @@
+% Copyright © 2012 Martin Ueding <dev@martin-ueding.de>
+%
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[a4paper, left=3cm, right=2cm, top=2cm, bottom=2cm]{geometry}
+\usepackage[activate]{pdfcprot}
+\usepackage[ngerman]{babel}
+\usepackage[parfill]{parskip}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{color}
+\usepackage{epstopdf}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{setspace}
+\usepackage{units}
+
+\definecolor{darkblue}{rgb}{0,0,.5}
+
+\hypersetup{
+	breaklinks=false,
+	colorlinks=true,
+	linkcolor=black,
+	menucolor=black,
+	urlcolor=darkblue
+}
+
+\setlength{\columnsep}{2cm}
+
+\newcommand{\arcsinh}{\mathrm{arcsinh}}
+\newcommand{\asinh}{\mathrm{arcsinh}}
+\newcommand{\messwert}{\textcolor{blue}{\square}}
+\newcommand{\card}{\mathrm{card}}
+\newcommand{\diam}{\mathrm{diam}}
+\newcommand{\e}[1]{\cdot 10^{#1}}
+\newcommand{\fehlt}{\textcolor{red}{Hier fehlen noch Inhalte.}}
+\newcommand{\half}{\frac{1}{2}}
+\newcommand{\laplace}{\vnabla^2}
+\newcommand{\vnabla}{\vec{\nabla}}
+\renewcommand{\d}{\, \mathrm d}
+
+\title{physik212 -- Versuch 240 \\ Gleichströme, Spannungsquellen und Widerstände}
+\author{Martin Ueding}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\vfill
+
+Stellen in \textcolor{blue}{blau} werden bei der Versuchsdurchführung eingetragen. Zum Beispiel werden Messwerte mit „$\messwert$“ markiert. Stellen in \textcolor{red}{rot} müssen noch vor Versuchsbeginn vervollständigt werden.
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                 Einleitung                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Einleitung}
+
+\fehlt
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                   Theorie                                   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Theorie}
+
+\fehlt
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                  Aufgaben                                   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Aufgaben}
+
+\subsection{Aufgabe A: ideale Stromquelle}
+
+Eine ideale Stromquelle hat keinen Innenwiderstand.
+
+\subsection{Aufgabe B: Messvorschrift}
+
+Da über dem Innenwiderstand $R_i$ eine Spannung $R_i I$ abfällt, kann
+mit dem Strom und der gemessenen Spannung zurückgerechnet werden, groß
+die Leerlaufspannung $U_0$ ist. Um den Widerstand zu bestimmen, müssen
+allerdings zwei Messungen mit verschiedenen Ströme durchgeführt werden.
+
+Also zweimal $I$ und $U$ messen, dann gilt folgendes Gleichungssystem:
+\begin{align*}
+	U_0 &= U_1 + I_1 R_i \\
+	U_0 &= U_2 + I_2 R_i
+\end{align*}
+
+Dies kann dann nach $U_0$ und $R_i$ aufgelöst werden.
+
+\subsection{Aufgabe C: Wheatstonesche Brücke}
+
+Folgende Beziehung soll hergeleitet werden:
+\[ R_x = \frac{R_1}{R_2} R_0 \]
+
+Die Idee bei der Wheatstoneschen Brücke ist, dass sich beide Seiten
+genau die Waage halten und in der Mitte kein Strom mehr fließt. Das
+Potentiometer wird so eingestellt, dass beim drücken des Tasters keine
+Ladung fließt. Dies bedeutet, dass über $R_1$ und $R_x$ gleich viel
+Spannung abfällt.
+
+Der Strom, der durch die jeweilige Seite fließt, ist:
+\begin{align*}
+	I_l &= \frac U{R_1 + R_2} \\
+	I_r &= \frac U{R_x + R_0}
+\end{align*}
+
+Da kein Strom in der Mitte fließt, gilt:
+\[ I_r R_1 = I_l R_x \]
+
+Durch Einsetzen erhalte ich:
+\begin{align*}
+	\frac U{R_1 + R_2} R_1 &= \frac U{R_x + R_0} R_x \\
+	\frac {R_1}{R_2}  &= \frac {R_x}{R_0} \\
+	R_x &= \frac {R_1}{R_2} R_0
+\end{align*}
+
+\subsection{Aufgabe D: Strommessung}
+
+Idealerweise wird das Messgerät knapp voll ausgelastet, 80\% vielleicht.  Somit
+soll durch das Messgerät einen Strom von $\unit[0.8]{mA}$ messen. Der restliche
+Strom muss über einen anderen Widerstand laufen.
+
+Nach der Stromteilerregel:
+\[ I_M + I_S = \unit[4]A \]
+
+\[ I_M = \frac{R_S}{R_S + R_i} I \]
+
+Daraus folgt für den Shunt:
+\[ R_S = \frac{I_M R_i}{I - I_m} \approx \unit[0.2]{m\Omega} \]
+
+\subsection{Aufgabe E: Voltmeter}
+
+Das Voltmeter misst letztlich den Strom, der durch es fließt. Dieser ist im
+Idealfall proportional zur außen anliegenden Spannung.
+
+Wenn ich $\unit[1]V$ messen möchte, brauche ich einen Widerstand von
+$\unit[100]{k\Omega}$, damit über diesem diese Spannung abfällt. Da dieser
+Widerstand und der Innenwiderstand parallel geschaltet sind, geht durch jeden
+nur noch der halbe Strom durch, die gemessene Spannung ist also nur noch halb
+so groß. Das Messgerät sollte dann $\unit[0.5]V$ anzeigen.
+
+\subsection{Aufgabe F: Spannung mit Ampèremeter}
+
+Man kann mit einem Ampèremeter eine Spannung messen, indem man den Strom durch
+einen parallelen Widerstand misst. Dieser sollte allerdings sehr groß sein im
+Verhältnis zum Verbraucher, dessen Spannungsabfall man bestimmen möchte. Nach
+der Stromteilerregel gilt dann:
+\[ I_M = \frac{R_M}{R_M + R_V} I \]
+
+Den Strom $I_M$ kann man bestimmen. Wenn man $R_M$ und $R_V$ kennt, lässt sich
+daraus $I$ bestimmen. Aus $I$ kann man dann $U = R_V I$ den Spannungsabfall
+über dem Verbraucher (ohne Messgerät) bestimmen.
+
+\subsection{Aufgabe G: Formeln}
+
+Seien $R_{U, i}$ und $R_{I, i}$ die Innenwiderstände der Messgeräte und $R_P$
+der Widerstand des Potentiometers.
+\[ R_A = R_{I, i} + \left( \frac{1}{R_x} + \frac{1}{R_{U, i}} \right)^{-1} + R_P \]
+\[ R_B = \left( \frac{1}{R_{I, i} + R_x} + \frac{1}{R_{U, i}} \right)^{-1} + R_P \]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                Durchführung                                 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Aufbau und Durchführung}
+
+\subsection{Aufgabe a: $U$-$I$-Abhängigkeit}
+
+Wir vermessen die erste Schaltung, Schaltung A.
+
+Als Vorwiderstand für das Voltmeter benutzen wir $\unit[(\messwert \pm
+\messwert)] \Omega$ und für das Ampèremeter $\unit[(\messwert \pm \messwert)]
+\Omega$.
+
+\begin{center}
+	\begin{tabular}{cc}
+		$U$ in $\unit V$ & $I$ in $\unit A$ \\
+		\hline
+		$\messwert$ & $\messwert$ \\
+		$\messwert$ & $\messwert$ \\
+		$\messwert$ & $\messwert$ \\
+			 \vdots & \vdots
+	\end{tabular}
+\end{center}
+
+Dabei sind die Fehler in der Spannung und Strom:
+\[ \Delta V = \unit[\messwert]V, \quad \Delta A = \unit[\messwert] A \]
+
+\subsection{Aufgabe c: $R_x$ mit Multimeter}
+
+Wir bestimmen den Widerstand mit einem Multimeter auf
+\[ R_x = \unit[(\messwert \pm \messwert)]{\Omega} \]
+
+\subsection{Aufgabe d: Spannungsteiler}
+
+\label{durchführung-d}
+
+Wir benutzen einen Spannungsteiler an einer $\unit[4]V$ Stromquelle. Dort sind
+$R_1$ und $R_2$ beliebig eingestellt. An den Abnehmer des Potentiometers hängen
+wir parallel Voltmeter und die Last aus Ampèremeter und Lastwiderstand $R_a$.
+
+Wir messen mit einem Mavometer für 10 verschiedene Lastwiderstände $R_a$ den
+Strom $I$ und die Spannung $U$.
+
+\begin{center}
+	\begin{tabular}{ccc}
+		$R_x$ in $\unit \Omega$ & $U$ in $\unit V$ & $I$ in $\unit A$ \\
+		\hline
+		$\messwert$ & $\messwert$ & $\messwert$ \\
+		$\messwert$ & $\messwert$ & $\messwert$ \\
+		$\messwert$ & $\messwert$ & $\messwert$ \\
+		$\messwert$ & $\messwert$ & $\messwert$ \\
+		$\messwert$ & $\messwert$ & $\messwert$ \\
+		$\messwert$ & $\messwert$ & $\messwert$ \\
+		$\messwert$ & $\messwert$ & $\messwert$ \\
+		$\messwert$ & $\messwert$ & $\messwert$ \\
+		$\messwert$ & $\messwert$ & $\messwert$ \\
+		$\messwert$ & $\messwert$ & $\messwert$
+	\end{tabular}
+\end{center}
+
+Dabei sind die Fehler in der Spannung und Strom:
+\[ \Delta V = \unit[\messwert]V, \quad \Delta A = \unit[\messwert] A \]
+
+\textcolor{red}{Mir ist an dieser Stelle nicht klar, wie ich den
+Innenwiderstand des Mavometers benutzen soll.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                 Auswertung                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Auswertung}
+
+\subsection{Aufgabe a: $U$-$I$-Abhängigkeit}
+
+\fehlt
+
+\subsection{Aufgabe b: wahrer Wert $R_x$}
+
+\fehlt
+
+\subsection{Aufgabe e: neue Spannungsquelle}
+
+Mit den Daten aus \ref{durchführung-d} errechne ich hier den Innenwiderstand
+$R_i^s$ und Leerlaufspannung $U_0^s$ der neuen Spannungsquelle, die das
+Potentiometer einschließt.
+
+Dazu erzeuge ich ein $U$-$I$-Diagram der Messwerte:
+
+\begin{figure}[h!]
+	\centering
+	\fehlt
+	\caption{$U$-$I$-Diagram}
+\end{figure}
+
+Das Verhältnis von $R_2$ zum Gesamtwiderstand $R_1 + R_2$ soll ja konstant
+bleiben. Somit kann man nur beide Widerstände um einen gemeinsamen Faktor
+$\lambda \in (0, 1)$ verkleinern:
+\[
+	R_{1,2} \mapsto \lambda R_{1,2}
+	\quad \Rightarrow \quad
+	\frac{\lambda R_2}{\lambda R_1 + \lambda R_2} = \frac{R_1}{R_1 + R_2},
+	\quad
+	\frac{\lambda^2 R_1 R_2}{\lambda R_1 + \lambda R_2} = \lambda R_i^s
+\]
+
+Wählt man $\lambda$ allerdings zu klein, kann man mit dem Potentiometer nicht
+mehr fein einstellen, außerdem würde die neue Spannungsquelle in sich
+kurzgeschlossen.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                  Resultat                                   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Resultat}
+
+\fehlt
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                 Diskussion                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Diskussion}
+
+\fehlt
+
+\end{document}
+
+% vim: spelllang=de
