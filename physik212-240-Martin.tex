@@ -1,11 +1,12 @@
 % Copyright © 2012 Martin Ueding <dev@martin-ueding.de>
 %
 \documentclass[11pt,german]{article}
-\usepackage[T1]{fontenc}
+
 \usepackage[a4paper, left=3cm, right=2cm, top=2cm, bottom=2cm]{geometry}
 \usepackage[activate]{pdfcprot}
 \usepackage[ngerman]{babel}
 \usepackage[parfill]{parskip}
+\usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -16,7 +17,6 @@
 \usepackage{hyperref}
 \usepackage{setspace}
 \usepackage{units}
-
 
 \definecolor{darkblue}{rgb}{0,0,.5}
 
@@ -30,12 +30,14 @@
 
 \setlength{\columnsep}{2cm}
 
-\newcommand{\arcsinh}{\mathrm{arcsinh}}
-\newcommand{\asinh}{\mathrm{arcsinh}}
+\DeclareMathOperator{\arcsinh}{arsinh}
+\DeclareMathOperator{\arsinh}{arsinh}
+\DeclareMathOperator{\asinh}{arsinh}
+\DeclareMathOperator{\card}{card}
+\DeclareMathOperator{\diam}{diam}
+
 \newcommand{\messwert}{\textcolor{blue}{\square}}
 \newcommand{\emesswert}{\left(\messwert \pm \messwert \right)}
-\newcommand{\card}{\mathrm{card}}
-\newcommand{\diam}{\mathrm{diam}}
 \newcommand{\e}[1]{\cdot 10^{#1}}
 \newcommand{\fehlt}{\textcolor{red}{Hier fehlen noch Inhalte.}}
 \newcommand{\half}{\frac{1}{2}}
