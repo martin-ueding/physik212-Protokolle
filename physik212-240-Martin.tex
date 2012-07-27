@@ -43,6 +43,8 @@
 \newcommand{\vnabla}{\vec{\nabla}}
 \renewcommand{\d}{\, \mathrm d}
 
+\setcounter{tocdepth}{2}
+
 \title{physik212 -- Versuch 240 \\ Gleichströme, Spannungsquellen und Widerstände}
 \author{Martin Ueding}
 
@@ -64,7 +66,11 @@ Stellen in \textcolor{blue}{blau} werden bei der Versuchsdurchführung eingetrag
 
 \section{Einleitung}
 
-\fehlt
+In diesem Versuch vermessen wir verschiedene Widerstände und reale
+Spannungsquellen mit Mavometern.
+
+Außerdem wollen wir die Temperaturabhängigkeit der Widerstände verschiedener
+Materialien ausmessen.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                   Theorie                                   %
@@ -72,7 +78,29 @@ Stellen in \textcolor{blue}{blau} werden bei der Versuchsdurchführung eingetrag
 
 \section{Theorie}
 
-\fehlt
+Eine reale Spannungsquellen hat einen Innenwiderstand, so dass die Spannung mit dem entnommenen Strom abnimmt wie:
+\[ U = U_0 - R_i I \]
+
+In den ersten Versuchsteilen benutzen wir ein Potentiometer, das ein variabler Spannungsteiler ist. Ein solcher besteht aus zwei Widerständen, über denen die gesamte Spannung der Spannungsquelle abfällt. In der Mitte kann eine Teilspannung entnommen werden.
+
+Dies ermöglicht Schaltungen wie das belastete Potentiometer in \ref{durchführung-d} und \ref{durchführung-f}. Oder auch die Kompensationsschaltung nach Poggendorf in \ref{durchführung-h} sowie die Wheatstonesche Brücke in \ref{durchführung-k}.
+
+Im letzten Teil betrachten wie die Temperaturabhängigkeit von Widerständen. Bei Metallen nimmt die Leitfähigkeit aufgrund der Brownschen Bewegung des restlichen Metalls ab und somit steigt der Widerstand.
+
+Der Widerstand skaliert mit $R(\theta) = R_0 (1 + \alpha \theta)$, wobei $\alpha$ vom Material abhängt.
+
+Bei einem Halbleiter führt die thermische Bewegung erst dazu, dass sich
+überhaupt Elektronen im Leiterband befinden. Je höher die Temperatur ist, desto
+mehr Elektronen stehen zur Leitung zur Verfügung, und desto höher wird die
+Leitfähigkeit.
+
+Der Widerstand eines Halbleiters skaliert wie
+\[ R(T) = R_0 \exp \left( \frac{E_G}{2 k T} \right), \]
+wobei $E_G$ die Energie der Bandlücke ist.
+
+Als Messgerät benutzen wir das Mavometer, mit dem Spannungen im Voltbereich und Ströme im Milliampèrebereich gemessen werden können. Um den Messbereich einstellen zu können, müssen wir Vorwiderstände oder Shunts benutzen. Erstere senken die zu messende Spannung herab, letztere verbrennen den Großteil des Stroms, so dass das Messgerät nicht überlastet wird.
+
+Teilweise benutzen wir ein Digitalmultimeter, das im Prinzip ähnlich funktioniert, allerdings die Vorwiderstände und Shunts schon eingebaut hat.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                  Aufgaben                                   %
@@ -178,6 +206,8 @@ der Widerstand des Potentiometers.
 
 \subsection{Aufgabe a: $U$-$I$-Abhängigkeit}
 
+\label{durchführung-a}
+
 Wir vermessen die erste Schaltung, Schaltung A.
 
 Als Vorwiderstand für das Voltmeter benutzen wir $\unit[(\messwert \pm
@@ -188,7 +218,6 @@ Als Vorwiderstand für das Voltmeter benutzen wir $\unit[(\messwert \pm
 	\begin{tabular}{cc}
 		$U$ in $\unit V$ & $I$ in $\unit A$ \\
 		\hline
-		$\messwert$ & $\messwert$ \\
 		$\messwert$ & $\messwert$ \\
 		$\messwert$ & $\messwert$ \\
 			 \vdots & \vdots
@@ -244,13 +273,12 @@ Innenwiderstand des Mavometers benutzen soll.}
 
 Wir ersetzen nun den Spannungsteiler mit seinen beiden Widerständen durch ein Helipot.
 
-Nun messen wir für einige Einstellungen $x$ die Spannung. Dafür klemmen wir an den Abgriff des Helipots ein Mavometer als Voltmeter. Das Helipot hat $l = \messwert$ Skalenteilen.
+Nun messen wir für einige Einstellungen $x$ die Spannung. Dafür klemmen wir an den Abgriff des Helipots ein Mavometer als Voltmeter. Das Helipot hat $l = \messwert$ Skalenteile.
 
 \begin{center}
 	\begin{tabular}{cc}
 		$x$ & $U_1$ in $\unit A$ \\
 		\hline
-		$\messwert$ & $\messwert$ \\
 		$\messwert$ & $\messwert$ \\
 		$\messwert$ & $\messwert$ \\
 			 \vdots & \vdots
@@ -265,7 +293,6 @@ Wir wiederholen die Messung mit einem Lastwiderstand von $R_a = \unit[20] \Omega
 		\hline
 		$\messwert$ & $\messwert$ \\
 		$\messwert$ & $\messwert$ \\
-		$\messwert$ & $\messwert$ \\
 			 \vdots & \vdots
 	\end{tabular}
 \end{center}
@@ -278,13 +305,108 @@ Wir wiederholen die Messung mit einem Lastwiderstand von $R_a = \unit[50] \Omega
 		\hline
 		$\messwert$ & $\messwert$ \\
 		$\messwert$ & $\messwert$ \\
-		$\messwert$ & $\messwert$ \\
 			 \vdots & \vdots
 	\end{tabular}
 \end{center}
 
 Dabei ist der Fehler in der Spannungsmessung für in dieser Aufgabe:
 \[ \Delta U_1 = \unit[\messwert] \Omega \]
+
+\subsection{Aufgabe h: Weston-Element}
+
+\label{durchführung-h}
+
+Wir bauen eine Kompensationsschaltung nach Poggendorff auf.
+
+\subsection{Aufgabe i: Leerlaufspannung}
+
+\label{durchführung-i}
+
+Wir messen die Leerlaufspannung einer Batterie mit Hilfe der kalibrierten
+Anordnung. Dazu regeln wir $x$, bis auf den Druck auf den Taster keine Ladung
+mehr fließt. Wir brauchen auch den Gesamtwiderstand $R$ des
+Schleifendrahtpotentiometers sowie die Anzahl der Skaleneinheiten $l$.
+
+Wir erhalten:
+\[
+	R = \unit[\emesswert]\Omega,
+	\quad
+	l = \messwert,
+	\quad
+	x = \messwert \pm \messwert,
+\]
+
+\subsection{Aufgabe j: Digitalmessgerät}
+
+\label{durchführung-j}
+
+Wir messen die Leerlaufspannung der Batterie mit einem Mavometer und mit einem
+Digitalmessgerät. Wir erhalten:
+\[ U_M = \unit[\emesswert] V, \quad U_D = \unit[\emesswert] V \]
+
+Das Mavometer misst nicht korrekt, da es selbst noch einen Innenwiderstand hat,
+durch den Strom fließt. Dadurch handelt es sich nicht mehr um die
+Leerlaufspannung bei der Batterie.
+
+\subsection{Aufgabe k: Wheatstonesche Brücke}
+
+\label{durchführung-k}
+
+Wir bauen eine Wheatstonesche Brücke auf. Dabei wählen wir die Widerstände:
+\[
+	R_0 = \unit[\emesswert] \Omega,
+	\quad
+	R = \unit[\emesswert] \Omega
+\]
+
+Keine Ladung fließt, wenn wir für $R_1$ und $R_2$ folgende Werte eingestellt haben:
+\[
+	R_1 = \unit[\emesswert] \Omega,
+	\quad
+	R_2 = \unit[\emesswert] \Omega
+\]
+
+\subsection{Aufgabe m: Temperaturabhängigkeit}
+
+\label{durchführung-m}
+
+Wir heizen die Temperatur im Reagenzglas langsam auf knapp $\unit[100]{^\circ C}$ auf und messen dann immer im Wechsel die Widerstände der Leiter mit einem Digitalmultimeter.
+
+Dabei erhalten wir für den Platindraht:
+
+\begin{center}
+	\begin{tabular}{cc}
+		T in $\unit{^\circ C}$ & Widerstand in $\unit \Omega$ \\
+		\hline
+		$\messwert$ & $\messwert$ \\
+		$\messwert$ & $\messwert$ \\
+		   \vdots & \vdots
+	\end{tabular}
+\end{center}
+
+Und für den Manganindraht:
+
+\begin{center}
+	\begin{tabular}{cc}
+		T in $\unit{^\circ C}$ & Widerstand in $\unit \Omega$ \\
+		\hline
+		$\messwert$ & $\messwert$ \\
+		$\messwert$ & $\messwert$ \\
+		   \vdots & \vdots
+	\end{tabular}
+\end{center}
+
+Sowie für den Heißleiter:
+
+\begin{center}
+	\begin{tabular}{cc}
+		T in $\unit{^\circ C}$ & Widerstand in $\unit \Omega$ \\
+		\hline
+		$\messwert$ & $\messwert$ \\
+		$\messwert$ & $\messwert$ \\
+		   \vdots & \vdots
+	\end{tabular}
+\end{center}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                 Auswertung                                  %
@@ -294,11 +416,29 @@ Dabei ist der Fehler in der Spannungsmessung für in dieser Aufgabe:
 
 \subsection{Aufgabe a: $U$-$I$-Abhängigkeit}
 
+Die Schaltung besteht aus den Widerständen des Ampèremeters $R_I$, des Voltmeters $R_U$, des unbekannten Widerstands $R_x$ und des Potentiometers $R_P$.  Der Ersatzwiderstand ist einfach:
+\[ R_A = R_I + \left( \frac{1}{R_X} + \frac 1{R_U} \right)^{-1} + R_P \]
+
+Den Strom $I$ können wir direkt messen.
+
 \fehlt
 
 \subsection{Aufgabe b: wahrer Wert $R_x$}
 
-\fehlt
+Die Spannung, die wir über dem unbekannten Widerstand gemessen haben, spiegelt jedoch nur den um den Innenwiderstand des Voltmeters reduzierten Strom dar. Daher muss ich noch die Stromteilerregel anwenden und erhalte:
+\[ U_x = \frac{R_U^2}{R_x + R_U} I \]
+
+Dies kann ich umstellen und erhalte:
+\[ R_x = \frac{R_U^2 I}{U_x} - R_U \]
+
+Mit den Innenwiderständen
+\[
+	R_U = \unit[\emesswert] \Omega,
+	\quad
+	R_I = \unit[\emesswert] \Omega
+\]
+erhalte ich als echten Widerstand:
+\[ R_x = \unit[\emesswert] \Omega \]
 
 \subsection{Aufgabe e: neue Spannungsquelle}
 
@@ -366,11 +506,91 @@ Das Maximum liegt bei $x = \messwert$. Für die Widerstände $R_1$ und $R_2$ gil
 \begin{align*}
 	\frac{R_1}{R_1 + R_2} &= \frac{x}{l} \\
 	R_1 \left( 1 - \frac{x}{l} \right) &= \frac{x}{l} R_2 \\
-		   \left( \frac{l}{x} - 1 \right) &= \frac{R_2}{R_1}
+		   \left( \frac{l}{x} - 1 \right) &= \frac{R_2}{R_1} \\
+					\frac{R_1}{R_2} &= \messwert
 \end{align*}
 
-Für das Maximale $x = \messwert$ gilt dann:
-\[ \frac{R_1}{R_2} = \messwert \]
+\subsection{Aufgabe i: Leerlaufspannung}
+
+\label{auswertung-i}
+
+Hier werte ich die Daten aus \ref{durchführung-i} aus.
+
+Aus dem gemessenen $x$-Wert, bei dem gerade keine Ladung mehr fließt, kann ich die Spannung der zu vermessenden Stromquelle errechnen. Es gilt:
+\begin{align*}
+	U_S &= R \\
+	&= \left( 1 - \frac xl \right) R + \frac xl \\
+	&= \left( 1 - \frac xl \right) R + U_W
+\end{align*}
+
+Der Messfehler variiert mit dem $x$-Wert wie folgt:
+\[
+	\Delta U_S = \sqrt{
+		\left( \left( 1 - \frac xl \right) \frac 1l \Delta x \right)^2
+		+ \left( \left( 1 - \frac xl \right) \Delta R \right)^2
+		+ \left( \Delta U_W \right)^2
+	}
+\]
+
+Würde man ein Weston-Element mit einer Spannung von $\unit[10] V$ verwenden,
+könnte man die Schaltung so nicht mehr verwenden. Würde man die Position von
+Batterie und Weston-Element tauschen, wäre dies jedoch möglich.
+
+\textcolor{red}{Ob das jedoch sinnvoll ist?}
+
+\subsection{Aufgabe l: Widerstand $R$}
+
+Der Widerstand $R$ sollte ungefähr $\unit[\messwert] \Omega$ haben. \textcolor{red}{Warum?}
+
+\fehlt
+
+\subsection{Aufgabe n: $R(T)$}
+
+Hier werte ich die Daten aus \ref{durchführung-m} aus.
+
+\subsubsection{metallische Leiter}
+
+Ich plotte die Messwerte für die beiden Metalle in einem Widerstand-gegen-Temperatur-Diagramm:
+
+\begin{figure}[h!]
+	\centering
+	\fehlt
+	\caption{$R$-$\theta$-Diagramm für die Metalle}
+\end{figure}
+
+An diesen Plot habe ich folgende Funktion mit Least-Squares gefittet:
+\[ R(T) = R_0 \left( 1 - \alpha \theta \right) \]
+
+Als Fitparameter erhalte ich:
+\[
+	R_0 = \unit[\emesswert] \Omega,
+	\quad
+	\alpha = \unitfrac[\emesswert]\Omega{^\circ C}
+\]
+
+Wenn die Temperatur gegen den absoluten Nullpunkt geht, \textcolor{blue}{ist $R$ wahrscheinlich 0.}
+
+\subsubsection{Halbleiter}
+
+Für den Halbleiter plotte ich den Widerstand $R$ gegen die absolute Temperatur $T$. Dabei setze ich die $R$-Achse logarithmisch.
+
+\begin{figure}[h!]
+	\centering
+	\fehlt
+	\caption{$R$-$T$-Diagramm für die Metalle}
+\end{figure}
+
+An die Messdaten fitte ich folgende Funktion:
+\[ R(T) = R_0 \exp \left( \frac{E_G}{2 k T} \right) \]
+
+Als Fitparameter erhalte ich:
+\[
+	R_0 = \unit[\emesswert] \Omega,
+	\quad
+	E_G = \unit[\emesswert] J = \unit[\emesswert]{eV}
+\]
+
+Im Theorieteil sind einige Gap-Energien gegeben. Am besten passt \textcolor{blue}{Material} zu den Messwerten.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                  Resultat                                   %
