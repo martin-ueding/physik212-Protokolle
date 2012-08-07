@@ -182,13 +182,7 @@ function eta = luft_fit_function(T, par)
 	eta = par(1) + par(2) * T;
 end
 
-# Erzeuge einen Plot von den Werten.
-title("Viskosität von Luft");
-luft.plot = plot(luft.data(:, 1), luft.data(:, 2), "+k", luft.data(:, 1), luft.data(:, 2), "-k");
-#set(luft.plot, "linestyle", "none");
-print("luft.eps", "-tight");
-
-[f, p, cvg, iter, corp, covp, covr, stdredid] = leasqr(
+[f, par, cvg, iter, corp, covp, covr, stdredid] = leasqr(
 		luft.data(:, 1),
 		luft.data(:, 2),
 		[1, 1],
@@ -197,7 +191,28 @@ print("luft.eps", "-tight");
 		20
 		);
 
-luft.eta.val = luft_fit_function(luft.T.val, p);
+plot_x = luft.data(:, 1);
+plot_y = luft.data(:, 2);
+plot_error = ones(size(plot_y)) * 0;
+
+function_x = (min(plot_x) : (max(plot_x)-min(plot_x))/10 : max(plot_x))';
+function_y = luft_fit_function(function_x, par);
+
+# Erzeuge einen Plot von den Werten.
+hold on;
+
+p1 = errorbar(plot_x, plot_y, plot_error, "~.k");
+p2 = plot(function_x, function_y, "-k");
+
+set(gca(), "fontsize", 20);
+set(p1, "linestyle", "none");
+set(p1, "marker", "+");
+# FIXME Umlaut im Titel, Encoding richtig einstellen.
+title("Viskosität von Luft");
+
+print("luft.eps", "-tight");
+
+luft.eta.val = luft_fit_function(luft.T.val, par);
 
 v_array = [];
 
