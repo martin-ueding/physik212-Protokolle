@@ -15,7 +15,35 @@
 # this program. If not, see http://www.gnu.org/licenses/.
 
 ###############################################################################
-#                                  Messwerte                                  #
+#                          Messwerte Fadenstrahlrohr                          #
+###############################################################################
+
+# Daten von Fadenstrahlrohr. Erste Spalte ist $r$ in [m], zweite $U$ in [V],
+# dritte $I_1$ in A und die letzte $I_1$ in A.
+faden.data = [
+0.02   0.14734   0.21169   0.94109
+0.02   0.1523772   0.3873263   0.1532324
+0.03   0.37048   0.63075   0.94510
+0.03   0.8603026   0.4372725   0.0509417
+0.04   0.0025177   0.7107548   0.7497745
+0.04   0.54712   0.28614   0.86428
+0.05   0.43760   0.43785   0.70058
+0.05   0.8823911   0.1423691   0.4405897
+];
+
+faden.U.err = 0.01;
+faden.r.err = 0;
+faden.I.err = 0;
+
+R.val = 2.1;
+R.err = 0;
+
+n.val = 20;
+
+mu0.val = 4 * pi * 10^-7;
+
+###############################################################################
+#                          Messwerte Millikanversuch                          #
 ###############################################################################
 
 # Lufttemperatur [°C].
@@ -92,7 +120,49 @@ luft.data = [
 ];
 
 ###############################################################################
-#                                 Rechnungen                                  #
+#                         Rechnungen Fadenstrahlrohr                          #
+###############################################################################
+
+plot_x = faden.data(:, 1) .^2 .* 0.5 .* (faden.data(:, 2) + faden.data(:, 3)) .^2;
+plot_y = faden.data(:, 2);
+plot_weights = ones(size(faden.data(:, 1))) * faden.U.err;
+
+function U = faden_funktion(rIsq, par)
+	U = par(1) * rIsq;
+end
+
+[f, par, cvg, iter, corp, covp, covr, stdredid] = leasqr(
+		plot_x,
+		plot_y,
+		[1],
+		"faden_funktion",
+		0.001,
+		20
+		);
+
+function_x = (min(plot_x):(max(plot_x)-min(plot_x))/10:max(plot_x))';
+function_y = faden_funktion(function_x, par);
+
+alpha1.val = par(1);
+alpha1.err = sqrt(diag(covp))(1);
+
+printf("Fadenstrahlrohr\n\n");
+
+printf("α₁ = %.3g ± %.3g\n", alpha1.val, alpha1.err);
+
+plot(plot_x, plot_y, "+k", function_x, function_y, "-");
+print("fadenstrahl.eps", "-tight");
+
+em.val = 2/.716^2 * R.val^2 / n.val^2 / mu0.val^2 * alpha1.val;
+em.err = sqrt(sum([
+			(2/.716^2 * R.val / n.val^2 / mu0.val^2 * alpha1.val * R.err )^2
+			(2/.716^2 * R.val / n.val^2 / mu0.val^2 * alpha1.err)^2
+			]));
+
+printf("e/m = %.3g ± %.3g C/kg\n", em.val, em.err);
+
+###############################################################################
+#                         Rechnungen Millikanversuch                          #
 ###############################################################################
 
 # Errechne die Viskosität von Luft anhand eines linearen Fits.
@@ -126,7 +196,7 @@ for i = 1:length(millikan.data)
 	v_array = [v_array ; v];
 endfor
 
-millikan.dev = 2 * millikan.v(:, 1) - millikan.v(:, 2) + millikan.v(:, 3);
+millikan.dev = 2 * v_array(:, 1) - v_array(:, 2) + v_array(:, 3);
 
 millikan.v = zeros(10, 3);
 
@@ -134,7 +204,7 @@ for i = 1:length(v_array)
 	millikan.v(floor((i-1)/5+1), :) +=  v_array(i, :);
 endfor
 
-# Berechne die Abweichungen
+# Berechne die Abweichungen.
 
 v_array
 millikan.v

@@ -259,7 +259,7 @@ Die Messwerte sind in Tabelle \ref{table:Aufgabe-a}.
 	\centering
 
 	\begin{tabular}{cccc}
-		$r$ in $\unit m$ & $U$ in $\unit V$ & $I_1$ in $\unit A$ & $I_1$ in $\unit A$ \\
+		$r$ in $\unit m$ & $U$ in $\unit V$ & $I_1$ in $\unit A$ & $I_2$ in $\unit A$ \\
 		\hline
 		$0.02$ & $\messwert$ & $\messwert$ & $\messwert$ \\
 		$0.03$ & $\messwert$ & $\messwert$ & $\messwert$ \\
@@ -422,9 +422,16 @@ Nach \eqref{eq:Helmholtz} und \eqref{eq:spezifische-Masse} ergibt sich:
 \end{equation}
 
 Ich stelle die Daten aus Tabelle \ref{table:Aufgabe-a} in einem $U$ gegen
-$(rI)^2$ Diagramm dar. Diese Daten fitte ich mit einem linearen Modell mit dem
-Parameter $\alpha_1$:
+$(rI)^2$ Diagramm dar (Abbildung \ref{fig:graph-fadenstrahlrohr}). Diese Daten
+fitte ich mit einem linearen Modell mit dem Parameter $\alpha_1$:
 \[ U = \underbrace{\frac{0.716^2}{2} \frac{n^2 \mu_0^2}{R^2} \frac em}_{\alpha_1} r^2 I^2 \]
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\textwidth]{fadenstrahl.pdf}
+	\caption{Graph der Messungen beim Fadenstrahlrohr}
+	\label{fig:graph-fadenstrahlrohr}
+\end{figure}
 
 Nach least-squares erhalte ich:
 \[ \alpha_1 = \unitfrac[\emesswert]{s^3 A}{m \cdot kg} \]
