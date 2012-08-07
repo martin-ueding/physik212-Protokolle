@@ -130,7 +130,7 @@ woraus die Ladung folgt.
 \subsection{Aufgabe A: Skizzen}
 
 Es sollen die Kraftvektoren skizziert werden. Dies habe ich für ein
-aufsteigendes in Abbildung \ref{fig:aufsteigend} und für fallendes Öltröpfchen
+aufsteigendes Öltröpfchen in Abbildung \ref{fig:aufsteigend} und für fallendes
 in Abbildung \ref{fig:fallend} gemacht.
 
 \begin{figure}[h!]
@@ -152,17 +152,70 @@ in Abbildung \ref{fig:fallend} gemacht.
 Es soll die Gleichung 249.10 bewiesen werden:
 \[ 2 v_\circ = v_\Downarrow - v_\Uparrow \]
 
-\fehlt
+\begin{proof}
+	In der Anleitung sind folgende Formeln gegeben. Sie beschreiben das
+	Kräftegleichgewicht für ein fallendes \eqref{eq:A-fallend} und steigendes
+	\eqref{eq:A-steigend} Tröpfchen:
+	%
+	\begin{equation}
+		\label{eq:A-fallend}
+		\frac{4 \pi}3 r^3 \left( \rho_\text{Öl} - \rho_\text{Luft} \right) g
+		- 6 \pi \eta r v_\Downarrow
+		= - N e E
+	\end{equation}
+	%
+	\begin{equation}
+		\label{eq:A-steigend}
+		\frac{4 \pi}3 r^3 \left( \rho_\text{Öl} - \rho_\text{Luft} \right) g
+		+ 6 \pi \eta r v_\Uparrow
+		= + N e E
+	\end{equation}
+
+	Entsprechend kann ich auch ein Kräftegleichgewicht für ein fehlendes
+	elektrisches Feld aufstellen:
+	%
+	\begin{equation}
+		\label{eq:A-alleine}
+		\frac{4 \pi}3 r^3 \left( \rho_\text{Öl} - \rho_\text{Luft} \right) g
+		+ 6 \pi \eta r v_\circ
+		= 0
+	\end{equation}
+
+	Nun rechne ich $2 \eqref{eq:A-alleine} - \eqref{eq:A-fallend} -
+	\eqref{eq:A-steigend}$, so dass sich der Teil der Schwerkraft und des
+	elektrischen Felds weghebt und erhalte:
+	%
+	\begin{align*}
+		12 \pi \eta r v_\circ - 6 \pi \eta r v_\Downarrow + 6 \pi \eta r v_\Uparrow &= 0 \\
+		2 v_\circ - v_\Downarrow + v_\Uparrow &= 0 \\
+		2 v_\circ &= v_\Downarrow - v_\Uparrow \\
+	\end{align*}
+
+	Dies ist die gesuchte Beziehung.
+\end{proof}
 
 \subsection{Aufgabe C: Gleichung 249.11}
 
 Es soll die Gleichung 249.11 bewiesen werden:
 \[ e_\circ = e_{S, i} \left( 1 + \frac A{r_i} \right)^{-\frac 32} \]
 
-\fehlt
+\begin{proof}
+	In Gleichung \eqref{eq:249.8} ist zu sehen, dass gilt:
+	\[ r \propto \eta^{\frac 12} \]
+
+	In Gleichung \eqref{eq:249.9} taucht noch ein $\eta$ neben dem $r$ auf.
+	Somit gilt also:
+	\[ N e \propto \eta^{\frac 32} \]
+
+	Im Text wurde erwähnt, dass gilt:
+	\[ \eta_\text{eff} = \eta_\text{Luft} \left( 1 + \frac Ar \right)^{-1} \]
+
+	Somit gilt:
+	\[ e_\circ = e_S \left( 1 + \frac Ar \right)^{-\frac 32} \]
+\end{proof}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%                          Aufbau und Durchführung                           %
+%                          Aufbau und Durchführung                            %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Aufbau und Durchführung}
