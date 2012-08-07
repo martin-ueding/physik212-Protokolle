@@ -140,7 +140,7 @@ end
 		20
 		);
 
-function_x = (min(plot_x):(max(plot_x)-min(plot_x))/10:max(plot_x))';
+function_x = (min(plot_x) : (max(plot_x)-min(plot_x))/10 : max(plot_x))';
 function_y = faden_funktion(function_x, par);
 
 alpha1.val = par(1);
