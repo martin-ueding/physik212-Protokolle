@@ -11,7 +11,6 @@ luft.eps: 249.m
 
 .PHONY: clean
 clean:
-	$(RM) *.class *.jar
-	$(RM) *.o *.out
-	$(RM) *.pyc *.pyo
-	$(RM) *.orig
+	$(RM) luft.eps
+	$(RM) luft.pdf
+	latexmk -C
