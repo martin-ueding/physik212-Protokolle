@@ -125,7 +125,7 @@ luft.data = [
 
 plot_x = faden.data(:, 1) .^2 .* 0.5 .* (faden.data(:, 2) + faden.data(:, 3)) .^2;
 plot_y = faden.data(:, 2);
-plot_weights = ones(size(faden.data(:, 1))) * faden.U.err;
+plot_error = ones(size(faden.data(:, 1))) * faden.U.err;
 
 function U = faden_funktion(rIsq, par)
 	U = par(1) * rIsq;
@@ -150,7 +150,18 @@ printf("Fadenstrahlrohr\n\n");
 
 printf("α₁ = %.3g ± %.3g\n", alpha1.val, alpha1.err);
 
-plot(plot_x, plot_y, "+k", function_x, function_y, "-");
+[plot_x plot_y plot_error]
+
+hold on;
+
+p1 = errorbar(plot_x, plot_y, plot_error, "~.k");
+p2 = plot(function_x, function_y, "-k");
+
+set(gca(), "fontsize", 20);
+set(p1, "linestyle", "none");
+set(p1, "marker", "+");
+title("Fadenstrahlrohr");
+
 print("fadenstrahl.eps", "-tight");
 
 em.val = 2/.716^2 * R.val^2 / n.val^2 / mu0.val^2 * alpha1.val;
