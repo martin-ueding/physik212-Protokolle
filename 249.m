@@ -214,9 +214,3 @@ millikan.v = zeros(10, 3);
 for i = 1:length(v_array)
 	millikan.v(floor((i-1)/5+1), :) +=  v_array(i, :);
 endfor
-
-# Berechne die Abweichungen.
-
-v_array
-millikan.v
-millikan.dev
