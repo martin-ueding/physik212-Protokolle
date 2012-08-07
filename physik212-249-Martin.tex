@@ -71,22 +71,51 @@ in \textcolor{red}{rot} müssen noch vor Versuchsbeginn vervollständigt werden.
 
 \section{Einleitung}
 
+In diesen Versuchen wollen wir die Ladung und Masse des Elektrons bestimmen.
+Dazu bestimmen wir zuerst die spezifische Masse $\frac em$ mit dem
+Fadenstrahlrohr und anschließend die Ladung $e$ mit dem Millikanversuch.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                   Theorie                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Theorie}
 
-Die spezifische Masse ist gegeben durch:
+\subsection{Fadenstrahlrohr}
+
+Im Fadenstrahlrohr werden Elektronen auf eine Energie $W = Ue$ beschleunigt.
+Damit haben sie eine Geschwindigkeit von $v = \sqrt{\frac{2W}{m}}$. Im
+Magnetfeld $B$ beschreiben sie eine Kreisbahn mit:
+\[ m \frac{v^2}r = e v B \]
+
+Daraus kann man die spezifische Masse ableiten:
 \begin{equation}
 	\label{eq:spezifische-Masse}
 	\frac em = \frac{2U}{r^2 B^2}
 \end{equation}
 
-Das Magnetfeld im Inneren der Helmholtz-Spulen ist gegeben durch:
+Das Magnetfeld im Inneren der Helmholtz-Spulen kann nach Biot-Savart hergeleitet werden und ist gegeben durch:
 \begin{equation}
 	\label{eq:Helmholtz}
 	B = 0.716 \mu_0 \frac{nI}R
+\end{equation}
+
+\subsection{Millikanversuch}
+
+Im Millikanversuch werden einzelne Öltröpfchen, die wenige Elementarladungen tragen, in einen Kondensator gebracht. Ihr Radius wird über die Sedimentgeschwindigkeiten bestimmt.
+%
+\begin{equation}
+	\label{eq:249.8}
+	r = \sqrt{\frac{9 \eta \left( v_\Downarrow - v_\Uparrow \right)}{4 g (\rho_\text{Öl} - \rho_\text{Luft})}}
+\end{equation}
+
+Über die Dichte wird dann die Masse bestimmt, daraus dann die
+Schwerebeschleunigung. Daraus kann dann die elektrische Kraft bestimmt werden,
+woraus die Ladung folgt.
+%
+\begin{equation}
+	\label{eq:249.9}
+	N e = 3 \pi \eta r \frac{v_\Downarrow + v_\Uparrow }E
 \end{equation}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -97,18 +126,22 @@ Das Magnetfeld im Inneren der Helmholtz-Spulen ist gegeben durch:
 
 \subsection{Aufgabe A: Skizzen}
 
-Es sollen die Kraftvektoren für ein aufsteigendes und fallendes Öltröpfchen skizziert werden.
+Es sollen die Kraftvektoren skizziert werden. Dies habe ich für ein
+aufsteigendes in Abbildung \ref{fig:aufsteigend} und für fallendes Öltröpfchen
+in Abbildung \ref{fig:fallend} gemacht.
 
 \begin{figure}[h!]
 	\centering
-	\fehlt
+	\includegraphics[width=.5\textwidth]{aufsteigend.pdf}
 	\caption{aufsteigendes Öltröpfchen}
+	\label{fig:aufsteigend}
 \end{figure}
 
 \begin{figure}[h!]
 	\centering
-	\fehlt
+	\includegraphics[width=.5\textwidth]{fallend.pdf}
 	\caption{fallendes Öltröpfchen}
+	\label{fig:fallend}
 \end{figure}
 
 \subsection{Aufgabe B: Gleichung 249.10}
@@ -131,7 +164,8 @@ Es soll die Gleichung 249.11 bewiesen werden:
 
 \section{Aufbau und Durchführung}
 
-Wir beginnen mit dem Fadenstrahlrohr. Der Aufbau ist in Abbildung \ref{fig:Fadenstrahlrohr} skizziert.
+Wir beginnen mit dem Fadenstrahlrohr. Der Aufbau ist in Abbildung
+\ref{fig:Fadenstrahlrohr} skizziert.
 
 \begin{figure}[h!]
 	\centering
@@ -144,11 +178,19 @@ Wir beginnen mit dem Fadenstrahlrohr. Der Aufbau ist in Abbildung \ref{fig:Faden
 
 \label{Durchführung-a}
 
-Wir heizen das Fadenstrahlrohr ungefähr drei Minuten auf. Danach wählen wir eine Spannung für Anode $U_A$ und Wehnelt-Zylinder $U_W$. Deren Differenz ist die Beschleunigungsspannung $U$. Diese bestimme ich allerdings erst in der Auswertung.
+Wir heizen das Fadenstrahlrohr ungefähr drei Minuten auf. Danach wählen wir
+eine Spannung für Anode $U_A$ und Wehnelt-Zylinder $U_W$. Deren Differenz ist
+die Beschleunigungsspannung $U$. Diese bestimme ich allerdings erst in der
+Auswertung.
 
-Dann leuchten wir die Messeinrichtung im Inneren mit einer Taschenlampe an, damit diese phosphoresziert. Wir schalten den Strom durch die Helmholtz-Spulen ein. Damit der Fadenstrahl genau senkrecht zum Magnetfeld verläuft, drehen wir das Fadenstrahlrohr entsprechend.
+Dann leuchten wir die Messeinrichtung im Inneren mit einer Taschenlampe an,
+damit diese phosphoresziert. Wir schalten den Strom durch die Helmholtz-Spulen
+ein. Damit der Fadenstrahl genau senkrecht zum Magnetfeld verläuft, drehen wir
+das Fadenstrahlrohr entsprechend.
 
-Nun stellen wir den Spulenstrom so ein, dass der Strahl genau auf eine Messmarke trifft. Wir lesen die Beschleunigungsspannung $U$, den Radius $r$ und den Spulenstrom $I$ ab.
+Nun stellen wir den Spulenstrom so ein, dass der Strahl genau auf eine
+Messmarke trifft. Wir lesen die Beschleunigungsspannung $U$, den Radius $r$ und
+den Spulenstrom $I$ ab.
 
 Wir wiederholen diesen Messvorgang einige Male mit verschiedenen $U$ und $I$
 für alle Radien. Für jede Spannung und jeden Radius messen wir zweimal. Einmal
@@ -196,7 +238,9 @@ Dabei sind die Fehler für die Messwerte:
 
 Diese Daten werte ich in \ref{Auswertung-b} aus.
 
-\subsection{Aufgabe c}
+\subsection{Aufgabe c: Tröpfchen sprühen}
+
+Wir testen den Zerstäuber an einem Blatt Papier. Wenn wir 
 
 \fehlt
 
@@ -208,11 +252,15 @@ Diese Daten werte ich in \ref{Auswertung-b} aus.
 
 \fehlt
 
-\subsection{Aufgabe f}
+\subsection{Aufgabe f: Sedimentgeschwindigkeiten}
 
-Wir messen für mindestens 10 Tröpfchen die drei Sedimentgeschwindigkeiten fünf Mal. Dabei messen wir immer eine Strecke und eine Zeit. Die Daten sind in Tabelle \ref{table:sediment1}.
+Wir messen für mindestens 10 Tröpfchen die drei Sedimentgeschwindigkeiten fünf
+Mal. Dabei messen wir immer eine Strecke und eine Zeit. Die Daten sind in
+Tabelle \ref{table:sediment1}.
 
-Die Messfehler ergeben sich später in \ref{Auswertung-f} aus der Statistik, da ja jedes Tröpfchen fünf Mal vermessen wird. Wir schätzen diese an dieser Stelle auf:
+Die Messfehler ergeben sich später in \ref{Auswertung-f} aus der Statistik, da
+ja jedes Tröpfchen fünf Mal vermessen wird. Wir schätzen diese an dieser Stelle
+auf:
 \[
 	\Delta s = \unit[\messwert] m
 	, \quad
@@ -255,7 +303,7 @@ Wir bestimmen noch die Zimmertemperatur auf:
 
 \section{Auswertung}
 
-\subsection{Aufgabe b}
+\subsection{Aufgabe b: Magnetfelder und spezifische Masse}
 
 \label{Auswertung-b}
 
@@ -274,7 +322,8 @@ Diese soll nun um das Erdmagnetfeld erweitert werden. Somit wird aus
 	\vec F = e \left( \vec v \times \left( \vec B_S + \vec B_E \right) \right)
 \end{equation}
 
-Da allerdings darauf geachtet worden ist, dass überall $\vec v \perp \vec B$ gilt, vereinfacht sich \eqref{eq:Erdmagnetfeld} zu:
+Da allerdings darauf geachtet worden ist, dass überall $\vec v \perp \vec B$
+gilt, vereinfacht sich \eqref{eq:Erdmagnetfeld} zu:
 \begin{equation}
 	\label{eq:magnetische-Kraft}
 	F = e v (B_S + B_E)
@@ -284,7 +333,9 @@ Die Magnetfeldstärke der Spulen ist hier nur eine Funktion des Stromes, da
 Windungszahl und Widerstand konstant bleibt. Diese Funktion $B_S(I)$ ist in
 \eqref{eq:Helmholtz} gegeben.
 
-Der Radius ist in beiden Messungen gleich. Also muss die Kraft und somit das Magnetfeld gleich sein. Das Erdmagnetfeld sei in Richtung von der ersten Messung positiv. Somit muss ich es von der zweiten Messung abziehen.
+Der Radius ist in beiden Messungen gleich. Also muss die Kraft und somit das
+Magnetfeld gleich sein. Das Erdmagnetfeld sei in Richtung von der ersten
+Messung positiv. Somit muss ich es von der zweiten Messung abziehen.
 %
 \begin{align*}
 	F_1 &= F_2 \\
@@ -306,31 +357,53 @@ Nach \eqref{eq:Helmholtz} und \eqref{eq:spezifische-Masse} ergibt sich:
 	\frac em = \frac{2}{0.716^2} \frac{R^2}{n^2 \mu_0^2} \frac{U}{r^2 I^2}
 \end{equation}
 
-Ich stelle die Daten aus Tabelle \ref{table:Aufgabe-a} in einem $U$ gegen $(rI)^2$ Diagramm dar. Diese Daten fitte ich mit einem linearen Modell mit dem Parameter $\alpha_1$:
+Ich stelle die Daten aus Tabelle \ref{table:Aufgabe-a} in einem $U$ gegen
+$(rI)^2$ Diagramm dar. Diese Daten fitte ich mit einem linearen Modell mit dem
+Parameter $\alpha_1$:
 \[ U = \underbrace{\frac{0.716^2}{2} \frac{n^2 \mu_0^2}{R^2} \frac em}_{\alpha_1} r^2 I^2 \]
 
 Nach least-squares erhalte ich:
-\[ \alpha_1 = \unitfrac[\emesswert]{s^3 A}{m \, kg} \]
+\[ \alpha_1 = \unitfrac[\emesswert]{s^3 A}{m \cdot kg} \]
 
-\textcolor{red}{Allerdings ist die Einheit sehr merkwürdig. Ich würde eher so etwas wie $\unitfrac{V}{m^2 A^2}$ erwarten.}
+\textcolor{red}{Allerdings ist die Einheit sehr merkwürdig. Ich würde eher so
+etwas wie $\unitfrac{V}{m^2 A^2}$ erwarten.}
 
 Nach \eqref{eq:fit} errechne ich daraus $\frac em$:
-\[ \frac em = \frac{2}{0.716^2} \frac{R^2}{n^2 \mu_0^2} \alpha_1 = \unitfrac[\emesswert] C{kg} \]
+\[
+	\frac em
+	= \frac{2}{0.716^2} \frac{R^2}{n^2 \mu_0^2} \alpha_1
+	= \unitfrac[\emesswert] C{kg}
+\]
 
-\subsection{Aufgabe f}
+Das Magnetfeld $B_E$ hatte ich etwas weiter oben schon berechnet. Für jede Messung kann ich einen Wert für $B_E$ bestimmen, deren Durchschnitt und Standardabweichung gibt das Magnetfeld:
+\[
+	B_E = \half B_S(I_2 - I_1)
+	, \quad
+	B_E = \overline{B_E}
+	, \quad
+	\Delta B_E = \frac 1n \sigma(B_E)
+\]
+
+Somit erhalte ich für das Erdmagnetfeld:
+\[ B_E = \unit[\emesswert] T \]
+
+\subsection{Aufgabe f: Sedimentgeschwindigkeiten}
 
 \label{Auswertung-f}
 
-Aus den Daten in Tabelle \ref{table:sediment1} berechne ich die Geschwindigkeiten für jedes Teilchen aus den fünf Messungen wie folgt:
+Aus den Daten in Tabelle \ref{table:sediment1} berechne ich die
+Geschwindigkeiten für jedes Teilchen aus den fünf Messungen wie folgt:
 \[ v_i = \frac{s_i}{t_i}, \quad i = 1, ... 5 \]
 
 Daraus bestimme ich den Mittelwert und den Fehler:
 \[ v = \overline{v_i}  \]
 
-Dabei sind die Fehler in der Geschwindigkeit einfach die Standardabweichung der Messergebnisse durch deren Anzahl:
+Dabei sind die Fehler in der Geschwindigkeit einfach die Standardabweichung der
+Messergebnisse durch deren Anzahl:
 \[ \Delta v = \frac 15 \sigma \left( v_i \right) \]
 
-Jeweils 5 Messungen für ein Teilchen zusammen ergeben dann die drei Sedimentgeschwindigkeiten. Diese in Tabelle \ref{table:sediment2} ausgerechnet.
+Jeweils 5 Messungen für ein Teilchen zusammen ergeben dann die drei
+Sedimentgeschwindigkeiten. Diese in Tabelle \ref{table:sediment2} ausgerechnet.
 
 \begin{table}[h!]
 	\centering
@@ -346,18 +419,19 @@ Jeweils 5 Messungen für ein Teilchen zusammen ergeben dann die drei Sedimentges
 	\label{table:sediment2}
 \end{table}
 
-\subsection{Aufgabe g}
+\subsection{Aufgabe g: Gesamtladung}
 
 Aus den Sedimentgeschwindigkeiten bestimme ich nun die Gesamtladung.
 
-Zuerst bestimme ich die Viskosität der Luft aus der Raumtemperatur. Dazu fitte ich die drei Datenpunkte aus der Anleitung mit einem linearen Modell:
-\[ \eta = \alpha_0 + \alpha_1 T \]
+Zuerst bestimme ich die Viskosität der Luft aus der Raumtemperatur. Dazu fitte
+ich die drei Datenpunkte aus der Anleitung mit einem linearen Modell:
+\[ \eta(T) = \alpha_0 + \alpha_1 T \]
 
 Der Plot ist in Abbildung \ref{fig:luft.pdf}. Als Fitparameter erhalte ich:
 \[
-	\alpha_0 = \unit[\emesswert]{Pa \, s}
+	\alpha_0 = \unit[\emesswert]{Pa \cdot s}
 	, \quad
-	\alpha_1 = \unitfrac[\emesswert]{Pa \, s}K
+	\alpha_1 = \unitfrac[\emesswert]{Pa \cdot s}K
 \]
 
 \begin{figure}[h!]
@@ -367,19 +441,50 @@ Der Plot ist in Abbildung \ref{fig:luft.pdf}. Als Fitparameter erhalte ich:
 	\label{fig:luft.pdf}
 \end{figure}
 
-\fehlt
+Mit der Lufttemperatur kann ich nun die Viskosität der Luft bestimmen zu:
+\[ \eta = \unit[\emesswert]{Pa \cdot s} \]
 
-\subsection{Aufgabe h}
+Nun verwende ich Gleichung \eqref{eq:249.8} um den Radius der einzelnen
+Tröpfchen zu berechnen. Anschließend benutze ich \eqref{eq:249.9} um die Ladung
+auf dem Tröpfchen zu berechnen.
 
-\fehlt
+\subsection{Aufgabe h: gemeinsamer Teiler}
 
-\subsection{Aufgabe i}
+Ich versuche einen gemeinsamen Teiler für die Ladungen zu finden. Damit kann
+ich die Anzahl $N_i$ der Elementarladungen auf jedem Tröpfchen abschätzen. Die
+Ladung teile ich durch diese Anzahl und erhalte eine Reihe von ungefähren
+Werten für die Elementarladung.
 
-\fehlt
+\subsection{Aufgabe i: Cunningham-Korrektur}
 
-\subsection{Aufgabe k}
+In der Anleitung wir die Gleichung gegeben:
+\[
+	\left( e_{S, i} \right)^{\frac 23}
+	= \underbrace{\left( e_\circ \right)^{\frac 23}}_{\alpha_0}
+	+ \underbrace{\left( e_\circ \right)^{\frac 23} A}_{\alpha_1} \frac 1{r_i}
+\]
 
-Ich hatte $\frac em$ in \eqref{eq:em} und $e_\circ$ in \eqref{eq:e} bestimmt. Daraus errechne ich nun $m$:
+In einem $\left( e_{S, i} \right)^{\frac 23}$ gegen $\frac 1{r_i}$ Diagramm
+fitte ich mit least-squares und erhalte:
+\[
+	\alpha_0 = \unit[\emesswert]{C^{\frac 23}}
+	, \quad
+	\alpha_1 = \unit[\emesswert]{C^{\frac 23} \cdot m}
+\]
+
+Das ganze ist in Abbildung \ref{fig:cunningham} dargestellt.
+
+\begin{figure}[h!]
+	\centering
+	\fehlt
+	\caption{Graph für die Cunningham-Korrektur}
+	\label{fig:cunningham}
+\end{figure}
+
+\subsection{Aufgabe k: Elektronenmasse}
+
+Ich hatte $\frac em$ in \eqref{eq:em} und $e_\circ$ in \eqref{eq:e} bestimmt.
+Daraus errechne ich nun $m$:
 \[
 	m = \frac{e_\circ}{\frac em} = \unit[\messwert]{kg},
 	\quad
@@ -396,7 +501,8 @@ Ich hatte $\frac em$ in \eqref{eq:em} und $e_\circ$ in \eqref{eq:e} bestimmt. Da
 
 \section{Resultat}
 
-Wir haben die spezifische Masse, die Elementarladung sowie die Elektronenmasse bestimmt auf:
+Wir haben die spezifische Masse, die Elementarladung sowie die Elektronenmasse
+bestimmt auf:
 \[
 	\frac em = \unitfrac[\emesswert]C{kg}
 	, \quad
@@ -412,6 +518,7 @@ Wir haben die spezifische Masse, die Elementarladung sowie die Elektronenmasse b
 
 \section{Diskussion}
 
+\fehlt
 
 \end{document}
 

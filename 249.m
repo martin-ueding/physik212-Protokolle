@@ -14,9 +14,9 @@ luft.T.err = 0.1;
 ###############################################################################
 
 luft.data = [
-0	17.20
-20	18.19
-40	19.12
+0	17.20e-6
+20	18.19e-6
+40	19.12e-6
 ];
 
 ###############################################################################
@@ -33,7 +33,7 @@ end
 title("Viskosität von Luft");
 luft.plot = plot(luft.data(:, 1), luft.data(:, 2), "+k", luft.data(:, 1), luft.data(:, 2), "-k");
 #set(luft.plot, "linestyle", "none");
-print("luft.eps");
+print("luft.eps", "-tight");
 
 [f, p, cvg, iter, corp, covp, covr, stdredid] = leasqr(
 		luft.data(:, 1),
