@@ -198,7 +198,11 @@ plot_error = ones(size(plot_y)) * 0;
 function_x = (min(plot_x) : (max(plot_x)-min(plot_x))/10 : max(plot_x))';
 function_y = luft_fit_function(function_x, par);
 
+[plot_y]
+[function_y]
+
 # Erzeuge einen Plot von den Werten.
+clf;
 hold on;
 
 p1 = errorbar(plot_x, plot_y, plot_error, "~.k");
