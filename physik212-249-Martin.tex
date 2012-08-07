@@ -1,0 +1,418 @@
+% Copyright © 2012 Martin Ueding <dev@martin-ueding.de>
+%
+\documentclass[11pt]{article}
+
+\usepackage[a4paper, left=3cm, right=2cm, top=2cm, bottom=2cm]{geometry}
+\usepackage[activate]{pdfcprot}
+\usepackage[ngerman]{babel}
+\usepackage[parfill]{parskip}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{color}
+\usepackage{epstopdf}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{setspace}
+\usepackage{units}
+
+\definecolor{darkblue}{rgb}{0,0,.5}
+
+\hypersetup{
+	breaklinks=false,
+	colorlinks=true,
+	linkcolor=black,
+	menucolor=black,
+	urlcolor=darkblue
+}
+
+\setlength{\columnsep}{2cm}
+
+\DeclareMathOperator{\arcsinh}{arsinh}
+\DeclareMathOperator{\arsinh}{arsinh}
+\DeclareMathOperator{\asinh}{arsinh}
+\DeclareMathOperator{\card}{card}
+\DeclareMathOperator{\diam}{diam}
+
+\newcommand{\emesswert}{\left(\messwert \pm \messwert \right)}
+\newcommand{\e}[1]{\cdot 10^{#1}}
+\newcommand{\fehlt}{\textcolor{red}{Hier fehlen noch Inhalte.}}
+\newcommand{\half}{\frac{1}{2}}
+\newcommand{\laplace}{\vnabla^2}
+\newcommand{\messwert}{\textcolor{blue}{\square}}
+\newcommand{\vnabla}{\vec{\nabla}}
+
+\renewcommand{\d}{\, \mathrm d}
+
+\title{physik212 -- Versuch 249 \\ Elektrische und magnetische Kraftwirkung auf geladene Teilchen}
+\author{Martin Ueding \\ \href{mailto:mu@uni-bonn.de}{mu@uni-bonn.de}}
+
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\vfill
+
+Stellen in \textcolor{blue}{blau} werden bei der Versuchsdurchführung
+eingetragen. Zum Beispiel werden Messwerte mit „$\messwert$“ markiert. Stellen
+in \textcolor{red}{rot} müssen noch vor Versuchsbeginn vervollständigt werden.
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                 Einleitung                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Einleitung}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                   Theorie                                   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Theorie}
+
+Die spezifische Masse ist gegeben durch:
+\begin{equation}
+	\label{eq:spezifische-Masse}
+	\frac em = \frac{2U}{r^2 B^2}
+\end{equation}
+
+Das Magnetfeld im Inneren der Helmholtz-Spulen ist gegeben durch:
+\begin{equation}
+	\label{eq:Helmholtz}
+	B = 0.716 \mu_0 \frac{nI}R
+\end{equation}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                  Aufgaben                                   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Aufgaben}
+
+\subsection{Aufgabe A: Skizzen}
+
+Es sollen die Kraftvektoren für ein aufsteigendes und fallendes Öltröpfchen skizziert werden.
+
+\begin{figure}[h!]
+	\centering
+	\fehlt
+	\caption{aufsteigendes Öltröpfchen}
+\end{figure}
+
+\begin{figure}[h!]
+	\centering
+	\fehlt
+	\caption{fallendes Öltröpfchen}
+\end{figure}
+
+\subsection{Aufgabe B: Gleichung 249.10}
+
+Es soll die Gleichung 249.10 bewiesen werden:
+\[ 2 v_\circ = v_\Downarrow - v_\Uparrow \]
+
+\fehlt
+
+\subsection{Aufgabe C: Gleichung 249.11}
+
+Es soll die Gleichung 249.11 bewiesen werden:
+\[ e_\circ = e_{S, i} \left( 1 + \frac A{r_i} \right)^{-\frac 32} \]
+
+\fehlt
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                          Aufbau und Durchführung                           %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Aufbau und Durchführung}
+
+Wir beginnen mit dem Fadenstrahlrohr. Der Aufbau ist in Abbildung \ref{fig:Fadenstrahlrohr} skizziert.
+
+\begin{figure}[h!]
+	\centering
+	\fehlt
+	\caption{Zeichnung des Aufbaus für den ersten Versuchsteil mit dem Fadenstrahlrohr.}
+	\label{fig:Fadenstrahlrohr}
+\end{figure}
+
+\subsection{Aufgabe a: Fadenstrahlrohr}
+
+\label{Durchführung-a}
+
+Wir heizen das Fadenstrahlrohr ungefähr drei Minuten auf. Danach wählen wir eine Spannung für Anode $U_A$ und Wehnelt-Zylinder $U_W$. Deren Differenz ist die Beschleunigungsspannung $U$. Diese bestimme ich allerdings erst in der Auswertung.
+
+Dann leuchten wir die Messeinrichtung im Inneren mit einer Taschenlampe an, damit diese phosphoresziert. Wir schalten den Strom durch die Helmholtz-Spulen ein. Damit der Fadenstrahl genau senkrecht zum Magnetfeld verläuft, drehen wir das Fadenstrahlrohr entsprechend.
+
+Nun stellen wir den Spulenstrom so ein, dass der Strahl genau auf eine Messmarke trifft. Wir lesen die Beschleunigungsspannung $U$, den Radius $r$ und den Spulenstrom $I$ ab.
+
+Wir wiederholen diesen Messvorgang einige Male mit verschiedenen $U$ und $I$
+für alle Radien. Für jede Spannung und jeden Radius messen wir zweimal. Einmal
+den Elektronenstrahl nach oben und einmal nach unten (der Strom wird umgepolt).
+Den Strom regeln wir dann so, dass der Radius wieder eingehalten wird.
+
+Die Messwerte sind in Tabelle \ref{table:Aufgabe-a}.
+
+\begin{table}[H]
+	\centering
+
+	\begin{tabular}{cccc}
+		$r$ in $\unit m$ & $U$ in $\unit V$ & $I_1$ in $\unit A$ & $I_1$ in $\unit A$ \\
+		\hline
+		$0.02$ & $\messwert$ & $\messwert$ & $\messwert$ \\
+		$0.03$ & $\messwert$ & $\messwert$ & $\messwert$ \\
+		$0.04$ & $\messwert$ & $\messwert$ & $\messwert$ \\
+		$0.05$ & $\messwert$ & $\messwert$ & $\messwert$ \\
+		\hline
+		$0.02$ & $\messwert$ & $\messwert$ & $\messwert$ \\
+		$0.03$ & $\messwert$ & $\messwert$ & $\messwert$ \\
+		$0.04$ & $\messwert$ & $\messwert$ & $\messwert$ \\
+		$0.05$ & $\messwert$ & $\messwert$ & $\messwert$ \\
+		\hline
+		$0.02$ & $\messwert$ & $\messwert$ & $\messwert$ \\
+		$0.03$ & $\messwert$ & $\messwert$ & $\messwert$ \\
+		$0.04$ & $\messwert$ & $\messwert$ & $\messwert$ \\
+		$0.05$ & $\messwert$ & $\messwert$ & $\messwert$ \\
+		\hline
+		   \vdots & \vdots & \vdots
+	\end{tabular}
+
+	\caption{Messwerte aus Aufgabe a}
+	\label{table:Aufgabe-a}
+\end{table}
+
+Dabei sind die Fehler für die Messwerte:
+\[
+	\Delta U = \unit[\messwert] V,
+	\quad
+	\Delta r = \unit[\messwert] m,
+	\quad
+	\Delta I = \unit[\messwert] A
+\]
+
+Diese Daten werte ich in \ref{Auswertung-b} aus.
+
+\subsection{Aufgabe c}
+
+\fehlt
+
+\subsection{Aufgabe d}
+
+\fehlt
+
+\subsection{Aufgabe e}
+
+\fehlt
+
+\subsection{Aufgabe f}
+
+Wir messen für mindestens 10 Tröpfchen die drei Sedimentgeschwindigkeiten fünf Mal. Dabei messen wir immer eine Strecke und eine Zeit. Die Daten sind in Tabelle \ref{table:sediment1}.
+
+Die Messfehler ergeben sich später in \ref{Auswertung-f} aus der Statistik, da ja jedes Tröpfchen fünf Mal vermessen wird. Wir schätzen diese an dieser Stelle auf:
+\[
+	\Delta s = \unit[\messwert] m
+	, \quad
+	\Delta t = \unit[\messwert] s
+\]
+
+\begin{table}[h!]
+	\centering
+
+	\begin{tabular}{cccccc}
+		$s_\circ$ in $\unit m$ & $t_\circ$ in $\unit s$ & $s_\Downarrow$ in $\unit m$ & $t_\Downarrow$ in $\unit s$ & $s_\Uparrow$ in $\unit m$ & $t_\Uparrow$ in $\unit s$ \\
+		\hline \hline
+		$\messwert$ & $\messwert$ & $\messwert$ & $\messwert$ & $\messwert$ & $\messwert$\\
+		$\messwert$ & $\messwert$ & $\messwert$ & $\messwert$ & $\messwert$ & $\messwert$\\
+		$\messwert$ & $\messwert$ & $\messwert$ & $\messwert$ & $\messwert$ & $\messwert$\\
+		$\messwert$ & $\messwert$ & $\messwert$ & $\messwert$ & $\messwert$ & $\messwert$\\
+		$\messwert$ & $\messwert$ & $\messwert$ & $\messwert$ & $\messwert$ & $\messwert$\\
+		\hline
+		$\messwert$ & $\messwert$ & $\messwert$ & $\messwert$ & $\messwert$ & $\messwert$\\
+		$\messwert$ & $\messwert$ & $\messwert$ & $\messwert$ & $\messwert$ & $\messwert$\\
+		$\messwert$ & $\messwert$ & $\messwert$ & $\messwert$ & $\messwert$ & $\messwert$\\
+		$\messwert$ & $\messwert$ & $\messwert$ & $\messwert$ & $\messwert$ & $\messwert$\\
+		$\messwert$ & $\messwert$ & $\messwert$ & $\messwert$ & $\messwert$ & $\messwert$\\
+		\hline
+				\vdots & \vdots & \vdots & \vdots & \vdots & \vdots
+	\end{tabular}
+
+	\caption{Sedimentgeschwindigkeiten der Öltröpfchen}
+	\label{table:sediment1}
+\end{table}
+
+Die tatsächlichen Geschwindigkeiten rechne ich in \ref{Auswertung-f} aus.
+
+Wir bestimmen noch die Zimmertemperatur auf:
+\[ T = \unit[\emesswert]{^\circ C} \]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                 Auswertung                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Auswertung}
+
+\subsection{Aufgabe b}
+
+\label{Auswertung-b}
+
+Hier werte ich die Daten aus \ref{Durchführung-a} aus.
+
+Die Formel 249.1 aus der Anleitung ist:
+\begin{equation}
+	\label{eq:249.1}
+	\vec F = e \left( \vec v \times \vec B \right)
+\end{equation}
+
+Diese soll nun um das Erdmagnetfeld erweitert werden. Somit wird aus
+\eqref{eq:249.1}:
+\begin{equation}
+	\label{eq:Erdmagnetfeld}
+	\vec F = e \left( \vec v \times \left( \vec B_S + \vec B_E \right) \right)
+\end{equation}
+
+Da allerdings darauf geachtet worden ist, dass überall $\vec v \perp \vec B$ gilt, vereinfacht sich \eqref{eq:Erdmagnetfeld} zu:
+\begin{equation}
+	\label{eq:magnetische-Kraft}
+	F = e v (B_S + B_E)
+\end{equation}
+
+Die Magnetfeldstärke der Spulen ist hier nur eine Funktion des Stromes, da
+Windungszahl und Widerstand konstant bleibt. Diese Funktion $B_S(I)$ ist in
+\eqref{eq:Helmholtz} gegeben.
+
+Der Radius ist in beiden Messungen gleich. Also muss die Kraft und somit das Magnetfeld gleich sein. Das Erdmagnetfeld sei in Richtung von der ersten Messung positiv. Somit muss ich es von der zweiten Messung abziehen.
+%
+\begin{align*}
+	F_1 &= F_2 \\
+	B_S(I_1) + B_E &= B_S(I_2) - B_E \\
+	B_S(I_1) - B_S(I_2) &= - 2 B_E \\
+	\intertext{Da $B_S$ linear in $I$ ist, kann ich dies umformen zu:}
+	\half B_S(I_2 - I_1) &= B_E \\
+\end{align*}
+
+Somit kann ich das Magnetfeld im Inneren durch die beiden Ströme ausdrücken:
+\begin{equation}
+	\label{eq:Magnetfeld-im-Inneren}
+	B = B_S(I_1) + \half B_S(I_2 - I_1)
+\end{equation}
+
+Nach \eqref{eq:Helmholtz} und \eqref{eq:spezifische-Masse} ergibt sich:
+\begin{equation}
+	\label{eq:fit}
+	\frac em = \frac{2}{0.716^2} \frac{R^2}{n^2 \mu_0^2} \frac{U}{r^2 I^2}
+\end{equation}
+
+Ich stelle die Daten aus Tabelle \ref{table:Aufgabe-a} in einem $U$ gegen $(rI)^2$ Diagramm dar. Diese Daten fitte ich mit einem linearen Modell mit dem Parameter $\alpha_1$:
+\[ U = \underbrace{\frac{0.716^2}{2} \frac{n^2 \mu_0^2}{R^2} \frac em}_{\alpha_1} r^2 I^2 \]
+
+Nach least-squares erhalte ich:
+\[ \alpha_1 = \unitfrac[\emesswert]{s^3 A}{m \, kg} \]
+
+\textcolor{red}{Allerdings ist die Einheit sehr merkwürdig. Ich würde eher so etwas wie $\unitfrac{V}{m^2 A^2}$ erwarten.}
+
+Nach \eqref{eq:fit} errechne ich daraus $\frac em$:
+\[ \frac em = \frac{2}{0.716^2} \frac{R^2}{n^2 \mu_0^2} \alpha_1 = \unitfrac[\emesswert] C{kg} \]
+
+\subsection{Aufgabe f}
+
+\label{Auswertung-f}
+
+Aus den Daten in Tabelle \ref{table:sediment1} berechne ich die Geschwindigkeiten für jedes Teilchen aus den fünf Messungen wie folgt:
+\[ v_i = \frac{s_i}{t_i}, \quad i = 1, ... 5 \]
+
+Daraus bestimme ich den Mittelwert und den Fehler:
+\[ v = \overline{v_i}  \]
+
+Dabei sind die Fehler in der Geschwindigkeit einfach die Standardabweichung der Messergebnisse durch deren Anzahl:
+\[ \Delta v = \frac 15 \sigma \left( v_i \right) \]
+
+Jeweils 5 Messungen für ein Teilchen zusammen ergeben dann die drei Sedimentgeschwindigkeiten. Diese in Tabelle \ref{table:sediment2} ausgerechnet.
+
+\begin{table}[h!]
+	\centering
+
+	\begin{tabular}{ccc}
+		$v_\circ$ in $\unitfrac ms$ & $v_\Downarrow$ in $\unitfrac ms$ & $v_\Uparrow$ in $\unitfrac ms$ \\
+		\hline
+		$\emesswert$ & $\emesswert$ & $\emesswert$ \\
+			   \vdots & \vdots & \vdots
+	\end{tabular}
+
+	\caption{Sedimentgeschwindigkeiten der Öltröpfchen}
+	\label{table:sediment2}
+\end{table}
+
+\subsection{Aufgabe g}
+
+Aus den Sedimentgeschwindigkeiten bestimme ich nun die Gesamtladung.
+
+Zuerst bestimme ich die Viskosität der Luft aus der Raumtemperatur. Dazu fitte ich die drei Datenpunkte aus der Anleitung mit einem linearen Modell:
+\[ \eta = \alpha_0 + \alpha_1 T \]
+
+Der Plot ist in Abbildung \ref{fig:luft.pdf}. Als Fitparameter erhalte ich:
+\[
+	\alpha_0 = \unit[\emesswert]{Pa \, s}
+	, \quad
+	\alpha_1 = \unitfrac[\emesswert]{Pa \, s}K
+\]
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=.7\textwidth]{luft.pdf}
+	\caption{Fit für die Viskosität von Luft}
+	\label{fig:luft.pdf}
+\end{figure}
+
+\fehlt
+
+\subsection{Aufgabe h}
+
+\fehlt
+
+\subsection{Aufgabe i}
+
+\fehlt
+
+\subsection{Aufgabe k}
+
+Ich hatte $\frac em$ in \eqref{eq:em} und $e_\circ$ in \eqref{eq:e} bestimmt. Daraus errechne ich nun $m$:
+\[
+	m = \frac{e_\circ}{\frac em} = \unit[\messwert]{kg},
+	\quad
+	\Delta m = \sqrt{
+		\left(\frac{1}{\frac em} \Delta e_\circ \right)^2
+		+ \left( \frac{e_\circ}{\left( \frac em \right)^2} \Delta \frac em \right)^2
+	}
+	= \unit[\messwert]{kg},
+\]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                  Resultat                                   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Resultat}
+
+Wir haben die spezifische Masse, die Elementarladung sowie die Elektronenmasse bestimmt auf:
+\[
+	\frac em = \unitfrac[\emesswert]C{kg}
+	, \quad
+	e_\circ = \unit[\emesswert]C
+	, \quad
+	m = \unit[\emesswert]{kg}
+\]
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                 Diskussion                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Diskussion}
+
+
+\end{document}
+
+% vim: spell spelllang=de
