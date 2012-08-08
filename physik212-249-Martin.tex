@@ -433,10 +433,14 @@ Messung positiv. Somit muss ich es von der zweiten Messung abziehen.
 \end{align*}
 
 Somit kann ich das Magnetfeld im Inneren durch die beiden Ströme ausdrücken:
-\begin{equation}
-	\label{eq:Magnetfeld-im-Inneren}
-	B = B_S(I_1) + \half B_S(I_2 - I_1)
-\end{equation}
+\begin{align*}
+	B &= B_S(I_1) + \half B_S(I_2 - I_1) \\
+	\intertext{Nun wende ich noch mal die Linearität an:}
+	B &= B_S \left( \half I_1 + \half I_2 \right) \\
+	\intertext{Dies ist einfach der Mittelwert der beiden $(I_i)_{i = 1,2}$.
+	Diesen Mittelwert nenne ich jetzt einfach $I$.}
+	B &= B_S(I)
+\end{align*}
 
 Nach \eqref{eq:Helmholtz} und \eqref{eq:spezifische-Masse} ergibt sich:
 \begin{equation}
