@@ -569,9 +569,23 @@ Der Plot ist in Abbildung \ref{fig:luft.pdf}. Als Fitparameter erhalte ich:
 Mit der Lufttemperatur kann ich nun die Viskosität der Luft bestimmen zu:
 \[ \eta_\text{Luft} = \unit[\emesswert]{Pa \cdot s} \]
 
-Nun verwende ich Gleichung \eqref{eq:249.8} um den Radius der einzelnen
-Tröpfchen zu berechnen. Anschließend benutze ich \eqref{eq:249.9} um die Ladung
-auf dem Tröpfchen zu berechnen.
+Nun verwende ich Gleichung \eqref{eq:249.8}, um den Radius der einzelnen
+Tröpfchen zu berechnen. Den Fehler berechne ich mit:
+\[
+	\Delta r = \frac 1{2 r} \sqrt{ \left( \Delta v_\Uparrow \right)^2 + \left( \Delta v_\Downarrow \right)^2 }
+\]
+
+Anschließend benutze ich \eqref{eq:249.9}, um die Ladung $q = Ne$ auf dem Tröpfchen zu
+berechnen. Den Fehler berechne ich mit:
+\[
+	\Delta q = \sqrt{
+		\left( \frac{3 \pi \eta_\text{Luft} r}{E} \right)^2 \left(
+		\left( \Delta v_\Uparrow \right)^2
+		+ \left( \Delta v_\Downarrow \right)^2
+		\right)
+		+ \left( \frac q{E^2} \Delta E \right)^2
+	}
+\]
 
 \subsection{Aufgabe h: gemeinsamer Teiler}
 
@@ -582,7 +596,7 @@ Werten für die Elementarladung.
 
 \subsection{Aufgabe i: Cunningham-Korrektur}
 
-In der Anleitung wir die Gleichung gegeben:
+In der Anleitung wird die Gleichung gegeben:
 \[
 	\left( e_{S, i} \right)^{\frac 23}
 	= \underbrace{\left( e_\circ \right)^{\frac 23}}_{\alpha_0}
