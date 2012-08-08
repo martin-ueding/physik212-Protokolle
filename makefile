@@ -1,6 +1,6 @@
 # Copyright © 2012 Martin Ueding <dev@martin-ueding.de>
 
-physik212-249-Martin.pdf: physik212-249-Martin.tex luft.pdf fadenstrahl.pdf
+physik212-249-Martin.pdf: physik212-249-Martin.tex luft.pdf fadenstrahl.pdf cunningham.pdf
 	latexmk -pdf $<
 
 %.pdf: %.eps
