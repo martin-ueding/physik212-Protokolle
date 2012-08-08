@@ -426,3 +426,15 @@ set(p1, "marker", "+");
 title("Cunningham");
 
 print("cunningham.eps", "-tight");
+
+###############################################################################
+#                              Rechnungen Finale                              #
+###############################################################################
+
+m.val = e.val / em.val;
+m.err = sqrt(
+	(1/em.val * e.err)^2
++ (e.val / em.val^2 * em.err)^2
+);
+
+printf("m = %.3g ± %.3g (%.2g) kg\n", m.val, m.err, rel_error(m));
