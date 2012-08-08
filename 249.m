@@ -120,6 +120,14 @@ luft.data = [
 ];
 
 ###############################################################################
+#                                 Funktionen                                  #
+###############################################################################
+
+function e = rel_error(v)
+	e = v.err / v.val;
+end
+
+###############################################################################
 #                         Rechnungen Fadenstrahlrohr                          #
 ###############################################################################
 
@@ -146,11 +154,14 @@ function_y = faden_funktion(function_x, par);
 alpha1.val = par(1);
 alpha1.err = sqrt(diag(covp))(1);
 
+B_E.list = 0.5 .* (faden.data(:, 2) + faden.data(:, 3));
+B_E.val = mean(B_E.list);
+B_E.err = std(B_E.list) / length(B_E.list);
+
 printf("Fadenstrahlrohr\n\n");
 
-printf("α₁ = %.3g ± %.3g\n", alpha1.val, alpha1.err);
-
-[plot_x plot_y plot_error]
+printf("α₁ = %.3g ± %.3g (%.2g)\n", alpha1.val, alpha1.err, rel_error(alpha1));
+printf("B_E = %.3g ± %.3g (%.2g) T\n", B_E.val, B_E.err, rel_error(B_E));
 
 hold on;
 
@@ -170,7 +181,7 @@ em.err = sqrt(sum([
 			(2/.716^2 * R.val / n.val^2 / mu0.val^2 * alpha1.err)^2
 			]));
 
-printf("e/m = %.3g ± %.3g C/kg\n", em.val, em.err);
+printf("e/m = %.3g ± %.3g (%.2g) C/kg\n", em.val, em.err, rel_error(em));
 
 ###############################################################################
 #                         Rechnungen Millikanversuch                          #
