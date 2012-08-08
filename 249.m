@@ -206,6 +206,7 @@ printf("\n");
 printf("α₁ = %.2e ± %.2e (%.1e)\n", alpha1.val, alpha1.err, rel_error(alpha1));
 printf("B_E = %.2e ± %.2e (%.1e) T\n", B_E.val, B_E.err, rel_error(B_E));
 
+clf;
 hold on;
 
 p1 = errorbar(plot_x, plot_y, plot_error, "~.k");
