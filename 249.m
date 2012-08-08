@@ -136,6 +136,9 @@ millikan(10).data = [
 s.err = 0.1;
 t.err = 0.1;
 
+# Das elektrische Feld in [V/m].
+E.val = 100;
+
 ###############################################################################
 #                               Literaturwerte                                #
 ###############################################################################
@@ -145,6 +148,11 @@ luft.data = [
 20	18.19e-6
 40	19.12e-6
 ];
+
+rho.oel.val = 700;
+rho.luft.val = 1;
+
+g = 9.81;
 
 ###############################################################################
 #                                 Funktionen                                  #
@@ -272,6 +280,9 @@ printf("\n");
 
 printf(" k          v_\\circ             v_\\Downarrow           v_\\Uparrow        n\n");
 
+v3_array.val = [];
+v3_array.err = [];
+
 # Gehe durch alle Tröpfchen $k$ durch.
 for k = 1:length(millikan)
 	data = millikan(k).data;
@@ -336,4 +347,82 @@ for k = 1:length(millikan)
 			v3.err(3),
 			n
 		  );
+
+	v3_array.val = [v3_array.val ; v3.val];
+	v3_array.err = [v3_array.err ; v3.err];
 endfor
+
+rq.val = [];
+rq.err = [];
+
+printf("\n");
+printf("Tabelle mit Radius und Ladung\n");
+printf("-----------------------------\n");
+printf("\n");
+
+for k = 1:length(v3_array.val)
+	v3.val = v3_array.val(k, :);
+	v3.err = v3_array.err(k, :);
+
+	r.val = sqrt( (9 * luft.eta.val * (v3.val(2) - v3.val(3) )) / (4 * g * (rho.oel.val - rho.luft.val)));
+	# TODO
+	r.err = 0;
+
+	q.val = 3 * pi * luft.eta.val * r.val * (v3.val(2) + v3.val(3)) / E.val;
+	# TODO
+	q.err = 0;
+
+	printf("k = %2d, r = %.3e, q = %.3e\n", k, r.val, q.val);
+
+	rq.val = [rq.val ; r.val q.val];
+	rq.err = [rq.err ; r.err q.err];
+end
+
+# TODO Automatisch einen gemeinsamen Teiler finden.
+
+er.val = rq.val;
+er.err = rq.err;
+
+function y = cunningham(x, par)
+	y = par(1) + par(2) * x;
+end
+
+plot_x = real(er.val(:, 1).^(2/3));
+plot_y = real(1 ./ er.val(:, 2));
+plot_error = abs(2/3 .* (er.val(:, 1)).^(2/3-1) .* er.err(:, 1));
+
+[f, par, cvg, iter, corp, covp, covr, stdredid] = leasqr(
+		plot_x,
+		plot_y,
+		[1, 1],
+		"cunningham",
+		0.001,
+		20
+		);
+
+alpha0.val = par(1);
+alpha0.err = sqrt(diag(covp))(1);
+
+printf("\n");
+printf("α₀ = %.3g ± %.3g (%.2g)\n", alpha0.val, alpha0.err, rel_error(alpha0));
+
+e.val = alpha0.val^(3/2);
+e.err = abs(3/2 * alpha0.val^(3/2-1) * alpha0.err);
+
+printf("e₀ = %.3g ± %.3g (%.2g) C\n", e.val, e.err, rel_error(e));
+
+function_x = (min(plot_x) : (max(plot_x)-min(plot_x))/10 : max(plot_x))';
+function_y = cunningham(function_x, par);
+
+clf;
+hold on;
+
+p1 = errorbar(plot_x, plot_y, plot_error, "~.k");
+p2 = plot(function_x, function_y, "-k");
+
+set(gca(), "fontsize", 20);
+set(p1, "linestyle", "none");
+set(p1, "marker", "+");
+title("Cunningham");
+
+print("cunningham.eps", "-tight");
