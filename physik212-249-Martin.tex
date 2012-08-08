@@ -50,7 +50,6 @@
 \title{physik212 -- Versuch 249 \\ Elektrische und magnetische Kraftwirkung auf geladene Teilchen}
 \author{Martin Ueding \\ \href{mailto:mu@uni-bonn.de}{mu@uni-bonn.de}}
 
-
 \begin{document}
 
 \maketitle
@@ -521,10 +520,9 @@ den Mittelwert:
 	i = \circ, \Downarrow, \Uparrow
 \]
 
-Dabei sind die Fehler in der Geschwindigkeit einfach die Standardabweichung der
-Messergebnisse durch deren Anzahl:
+Dabei sind die Fehler in der Geschwindigkeit die Summe der einzelnen Fehler durch deren Anzahl:
 \[
-	\Delta v_i = \frac 1n \sigma \left( v_{ij} \right)
+	\Delta v_i = \frac 1n \sqrt{ \sum_{j=1}^n (\Delta v_{ij})^2 }
 	, \quad
 	i = \circ, \Downarrow, \Uparrow
 \]
