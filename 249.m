@@ -138,6 +138,7 @@ t.err = 0.1;
 
 # Das elektrische Feld in [V/m].
 E.val = 100;
+E.err = 0.1;
 
 ###############################################################################
 #                               Literaturwerte                                #
@@ -368,7 +369,10 @@ for k = 1:length(v3_array.val)
 	r.err = 1 / (2 * r.val) * sqrt( v3.err(2)^2 + v3.err(3)^2 );
 
 	q.val = 3 * pi * luft.eta.val * r.val * (v3.val(2) + v3.val(3)) / E.val;
-	q.err = 3 * pi * luft.eta.val * r.val / E.val * sqrt(v3.err(2)^2 + v3.err(3)^2);
+	q.err = sqrt(
+			(3 * pi * luft.eta.val * r.val / E.val)^2 * (v3.err(2)^2 + v3.err(3)^2)
+			+ (q.val / E.val^2 * E.err)^2
+			);
 
 	printf("r = %.2e ± %.2e (%.1e), q = %.2e ± %.2e (%.1e)\n", r.val, r.err, rel_error(r), q.val, q.err, rel_error(q));
 
@@ -389,13 +393,16 @@ plot_x = real(er.val(:, 1).^(2/3));
 plot_y = real(1 ./ er.val(:, 2));
 plot_error = abs(2/3 .* (er.val(:, 1)).^(2/3-1) .* er.err(:, 1));
 
+[plot_x plot_y plot_error]
+
 [f, par, cvg, iter, corp, covp, covr, stdredid] = leasqr(
 		plot_x,
 		plot_y,
 		[1, 1],
 		"cunningham",
 		0.001,
-		20
+		20,
+		1./plot_error
 		);
 
 alpha0.val = par(1);
