@@ -202,8 +202,8 @@ printf("Fadenstrahlrohr\n");
 printf("===============\n");
 printf("\n");
 
-printf("α₁ = %.3g ± %.3g (%.2g)\n", alpha1.val, alpha1.err, rel_error(alpha1));
-printf("B_E = %.3g ± %.3g (%.2g) T\n", B_E.val, B_E.err, rel_error(B_E));
+printf("α₁ = %.2e ± %.2e (%.1e)\n", alpha1.val, alpha1.err, rel_error(alpha1));
+printf("B_E = %.2e ± %.2e (%.1e) T\n", B_E.val, B_E.err, rel_error(B_E));
 
 hold on;
 
@@ -223,7 +223,7 @@ em.err = sqrt(sum([
 			(2/.716^2 * R.val / n.val^2 / mu0.val^2 * alpha1.err)^2
 			]));
 
-printf("e/m = %.3g ± %.3g (%.2g) C/kg\n", em.val, em.err, rel_error(em));
+printf("e/m = %.2e ± %.2e (%.1e) C/kg\n", em.val, em.err, rel_error(em));
 
 ###############################################################################
 #                         Rechnungen Millikanversuch                          #
@@ -278,7 +278,7 @@ printf("Tabelle mit den verrechneten drei Geschwindigkeiten pro Teilchen\n");
 printf("----------------------------------------------------------------\n");
 printf("\n");
 
-printf(" k          v_\\circ             v_\\Downarrow           v_\\Uparrow        n\n");
+printf(" k       v_\\circ            v_\\Downarrow          v_\\Uparrow       n\n");
 
 v3_array.val = [];
 v3_array.err = [];
@@ -318,7 +318,7 @@ for k = 1:length(millikan)
 
 
 		if abs(deviation) <= abs(deviation_erlaubt)
-			#printf("Messung %d von Teilchen %d: %.3g ≤ %.3g\n", j, k, deviation, deviation_erlaubt);
+			#printf("Messung %d von Teilchen %d: %.2e ≤ %.2e\n", j, k, deviation, deviation_erlaubt);
 			n += 1;
 			v2.val = [v2.val ; row.val];
 			v2.err = [v2.err ; row.err];
@@ -337,7 +337,7 @@ for k = 1:length(millikan)
 		v3.err = sqrt(sumsq(v2.val)) / n;
 	endif
 
-	printf("%2d: %.3e ± %.3e, %.3e ± %.3e, %.3e ± %.3e, %d \n",
+	printf("%2d: %.2e ± %.2e, %.2e ± %.2e, %.2e ± %.2e, %d \n",
 			k,
 			v3.val(1),
 			v3.err(1),
@@ -365,14 +365,12 @@ for k = 1:length(v3_array.val)
 	v3.err = v3_array.err(k, :);
 
 	r.val = sqrt( (9 * luft.eta.val * (v3.val(2) - v3.val(3) )) / (4 * g * (rho.oel.val - rho.luft.val)));
-	# TODO
-	r.err = 0;
+	r.err = 1 / (2 * r.val) * sqrt( v3.err(2)^2 + v3.err(3)^2 );
 
 	q.val = 3 * pi * luft.eta.val * r.val * (v3.val(2) + v3.val(3)) / E.val;
-	# TODO
-	q.err = 0;
+	q.err = 3 * pi * luft.eta.val * r.val / E.val * sqrt(v3.err(2)^2 + v3.err(3)^2);
 
-	printf("k = %2d, r = %.3e, q = %.3e\n", k, r.val, q.val);
+	printf("r = %.2e ± %.2e (%.1e), q = %.2e ± %.2e (%.1e)\n", r.val, r.err, rel_error(r), q.val, q.err, rel_error(q));
 
 	rq.val = [rq.val ; r.val q.val];
 	rq.err = [rq.err ; r.err q.err];
@@ -404,12 +402,12 @@ alpha0.val = par(1);
 alpha0.err = sqrt(diag(covp))(1);
 
 printf("\n");
-printf("α₀ = %.3g ± %.3g (%.2g)\n", alpha0.val, alpha0.err, rel_error(alpha0));
+printf("α₀ = %.2e ± %.2e (%.1e)\n", alpha0.val, alpha0.err, rel_error(alpha0));
 
 e.val = alpha0.val^(3/2);
 e.err = abs(3/2 * alpha0.val^(3/2-1) * alpha0.err);
 
-printf("e₀ = %.3g ± %.3g (%.2g) C\n", e.val, e.err, rel_error(e));
+printf("e = %.2e ± %.2e (%.1e) C\n", e.val, e.err, rel_error(e));
 
 function_x = (min(plot_x) : (max(plot_x)-min(plot_x))/10 : max(plot_x))';
 function_y = cunningham(function_x, par);
@@ -437,4 +435,9 @@ m.err = sqrt(
 + (e.val / em.val^2 * em.err)^2
 );
 
-printf("m = %.3g ± %.3g (%.2g) kg\n", m.val, m.err, rel_error(m));
+printf("\n");
+printf("gemeinsam\n");
+printf("=========\n");
+printf("\n");
+
+printf("m = %.2e ± %.2e (%.1e) kg\n", m.val, m.err, rel_error(m));
