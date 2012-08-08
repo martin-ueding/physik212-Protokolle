@@ -150,7 +150,10 @@ in Abbildung \ref{fig:fallend} gemacht.
 \subsection{Aufgabe B: Gleichung 249.10}
 
 Es soll die Gleichung 249.10 bewiesen werden:
-\[ 2 v_\circ = v_\Downarrow - v_\Uparrow \]
+\begin{equation}
+	\label{eq:249.10}
+	2 v_\circ = v_\Downarrow - v_\Uparrow
+\end{equation}
 
 \begin{proof}
 	In der Anleitung sind folgende Formeln gegeben. Sie beschreiben das
@@ -390,6 +393,9 @@ Wir bestimmen noch die Zimmertemperatur auf:
 
 \section{Auswertung}
 
+Das GNU Octave Programm, das ich für die Auswertung geschrieben habe, ist unter
+\url{http://uni-bonn.de/~s6mauedi/physik212/249.html} zu finden.
+
 \subsection{Aufgabe b: Magnetfelder und spezifische Masse}
 
 \label{Auswertung-b}
@@ -492,17 +498,36 @@ Somit erhalte ich für das Erdmagnetfeld:
 \label{Auswertung-f}
 
 Aus den Daten in Tabelle \ref{table:sediment1} berechne ich die
-Geschwindigkeiten für jedes Teilchen aus den fünf Messungen wie folgt:
-\[ v_i = \frac{s_i}{t_i}, \quad i = 1, ... 5 \]
+Geschwindigkeiten $i$ für jedes Teilchen $j$ aus den fünf Messungen wie folgt:
+\[
+	v_{ij} = \frac{s_{ij}}{t_{ij}}
+	, \quad
+	i = \circ, \Downarrow, \Uparrow
+	, \quad
+	j = 1, ..., 5
+\]
 
-Daraus bestimme ich den Mittelwert und den Fehler:
-\[ v = \overline{v_i}  \]
+Nun kann es sein, dass die Gleichung \eqref{eq:249.10} allerdings nicht erfüllt
+ist, weil das Tröpfchen $j$ seine Ladung verändert hat. Derartige
+Geschwindigkeitstriplets verwerfe ich.
+
+Aus den verbleibenden $n \leq 5$ Messungen für ein Teilchen $j$ bestimme ich den
+Mittelwert:
+\[
+	v_i = \frac 1n \sum_{j=1}^n v_{ij}
+	, \quad
+	i = \circ, \Downarrow, \Uparrow
+\]
 
 Dabei sind die Fehler in der Geschwindigkeit einfach die Standardabweichung der
 Messergebnisse durch deren Anzahl:
-\[ \Delta v = \frac 15 \sigma \left( v_i \right) \]
+\[
+	\Delta v_i = \frac 1n \sigma \left( v_{ij} \right)
+	, \quad
+	i = \circ, \Downarrow, \Uparrow
+\]
 
-Jeweils 5 Messungen für ein Teilchen zusammen ergeben dann die drei
+Die drei mal $n$ Messungen für ein Teilchen zusammen ergeben dann die drei
 Sedimentgeschwindigkeiten. Diese in Tabelle \ref{table:sediment2} ausgerechnet.
 
 \begin{table}[h!]
