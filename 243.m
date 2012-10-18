@@ -47,12 +47,12 @@ h.data.val = [
 1.00	65
 1.75	60
 1.75	61
-13.35	20
 2.28	56
 3.13	52
 3.94	48
 5.16	44
 5.85	40
+13.35	20
 ];
 
 h.C.val = 10.21e-6;
@@ -63,12 +63,12 @@ h.C.err = 0.1e-6;
 ###############################################################################
 
 function y = plot_d(R, par)
-	y = par(1) * (R + par(2));
+	y = par(1) * R + par(2);
 end
 
-plot_x = c.data.val(:, 2);
-plot_y = 1 ./ c.data.val(:, 1);
-plot_error = 1 ./ c.data.val(:, 1).^2 * phi.err;
+plot_x = c.data.val(:, 1);
+plot_y = 1 ./ c.data.val(:, 2);
+plot_error = 1 ./ c.data.val(:, 2).^2 * phi.err;
 
 [f, par, cvg, iter, corp, covp, covr, stdredid] = leasqr(
 		plot_x,
@@ -91,7 +91,7 @@ p2 = plot(function_x, function_y);
 
 set(gca(), "fontsize", 20);
 xlabel("R in [Ohm]");
-ylabel("1 / phi in [rad]");
+ylabel("1 / phi");
 set(p1, "linestyle", "none");
 set(p1, "marker", "+");
 title("Empfindlichkeit");
@@ -101,8 +101,8 @@ print("plot-empfindlichkeit.eps", "-tight");
 c.alpha.val = par(1);
 c.alpha.err = sqrt(diag(covp))(1);
 
-c.Rg.val = par(2);
-c.Rg.err = sqrt(diag(covp))(2);
+c.Rg.val = par(2) / c.alpha.val;
+c.Rg.err = sqrt(diag(covp))(2) / c.alpha.val;
 
 c.cI.val =  (c.R1.val + c.R2.val) / (c.alpha.val * c.U0.val * c.R2.val);
 c.cI.err = sqrt(
@@ -123,12 +123,12 @@ printf("\n");
 ###############################################################################
 
 function y = plot_h(t, par)
-	y = par(1) * exp(- t ./ par(2));
+	y = par(1) - t / par(2);
 end
 
 plot_x = h.data.val(:, 1);
-plot_y = h.data.val(:, 2);
-plot_error = ones(size(h.data.val(:, 2))) * phi.err;
+plot_y = log(h.data.val(:, 2));
+plot_error = abs(1 ./ h.data.val(:, 2) * phi.err);
 
 pl = [plot_x plot_y plot_error];
 save test.dat pl
@@ -149,20 +149,20 @@ function_y = plot_h(function_x, par);
 clf;
 hold on;
 
-p1 = semilogyerr(plot_x, plot_y, plot_error);
-p2 = semilogy(function_x, function_y);
+p1 = errorbar(plot_x, plot_y, plot_error);
+p2 = plot(function_x, function_y);
 
 set(gca(), "fontsize", 20);
 xlabel("t in [s]");
-ylabel("phi");
+ylabel("ln(phi)");
 set(p1, "linestyle", "none");
 set(p1, "marker", "+");
 title("großer Widerstand");
 
 print("plot-widerstand.eps", "-tight");
 
-h.Q0.val = par(1);
-h.Q0.err = sqrt(diag(covp))(1);
+h.Q0.val = exp(par(1));
+h.Q0.err = exp(par(1)) * par(1) * sqrt(diag(covp))(1);
 
 h.RC.val = par(2);
 h.RC.err = sqrt(diag(covp))(2);
