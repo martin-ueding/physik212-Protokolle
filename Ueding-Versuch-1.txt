@@ -1,8 +1,4 @@
-MIN=0	0	0	-1	0	0	-1	0	0	0	
-MAX=12,5	21	70	1	21	70	1	200	200	5	
-SCALE=5	10	50	0,5	10	50	0,5	100	100	1	
-DEC=1	2	1	2	2	1	2	1	1	2	
-DEF="Zeit" t / s	"Strom" I_A1 / A	"Spannung" U_B1 / V	"Leistungsfaktor" cos&j_1	"Strom" I_A2 / A	"Spannung" U_B2 / V	"Leistungsfaktor" cos&j_2	"P_ein" P_1 / W	"P_aus" P_2 / W	"Frequenz" f / Hz	
+#DEF="Zeit" t / s	"Strom" I_A1 / A	"Spannung" U_B1 / V	"Leistungsfaktor" cos&j_1	"Strom" I_A2 / A	"Spannung" U_B2 / V	"Leistungsfaktor" cos&j_2	"P_ein" P_1 / W	"P_aus" P_2 / W	"Frequenz" f / Hz	
 0	0,6733097508	46,76431895	0,791656865	0,4631061003	45,01836782	0,9896244639	24,92679833	20,63196867	NAN	
 0	0,7175274426	46,73735487	0,8051803549	0,5021507216	44,9165653	0,9914323387	27,0019927	22,36164306	NAN	
 0	0,7632330642	46,73772873	0,8174670795	0,545243983	44,83212888	0,9923594266	29,16050575	24,25767891	NAN	
