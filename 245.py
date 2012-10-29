@@ -19,16 +19,16 @@
 import matplotlib.pyplot as pl
 import numpy as np
 
-I_err = 0.5
-P_err = 0.5
-R_err = 0.5
+I_err = 0.1
+P_err = 1.0
+R_err = 0.05
 U_err = 0.5
 
 plotargs = {
-    "color": "black",
+    #"color": "black",
     "linestyle": "None",
-    "markeredgecolor": "black",
-    "markersize": 7
+    #"markeredgecolor": "black",
+    #"markersize": 4
 }
 
 __docformat__ = "restructuredtext en"
@@ -48,7 +48,7 @@ def a():
         41.43,
         41.08,
         40.03,
-        30.79,
+        38.79,
         37.63,
         35.87,
         34.06,
@@ -57,6 +57,11 @@ def a():
     ])
     U = d["U_2"]
     R = U_R / I
+
+    R_err = np.sqrt(
+        (1/I * U_err)**2
+        + (U_R / (I**2) * I_err)**2
+    )
 
     ###########################################################################
     #                               Rechnungen                                #
@@ -67,11 +72,11 @@ def a():
 
     pl.clf()
     pl.grid(True)
-    pl.errorbar(I, P_S, label=ur"$P_S$", yerr=np.ones(P_S.size) * P_err, marker="x", **plotargs)
-    pl.errorbar(I, P_W, label=ur"$P_W$", yerr=np.ones(P_W.size) * P_err, marker="o", **plotargs)
-    pl.errorbar(I, P_S * cos, label=ur"$P_S \cos(\phi)$", yerr=np.ones(P_W.size) * P_err, marker="d", **plotargs)
-    pl.title(u"Leistungen gegen Strom")
-    pl.xlabel(ur"$I / \mathrm{A}$")
+    pl.errorbar(R, P_S, label=ur"$P_S$", xerr=R_err, yerr=np.ones(P_S.size) * P_err, **plotargs)
+    pl.errorbar(R, P_W, label=ur"$P_W$", xerr=R_err, yerr=np.ones(P_W.size) * P_err, **plotargs)
+    pl.errorbar(R, P_S * cos, label=ur"$P_S \cos(\phi)$", xerr=R_err, yerr=np.ones(P_W.size) * P_err, **plotargs)
+    pl.title(u"Leistungen gegen Widerstand")
+    pl.xlabel(ur"$R / \mathrm{\Omega}$")
     pl.ylabel(ur"$P / \mathrm{W}$")
     pl.legend()
     pl.savefig("b.pdf")
@@ -89,9 +94,14 @@ def c():
     U_2 = d["U_2"]
     U_1 = d["U_1"]
     P_W1 = d["P_1"]
+    P_W2 = d["P_2"]
+    cos_1 = d["cos_1"]
+    cos_2 = d["cos_2"]
 
 
     R_1 = R_2 = 0.5
+
+    I_2_err = np.ones(I_2.shape) * I_err
 
     ###########################################################################
     #                               Rechnungen                                #
@@ -99,7 +109,7 @@ def c():
 
     P_W1_err = np.ones(P_W1.shape) * P_err
 
-    P_S2 = U_2 / I_2
+    P_S2 = U_2 * I_2
     P_S2_err = np.sqrt(
         (I_2 * U_err)**2
         + (U_2 * I_err)**2
@@ -119,11 +129,12 @@ def c():
     print np.array([P_Cu, P_Cu_err]).transpose()
     print
 
-    P_W2 = P_S2 - P_Cu
-    P_W2_err = np.sqrt(P_S2_err**2 + P_Cu_err**2)
-    print "P_W2"
-    print np.array([P_W2, P_W2_err]).transpose()
-    print
+ #   P_W2 = P_S2 / cos_2
+ #   P_W2_err = np.sqrt(P_S2_err**2 + P_Cu_err**2)
+ #   print "P_W2"
+ #   print np.array([P_W2, P_W2_err]).transpose()
+ #   print
+    P_W2_err = np.ones(P_W2.size) * P_err
 
     eta = P_W2 / P_W1
     eta_err = np.sqrt(
@@ -164,21 +175,52 @@ def c():
         + (U_2 / (U_1**2) * U_1_err)**2
     )
 
+    dtype = map(lambda x: (x, "f8"), [
+        "I_2", "I_2_err",
+        "P_S2", "P_S2_err",
+        "P_Cu", "P_Cu_err",
+        "eta", "eta_err",
+        "P_v", "P_v_err",
+        "P_Fe", "P_Fe_err",
+        "P_S1", "P_S1_err",
+    ])
+
+    export = np.zeros(I_2.shape, dtype=dtype)
+
+    export["I_2"] = I_2
+    export["I_2_err"] = I_2_err
+    export["P_S2"] = P_S2
+    export["P_S2_err"] = P_S2_err
+    export["P_Cu"] = P_Cu
+    export["P_Cu_err"] = P_Cu_err
+    export["eta"] = eta
+    export["eta_err"] = eta_err
+    export["P_v"] = P_v
+    export["P_v_err"] = P_v_err
+    export["P_Fe"] = P_Fe
+    export["P_Fe_err"] = P_Fe_err
+    export["P_S1"] = P_S1
+    export["P_S1_err"] = P_S1_err
+
+    np.savetxt("export.csv", export, fmt="%f")
+
     pl.clf()
     pl.grid(True)
-    pl.errorbar(I_2, P_W1, label=ur"$P_{W,1}$", yerr=P_W1_err, **plotargs)
-    pl.errorbar(I_2, P_W2, label=ur"$P_{W,2}$", yerr=P_W2_err, **plotargs)
-    pl.errorbar(I_2, P_v, label=ur"$P_v$", yerr=P_v_err, **plotargs)
-    pl.errorbar(I_2, P_Cu, label=ur"$P_\mathrm{Cu}$", yerr=P_Cu_err, **plotargs)
-    pl.errorbar(I_2, P_Fe, label=ur"$P_\mathrm{Fe}$", yerr=P_Fe_err, **plotargs)
-    pl.title(u"Diverses gegen Sekundärstrom")
+    pl.errorbar(I_2, P_Cu, xerr=I_2_err, label=ur"$P_\mathrm{Cu}$", yerr=P_Cu_err, **plotargs)
+    pl.errorbar(I_2, P_S2, xerr=I_2_err, label=ur"$P_{S,2}$", yerr=P_S2_err, **plotargs)
+    pl.errorbar(I_2, P_v,  xerr=I_2_err, label=ur"$P_v$", yerr=P_v_err, **plotargs)
+    pl.errorbar(I_2, P_W2, xerr=I_2_err, label=ur"$P_{W,2}$", yerr=P_W2_err, **plotargs)
+    pl.errorbar(I_2, P_W1, xerr=I_2_err, label=ur"$P_{W,1}$", yerr=P_W1_err, **plotargs)
+    pl.errorbar(I_2, P_Fe, xerr=I_2_err, label=ur"$P_\mathrm{Fe}$", yerr=P_Fe_err, **plotargs)
+    pl.title(u"Leistungen gegen Sekundärstrom")
     pl.xlabel(ur"$I_2 / \mathrm{A}$")
-    pl.legend()
+    pl.ylabel(ur"$P / \mathrm{W}$")
+    pl.legend(loc="upper left")
     pl.savefig("d.pdf")
 
     pl.clf()
     pl.grid(True)
-    pl.errorbar(I_2, eta, label=ur"$\eta$", yerr=eta_err, **plotargs)
+    pl.errorbar(I_2, eta, label=ur"$\eta$", xerr=I_2_err, yerr=eta_err, **plotargs)
     pl.title(u"Wirkungsgrad gegen Sekundärstrom")
     pl.xlabel(ur"$I_2 / \mathrm{A}$")
     pl.ylabel(ur"$\eta$")
@@ -186,10 +228,38 @@ def c():
 
     pl.clf()
     pl.grid(True)
-    pl.errorbar(I_2, transfer, yerr=transfer_err, **plotargs)
+    pl.errorbar(I_2, transfer, xerr=I_2_err, yerr=transfer_err, **plotargs)
     pl.title(u"Spannungsübertragung")
     pl.xlabel(ur"$I_2 / \mathrm{A}$")
     pl.ylabel(ur"$U_2 / U_1$")
+    pl.savefig("g.pdf")
+
+    m = np.argmin(U_1 / I_1 - U_2/I_2 / np.sqrt(2))
+    print "ωL =", U_2[m] / I_2[m]
+
+    m = np.argmin(I_2 / I_1 - 1 / np.sqrt(2))
+    print "ωL =", U_2[m] / I_2[m] + R_1 + R_2
+
+    #omegaL = np.mean([176.309, 474, 475])
+    #ML = np.mean([0.819, 0.982])
+    #sigma = np.mean([0.328, 0.036, 0.0408, 0.015])
+
+    omegaL = 176
+    ML = 0.982
+    sigma = 0.036
+
+    R = U_2 / I_2
+
+    U2U1 = R / (R + 2 * R_1) * ML / np.sqrt(1 + (sigma * omegaL / (R + 2 * R_1))**2)
+
+    pl.clf()
+    pl.grid(True)
+    pl.errorbar(I_2, transfer, xerr=I_2_err, label="gemessen", yerr=transfer_err, **plotargs)
+    pl.errorbar(I_2, U2U1, xerr=I_2_err, label="errechnet", **plotargs)
+    pl.title(u"Spannungsübertragung")
+    pl.xlabel(ur"$I_2 / \mathrm{A}$")
+    pl.ylabel(ur"$U_2 / U_1$")
+    pl.legend()
     pl.savefig("g.pdf")
 
 if __name__ == "__main__":
