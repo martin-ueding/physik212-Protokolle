@@ -486,7 +486,7 @@ set(gca(), "fontsize", 20);
 set(p1, "linestyle", "none");
 xlabel("1/r / [1/m]");
 ylabel("e_S^{2/3} / [C^{2/3}]");
-set(p1, "marker", "+");
+set(p1, "marker", "x");
 title("Cunningham");
 
 print("cunningham.eps", "-tight");
