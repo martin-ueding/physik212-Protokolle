@@ -506,4 +506,4 @@ printf("gemeinsam\n");
 printf("=========\n");
 printf("\n");
 
-printf("m = %.2e ± %.2e (%.1e) kg\n", m.val, m.err, rel_error(m));
+printf("m = %.2e ± %.2e (%.1e) kg", m.val, m.err, rel_error(m));
