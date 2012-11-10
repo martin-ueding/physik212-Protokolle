@@ -1,9 +1,10 @@
 % Copyright © 2012 Martin Ueding <dev@martin-ueding.de>
 %
-\documentclass[11pt]{article}
+\documentclass[11pt, ngerman]{article}
 
 \usepackage[a4paper, left=3cm, right=2cm, top=2cm, bottom=2cm]{geometry}
 \usepackage[activate]{pdfcprot}
+\usepackage[iso]{isodate}
 \usepackage[ngerman]{babel}
 \usepackage[parfill]{parskip}
 \usepackage[T1]{fontenc}
@@ -19,10 +20,14 @@
 \usepackage{setspace}
 \usepackage{units}
 
+\usepackage[charter]{mathdesign}
+
 \definecolor{darkblue}{rgb}{0,0,.5}
+\definecolor{darkgreen}{rgb}{0,.5,0}
 
 \hypersetup{
 	breaklinks=false,
+	citecolor=darkgreen,
 	colorlinks=true,
 	linkcolor=black,
 	menucolor=black,
@@ -48,7 +53,7 @@
 \renewcommand{\d}{\, \mathrm d}
 
 \title{physik212 -- Versuch 249 \\ Elektrische und magnetische Kraftwirkung auf geladene Teilchen}
-\author{Martin Ueding \\ \href{mailto:mu@uni-bonn.de}{mu@uni-bonn.de}}
+\author{Martin Ueding \\ {\small \href{mailto:mu@uni-bonn.de}{mu@uni-bonn.de}}}
 
 \begin{document}
 
@@ -58,9 +63,12 @@
 
 \vfill
 
-Stellen in \textcolor{blue}{blau} werden bei der Versuchsdurchführung
-eingetragen. Zum Beispiel werden Messwerte mit „$\messwert$“ markiert. Stellen
-in \textcolor{red}{rot} müssen noch vor Versuchsbeginn vervollständigt werden.
+\begin{small}
+	Stellen in \textcolor{blue}{blau} werden bei der Versuchsdurchführung
+	eingetragen. Zum Beispiel werden Messwerte mit „$\messwert$“ markiert.
+	Stellen in \textcolor{red}{rot} müssen noch vor Versuchsbeginn
+	vervollständigt werden.
+\end{small}
 
 \newpage
 
@@ -343,9 +351,10 @@ Zeit und zählen die Anzahl Striche, die das Tröpfchen zurücklegt im Mikroskop
 
 \subsubsection{Aufgabe f: weitere Tröpfchen}
 
-Wir messen für mindestens 10 Tröpfchen die drei Sedimentgeschwindigkeiten fünf
-Mal. Dabei messen wir immer eine Strecke und eine Zeit. Die Daten sind in
-Tabelle \ref{table:sediment1}.
+Wir messen für mindestens 10 Tröpfchen die drei Sedimentgeschwindigkeiten
+mindestens fünf Mal. Dabei messen wir immer eine Strecke und eine Zeit. Die
+Daten sind in Tabelle \ref{table:sediment1}. Dabei sind die einzelnen Teilchen
+mit einer horizontalen Linie getrennt.
 
 Die Messfehler ergeben sich später in \ref{Auswertung-f} aus der Statistik, da
 ja jedes Tröpfchen fünf Mal vermessen wird. Wir schätzen diese an dieser Stelle
@@ -458,13 +467,6 @@ $(rI)^2$ Diagramm dar (Abbildung \ref{fig:graph-fadenstrahlrohr}). Diese Daten
 fitte ich mit einem linearen Modell mit dem Parameter $\alpha_1$:
 \[ U = \underbrace{\frac{0.716^2}{2} \frac{n^2 \mu_0^2}{R^2} \frac em}_{\alpha_1} r^2 I^2 \]
 
-\begin{figure}[h!]
-	\centering
-	\includegraphics[width=\textwidth]{fadenstrahl.pdf}
-	\caption{Graph der Messungen beim Fadenstrahlrohr}
-	\label{fig:graph-fadenstrahlrohr}
-\end{figure}
-
 Nach least-squares erhalte ich:
 \[ \alpha_1 = \unitfrac[\emesswert]{s^3 A}{m \cdot kg} \]
 
@@ -487,7 +489,7 @@ Standardabweichung gibt das Magnetfeld:
 	, \quad
 	B_E = \overline{B_{E,i}}
 	, \quad
-	\Delta B_E = \frac 1n \sigma(B_E)
+	\Delta B_E = \frac 1n \sigma(B_{E,i})
 \]
 
 Somit erhalte ich für das Erdmagnetfeld:
@@ -498,33 +500,40 @@ Somit erhalte ich für das Erdmagnetfeld:
 \label{Auswertung-f}
 
 Aus den Daten in Tabelle \ref{table:sediment1} berechne ich die
-Geschwindigkeiten $i$ für jedes Teilchen aus den fünf Messungen $j$ wie folgt:
+Geschwindigkeiten $i$ für jedes Teilchen $k$ aus den fünf Messungen $j$ wie
+folgt:
 \[
-	v_{ij} = \frac{s_{ij}}{t_{ij}}
+	v_{kij} = \frac{s_{kij}}{t_{kij}}
 	, \quad
 	i = \circ, \Downarrow, \Uparrow
 	, \quad
-	j = 1, ..., 5
+	j = 1, ..., 5, (...)
+	, \quad
+	k = 1, ..., 10, (...)
 \]
 
 Nun kann es sein, dass die Gleichung \eqref{eq:249.10} allerdings nicht im
-Rahmen der Messungenauigkeit erfüllt ist, weil das Tröpfchen während der
+Rahmen der Messungenauigkeit erfüllt ist, weil das Tröpfchen $k$ während der
 Messung $j$ seine Ladung verändert hat. Derartige Geschwindigkeitstriplets
 verwerfe ich.
 
 Aus den verbleibenden $n \leq 5$ Messungen $j$ für ein Teilchen bestimme ich
 den Mittelwert:
 \[
-	v_i = \frac 1n \sum_{j=1}^n v_{ij}
+	v_{ki} = \frac 1n \sum_{j=1}^n v_{kij}
 	, \quad
 	i = \circ, \Downarrow, \Uparrow
+	, \quad
+	k = 1, ..., 10, (...)
 \]
 
 Dabei sind die Fehler in der Geschwindigkeit die Summe der einzelnen Fehler durch deren Anzahl:
 \[
-	\Delta v_i = \frac 1n \sqrt{ \sum_{j=1}^n (\Delta v_{ij})^2 }
+	\Delta v_{ki} = \frac 1n \sqrt{ \sum_{j=1}^n (\Delta v_{kij})^2 }
 	, \quad
 	i = \circ, \Downarrow, \Uparrow
+	, \quad
+	k = 1, ..., 10, (...)
 \]
 
 Die drei Sedimentgeschwindigkeiten $j$ sind in Tabelle \ref{table:sediment2}
@@ -559,40 +568,68 @@ Der Plot ist in Abbildung \ref{fig:luft.pdf}. Als Fitparameter erhalte ich:
 	\alpha_1 = \unitfrac[\emesswert]{Pa \cdot s}K
 \]
 
-\begin{figure}[h!]
-	\centering
-	\includegraphics[width=\textwidth]{luft.pdf}
-	\caption{Fit für die Viskosität von Luft}
-	\label{fig:luft.pdf}
-\end{figure}
-
 Mit der Lufttemperatur kann ich nun die Viskosität der Luft bestimmen zu:
 \[ \eta_\text{Luft} = \unit[\emesswert]{Pa \cdot s} \]
 
 Nun verwende ich Gleichung \eqref{eq:249.8}, um den Radius der einzelnen
 Tröpfchen zu berechnen. Den Fehler berechne ich mit:
 \[
-	\Delta r = \frac 1{2 r} \sqrt{ \left( \Delta v_\Uparrow \right)^2 + \left( \Delta v_\Downarrow \right)^2 }
+	\Delta r_k = \frac 1{2 r_k} \sqrt{ \left( \Delta v_{k, \Uparrow} \right)^2 + \left( \Delta v_{k, \Downarrow} \right)^2 }
+	, \quad
+	k = 1, ..., 10, (...)
 \]
 
-Anschließend benutze ich \eqref{eq:249.9}, um die Ladung $q = Ne$ auf dem Tröpfchen zu
-berechnen. Den Fehler berechne ich mit:
+Anschließend benutze ich \eqref{eq:249.9}, um die Ladung $q_k = N_ke$ auf dem
+Tröpfchen zu berechnen. Den Fehler berechne ich mit:
 \[
-	\Delta q = \sqrt{
-		\left( \frac{3 \pi \eta_\text{Luft} r}{E} \right)^2 \left(
-		\left( \Delta v_\Uparrow \right)^2
-		+ \left( \Delta v_\Downarrow \right)^2
+	\Delta q_k = \sqrt{
+		\left( \frac{3 \pi \eta_\text{Luft} r_k}{E} \right)^2 \left(
+		\left( \Delta v_{k, \Uparrow} \right)^2
+		+ \left( \Delta v_{k, \Downarrow} \right)^2
 		\right)
-		+ \left( \frac q{E^2} \Delta E \right)^2
+		+ \left( \frac{q_k}{E^2} \Delta E \right)^2
 	}
+	, \quad
+	k = 1, ..., 10, (...)
 \]
 
 \subsection{Aufgabe h: gemeinsamer Teiler}
 
 Ich versuche einen gemeinsamen Teiler für die Ladungen zu finden. Damit kann
-ich die Anzahl $N_i$ der Elementarladungen auf jedem Tröpfchen abschätzen. Die
+ich die Anzahl $N_k$ der Elementarladungen auf jedem Tröpfchen abschätzen. Die
 Ladung teile ich durch diese Anzahl und erhalte eine Reihe von ungefähren
 Werten für die Elementarladung.
+
+Dabei suche ich nach dem Teiler wie folgt: Zuerst sortiere ich die Ladungen
+$q_k$ nach der Größe und erhalte eine monoton steigende Folge von Ladungen
+$(q_k)_{k \in \mathbb N}$. Dann bilde ich die Quotienten $\frac{q_k}{q_0}$.
+
+Da $q_k = N_k e$ gelten soll, sind die Quotienten rational und sollten als
+Brüche relativ kleiner natürlicher Zahlen $a_k$ und $b_k$ ausgedrückt werden
+können. Dabei muss $\frac{a_k}{b_k}$ nur bis auf die Messungenauigkeit
+$\frac{q_k}{q_0}$ annähern können. Die Ungenauigkeit ist gegeben durch:
+\[
+	\Delta \left( \frac{q_k}{q_0} \right)
+	= \sqrt{
+		\left( \frac{1}{q_0} \Delta q_k \right)^2
+		+ \left( \frac{q_k}{q_0^2} \Delta q_0 \right)^2
+	}
+\]
+
+Aus allen $b_k$ bilde ich das kleinste gemeinsame Vielfache $v$. Dann gilt:
+\[ e_{S, 0} = \frac{q_0}v \]
+
+Anschließend kann ich aus allen $q_k$ die Anzahl der Ladungen herausfinden,
+indem ich die angenäherten Brüche $\frac{a_k}{b_k}$ benutze:
+\[
+	N_k
+	= \frac{q_k}e
+	= \frac{q_k}{q_0} v
+	\approx \frac{a_k}{b_k} v
+\]
+
+Da $v$ als Vielfaches von allen $b_k$ gewähnt war, bleibt eine ganze Zahl
+stehen. \cite{com.stackoverflow/divisor, com.stackexchange.math/denominator}
 
 \subsection{Aufgabe i: Cunningham-Korrektur}
 
@@ -612,13 +649,6 @@ fitte ich mit least-squares und erhalte:
 \]
 
 Das ganze ist in Abbildung \ref{fig:cunningham} dargestellt.
-
-\begin{figure}[h!]
-	\centering
-	\includegraphics[width=\textwidth]{cunningham.pdf}
-	\caption{Graph für die Cunningham-Korrektur}
-	\label{fig:cunningham}
-\end{figure}
 
 Nun kann ich aus $\alpha_0$ die Elementarladung bestimmen:
 \[
@@ -694,6 +724,36 @@ aufgelistet.
 
 \textcolor{blue}{Die Messwerte liegen mit ihrem relativen Fehler innerhalb der
 Abweichung vom Literaturwert. Oder eben nicht. Und das könnte an … liegen.}
+
+\bibliography{../../zentrale_BibTeX/Central}
+\bibliographystyle{plain}
+
+\newpage
+
+\section{Plots}
+
+\newcommand\fraction{.4}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[height=\fraction\textheight]{fadenstrahl.pdf}
+	\caption{Graph der Messungen beim Fadenstrahlrohr}
+	\label{fig:graph-fadenstrahlrohr}
+\end{figure}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[height=\fraction\textheight]{luft.pdf}
+	\caption{Fit für die Viskosität von Luft}
+	\label{fig:luft.pdf}
+\end{figure}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[height=\fraction\textheight]{cunningham.pdf}
+	\caption{Graph für die Cunningham-Korrektur}
+	\label{fig:cunningham}
+\end{figure}
 
 \end{document}
 
