@@ -228,13 +228,14 @@ title("Viskosität von Luft");
 
 print("luft.eps", "-tight");
 
+printf("alpha_0 = %.3g, alpha_1 = %.3g\n", par(1), par(2));
+
 luft.eta.val = luft_fit_function(luft.T.val, par);
+
+printf("eta_Luft = %.3g Pa\n", luft.eta.val);
 
 # Nun die Sedimentgeschwindigkeiten.
 
-printf("\n");
-printf("Millikanversuch\n");
-printf("===============\n");
 printf("\n");
 printf("Tabelle mit den verrechneten drei Geschwindigkeiten pro Teilchen\n");
 printf("----------------------------------------------------------------\n");
