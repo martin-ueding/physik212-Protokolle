@@ -450,6 +450,8 @@ plot_x = (1 ./ er.val(:, 2));
 plot_y = (er.val(:, 1).^(2/3));
 plot_error = abs(2/3 .* (er.val(:, 1)).^(2/3-1) .* er.err(:, 1));
 
+[plot_x plot_y]
+
 [f, par, cvg, iter, corp, covp, covr, stdredid] = leasqr(
 		plot_x,
 		plot_y,
