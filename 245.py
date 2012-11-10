@@ -234,28 +234,50 @@ def c():
     pl.ylabel(ur"$U_2 / U_1$")
     pl.savefig("g.pdf")
 
-    m = np.argmin(U_1 / I_1 - U_2/I_2 / np.sqrt(2))
+    m = np.argmin(np.abs(U_1 / I_1 - U_2/I_2 / np.sqrt(2)))
+    print "Minimaler Wert bei", m
     print "ωL =", U_2[m] / I_2[m]
 
-    m = np.argmin(I_2 / I_1 - 1 / np.sqrt(2))
+    m = np.argmin(np.abs(I_2 / I_1 - 1 / np.sqrt(2)))
+    print "Minimaler Wert bei", m
     print "ωL =", U_2[m] / I_2[m] + R_1 + R_2
 
-    #omegaL = np.mean([176.309, 474, 475])
-    #ML = np.mean([0.819, 0.982])
-    #sigma = np.mean([0.328, 0.036, 0.0408, 0.015])
+    print
 
-    omegaL = 176
-    ML = 0.982
-    sigma = 0.036
+    omegaL_list = np.array([176.309, 97, 87])
+    ML_list = np.array([0.819, 0.982])
+    sigma_list = np.array([0.328, 0.036, 0.0408, 0.015])
 
     R = U_2 / I_2
 
-    U2U1 = R / (R + 2 * R_1) * ML / np.sqrt(1 + (sigma * omegaL / (R + 2 * R_1))**2)
+    var = np.zeros((len(omegaL_list)*len(sigma_list), len(R)))
+
+    i = 0
+
+    for omegaL in omegaL_list:
+        for sigma in sigma_list:
+            ML = np.sqrt(1 - sigma)
+            var[i] = R / (R + 2 * R_1) * ML / np.sqrt(1 + (sigma * omegaL / (R + 2 * R_1))**2)
+            i += 1
+
+    print "var", var
+
+    span = np.zeros(len(var[0]))
+    mid = np.zeros(len(var[0]))
+    for k in xrange(var.shape[1]):
+        c = var[:, k]
+        print k, c
+        mid[k] = np.mean(c)
+        span[k] = (np.max(c) - np.min(c)) / 2
+
+    print "I_2", I_2
+    print "mid", mid
+    print "span", span
 
     pl.clf()
     pl.grid(True)
     pl.errorbar(I_2, transfer, xerr=I_2_err, label="gemessen", yerr=transfer_err, **plotargs)
-    pl.errorbar(I_2, U2U1, xerr=I_2_err, label="errechnet", **plotargs)
+    pl.errorbar(I_2, mid.T, xerr=I_2_err, yerr=span.T, label="errechnet", **plotargs)
     pl.title(u"Spannungsübertragung")
     pl.xlabel(ur"$I_2 / \mathrm{A}$")
     pl.ylabel(ur"$U_2 / U_1$")
