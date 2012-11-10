@@ -167,6 +167,8 @@ p1 = errorbar(plot_x, plot_y, plot_error, "~.k");
 p2 = plot(function_x, function_y, "-k");
 
 set(gca(), "fontsize", 20);
+xlabel("r^2 I^2  / [m^2  A^2 ]");
+ylabel("U / [V]");
 set(p1, "linestyle", "none");
 set(p1, "marker", "+");
 title("Fadenstrahlrohr");
