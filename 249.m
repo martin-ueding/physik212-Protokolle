@@ -473,7 +473,7 @@ e.err = abs(3/2 * abs(alpha0.val)^(3/2-1) * alpha0.err);
 
 printf("e = %.2e ± %.2e (%.1e) C\n", e.val, e.err, rel_error(e));
 
-function_x = (min(plot_x) : (max(plot_x)-min(plot_x))/10 : max(plot_x))';
+function_x = (0 : (max(plot_x)-min(plot_x))/10 : max(plot_x))';
 function_y = cunningham(function_x, par);
 
 clf;
