@@ -130,7 +130,7 @@ printf("\n");
 #                         Rechnungen Fadenstrahlrohr                          #
 ###############################################################################
 
-plot_x = faden.data(:, 1) .^2 .* 0.5 .* (faden.data(:, 2) + faden.data(:, 3)) .^2;
+plot_x = faden.data(:, 1) .^2 .* (0.5 .* (faden.data(:, 2) + faden.data(:, 3))) .^2;
 plot_y = faden.data(:, 2);
 plot_error = ones(size(faden.data(:, 1))) * faden.U.err;
 
@@ -191,6 +191,14 @@ printf("e/m = %.2e ± %.2e (%.1e) C/kg\n", em.val, em.err, rel_error(em));
 #                         Rechnungen Millikanversuch                          #
 ###############################################################################
 
+printf("\n");
+printf("Millikanversuch\n");
+printf("===============\n");
+printf("\n");
+printf("Luftviskosität\n");
+printf("--------------\n");
+printf("\n");
+
 # Errechne die Viskosität von Luft anhand eines linearen Fits.
 
 function eta = luft_fit_function(T, par)
@@ -221,6 +229,8 @@ p1 = errorbar(plot_x, plot_y, plot_error, "~.k");
 p2 = plot(function_x, function_y, "-k");
 
 set(gca(), "fontsize", 20);
+xlabel("T / [^{\circ} C]");
+ylabel("\eta / [Pa s]");
 set(p1, "linestyle", "none");
 set(p1, "marker", "+");
 # FIXME Umlaut im Titel, Encoding richtig einstellen.
@@ -254,15 +264,15 @@ for k = 1:length(millikan)
 
 	e1 = sqrt(
 		(1 ./ data(:, 2) .* s.err).^2
-		+ (data(:, 2) ./ (data(:, 2).^2) .* t.err).^2
+		+ (data(:, 1) ./ (data(:, 2).^2) .* t.err).^2
 	);
 	e2 = sqrt(
 		(1 ./ data(:, 4) .* s.err).^2
-		+ (data(:, 4) ./ (data(:, 4).^2) .* t.err).^2
+		+ (data(:, 3) ./ (data(:, 4).^2) .* t.err).^2
 	);
 	e3 = sqrt(
 		(1 ./ data(:, 6) .* s.err).^2
-		+ (data(:, 6) ./ (data(:, 6).^2) .* t.err).^2
+		+ (data(:, 5) ./ (data(:, 6).^2) .* t.err).^2
 	);
 	v.err = [e1 e2 e3];
 
@@ -271,14 +281,13 @@ for k = 1:length(millikan)
 
 	n = 0;
 
-	for j = 1:length(v.val)
-		row.val = v.val(j, :);
-		row.err = v.err(j, :);
+	#for j = 1:length(v.val)
+		row.val = v.val;
+		row.err = v.err;
 
 		# Prüfe, ob $2 v_\circ = v_\Downarrow - v_\Uparrow$ gilt.
 		deviation = 2 * row.val(1) - row.val(2) + row.val(3);
 		deviation_erlaubt = 2 * row.err(1) + row.err(2) + row.err(3);
-
 
 		if abs(deviation) <= abs(deviation_erlaubt)
 			#printf("Messung %d von Teilchen %d: %.2e ≤ %.2e\n", j, k, deviation, deviation_erlaubt);
@@ -288,10 +297,10 @@ for k = 1:length(millikan)
 		else
 			#printf("Verwerfe Messung\n");
 		endif
-	endfor
+	#endfor
 
 	if n == 0
-		#printf("Keine brauchbaren Messungen für Teilchen %d.\n", k);
+		printf("Keine brauchbaren Messungen für Teilchen %d.\n", k);
 		continue;
 	elseif n == 1
 		v3 = v2;
@@ -327,8 +336,8 @@ for k = 1:length(v3_array.val)
 	v3.val = v3_array.val(k, :);
 	v3.err = v3_array.err(k, :);
 
-	r.val = sqrt( (9 * luft.eta.val * (v3.val(2) - v3.val(3) )) / (4 * g * (rho.oel.val - rho.luft.val)));
-	r.err = 1 / (2 * r.val) * sqrt( v3.err(2)^2 + v3.err(3)^2 );
+	r.val = sqrt( (v3.val(2) - v3.val(3) ) * (9 * luft.eta.val) / (4 * g * (rho.oel.val - rho.luft.val)));
+	r.err = (1 / (2 * r.val)) * (9 * luft.eta.val) / (4 * g * (rho.oel.val - rho.luft.val)) * sqrt( v3.err(2)^2 + v3.err(3)^2 );
 
 	q.val = 3 * pi * luft.eta.val * r.val * (v3.val(2) + v3.val(3)) / E.val;
 	q.err = sqrt(
@@ -336,26 +345,98 @@ for k = 1:length(v3_array.val)
 			+ (q.val / E.val^2 * E.err)^2
 			);
 
-	printf("r = %.2e ± %.2e (%.1e), q = %.2e ± %.2e (%.1e)\n", r.val, r.err, rel_error(r), q.val, q.err, rel_error(q));
+	printf("r = %.2e ± %.2e (%+.1e), q = %.2e ± %.2e (%+.1e)\n", r.val, r.err, rel_error(r), q.val, q.err, rel_error(q));
 
 	rq.val = [rq.val ; r.val q.val];
 	rq.err = [rq.err ; r.err q.err];
 end
 
-# TODO Automatisch einen gemeinsamen Teiler finden.
+printf("\n");
 
-er.val = rq.val;
-er.err = rq.err;
+printf("Suche nach Elementarladung\n");
+printf("--------------------------\n");
+printf("\n");
+
+# Sortiere die Einträge nach Ladung $q$.
+[sorted, indexes] = sort(rq.val);
+
+for i = 1:length(indexes)
+	k = indexes(i, 2);
+	printf("r = %.2e m, q = %.2e C\n", rq.val(k, 1), rq.val(k, 2));
+
+	div(i).r.val = rq.val(k, 1);
+	div(i).q.val = rq.val(k, 2);
+	div(i).r.err = rq.err(k, 1);
+	div(i).q.err = rq.err(k, 2);
+end
+
+printf("\n");
+
+# Nun ist div ein Array mit jeweils einem Struct mit $e$ und $q$, die jeweils
+# wieder ``val`` und ``err`` enthalten.
+
+printf("Suche nach gemeinsamen Nenner\n");
+printf("-----------------------------\n");
+printf("\n");
+
+# Jetzt bilde ich die Quotienten $q_k/q_0$.
+for k = 1:length(div)
+	div(k).ratio.val = div(k).q.val / div(1).q.val;
+	div(k).ratio.err = sqrt(
+			(1 / div(1).q.val * div(k).q.err)^2
+			+ (div(k).q.val / div(1).q.val^2 * div(1).q.err)^2
+			);
+
+	# Finde einen Bruch, der bis auf den Messfehler das Verhältnis annähert.
+	[div(k).a div(k).b] = rat(div(k).ratio.val, div(k).ratio.err);
+
+	printf("%.2g ± %.1g → %d / %d\n", div(k).ratio.val, div(k).ratio.err, div(k).a, div(k).b);
+
+	lcm_input(k) = div(k).b;
+end
+
+printf("\n");
+
+v = lcm(lcm_input);
+
+printf("v = %d\n", v);
+printf("\n");
+
+for k = 1:length(div)
+	div(k).n.val = div(k).a * v / div(k).b;
+	div(k).es.val = div(k).q.val / div(k).n.val;
+
+	printf("k = %d, e_S = %.3g C, n = %d, r = %.3g ± %.3g\n",
+			k,
+			div(k).es.val,
+			div(k).n.val,
+			div(k).r.val,
+			div(k).r.err
+		  );
+end
+
+printf("\n");
+
+# -----------------------------------------------------------------------------
+
+# Konvertiere Daten für den nächsten Abschnitt.
+
+printf("Cunninghamkorrektur\n");
+printf("-------------------\n");
+printf("\n");
+
+for k = 1:length(div)
+	er.val(k, :) = [div(k).es.val div(k).r.val];
+	er.err(k, :) = [0             div(k).r.err];
+end
 
 function y = cunningham(x, par)
 	y = par(1) + par(2) * x;
 end
 
-plot_x = real(er.val(:, 1).^(2/3));
-plot_y = real(1 ./ er.val(:, 2));
+plot_x = (1 ./ er.val(:, 2));
+plot_y = (er.val(:, 1).^(2/3));
 plot_error = abs(2/3 .* (er.val(:, 1)).^(2/3-1) .* er.err(:, 1));
-
-[plot_x plot_y plot_error]
 
 [f, par, cvg, iter, corp, covp, covr, stdredid] = leasqr(
 		plot_x,
@@ -363,18 +444,20 @@ plot_error = abs(2/3 .* (er.val(:, 1)).^(2/3-1) .* er.err(:, 1));
 		[1, 1],
 		"cunningham",
 		0.001,
-		20,
-		1./plot_error
+		20
 		);
 
 alpha0.val = par(1);
 alpha0.err = sqrt(diag(covp))(1);
 
-printf("\n");
-printf("α₀ = %.2e ± %.2e (%.1e)\n", alpha0.val, alpha0.err, rel_error(alpha0));
+alpha1.val = par(2);
+alpha1.err = sqrt(diag(covp))(2);
 
-e.val = alpha0.val^(3/2);
-e.err = abs(3/2 * alpha0.val^(3/2-1) * alpha0.err);
+printf("α₀ = %.2e ± %.2e (%.1e)\n", alpha0.val, alpha0.err, rel_error(alpha0));
+printf("α₁ = %.2e ± %.2e (%.1e)\n", alpha1.val, alpha1.err, rel_error(alpha1));
+
+e.val = abs(alpha0.val)^(3.0/2.0);
+e.err = abs(3/2 * abs(alpha0.val)^(3/2-1) * alpha0.err);
 
 printf("e = %.2e ± %.2e (%.1e) C\n", e.val, e.err, rel_error(e));
 
