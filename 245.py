@@ -266,8 +266,8 @@ def c():
     U2U1_err = np.sqrt(
 
         (-((omegaL * R * np.sqrt(1 - sigma) *  sigma**2)/((R + 2 * R_1)**3 * (1 + (omegaL**2 * sigma**2)/(R + 2 * R_1)**2)**(3.0/2))) * omegaL_err)**2
-
-        +(-((omegaL**2 * R * np.sqrt(1 - sigma) * sigma)/((R + 2 * R_1)**3 * (1 + (omegaL**2 * sigma**2)/(R + 2 * R_1)**2)**( 3.0/2))) - R/( 2 * (R + 2 * R_1) * np.sqrt(1 - sigma) * np.sqrt( 1 + (omegaL**2 * sigma**2)/(R + 2 * R_1)**2)) * sigma_err)**2
+        #+
+        #(-((omegaL**2 * R * np.sqrt(1 - sigma) * sigma)/((R + 2 * R_1)**3 * (1 + (omegaL**2 * sigma**2)/(R + 2 * R_1)**2)**( 3.0/2))) - R/( 2 * (R + 2 * R_1) * np.sqrt(1 - sigma) * np.sqrt( 1 + (omegaL**2 * sigma**2)/(R + 2 * R_1)**2)) * sigma_err)**2
 
     )
 
