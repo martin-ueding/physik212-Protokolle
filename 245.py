@@ -98,7 +98,6 @@ def c():
     cos_1 = d["cos_1"]
     cos_2 = d["cos_2"]
 
-
     R_1 = R_2 = 0.5
 
     I_2_err = np.ones(I_2.shape) * I_err
@@ -245,39 +244,37 @@ def c():
     print
 
     omegaL_list = np.array([176.309, 97, 87])
-    ML_list = np.array([0.819, 0.982])
-    sigma_list = np.array([0.328, 0.036, 0.0408, 0.015])
+    sigma_list = [
+        (0.328, 0.0329),
+        (0.036, 0.0293),
+        (0.0408, 0.0154),
+        (0.0771, 0.0271),
+    ]
+
+    omegaL = 114.0
+    omegaL_err = 40.0
+
+    sigma = sum([z / s**2 for z, s in sigma_list]) / sum([1 / s**2 for z, s in sigma_list])
+    sigma_err = len(sigma_list) / sum([1 / s**2 for z, s in sigma_list])
+
+    print sigma, sigma_err
 
     R = U_2 / I_2
 
-    var = np.zeros((len(omegaL_list)*len(sigma_list), len(R)))
+    ML = np.sqrt(1 - sigma)
+    U2U1 = R / (R + 2 * R_1) * ML / np.sqrt(1 + (sigma * omegaL / (R + 2 * R_1))**2)
+    U2U1_err = np.sqrt(
 
-    i = 0
+        (-((omegaL * R * np.sqrt(1 - sigma) *  sigma**2)/((R + 2 * R_1)**3 * (1 + (omegaL**2 * sigma**2)/(R + 2 * R_1)**2)**(3.0/2))) * omegaL_err)**2
 
-    for omegaL in omegaL_list:
-        for sigma in sigma_list:
-            ML = np.sqrt(1 - sigma)
-            var[i] = R / (R + 2 * R_1) * ML / np.sqrt(1 + (sigma * omegaL / (R + 2 * R_1))**2)
-            i += 1
+        +(-((omegaL**2 * R * np.sqrt(1 - sigma) * sigma)/((R + 2 * R_1)**3 * (1 + (omegaL**2 * sigma**2)/(R + 2 * R_1)**2)**( 3.0/2))) - R/( 2 * (R + 2 * R_1) * np.sqrt(1 - sigma) * np.sqrt( 1 + (omegaL**2 * sigma**2)/(R + 2 * R_1)**2)) * sigma_err)**2
 
-    print "var", var
-
-    span = np.zeros(len(var[0]))
-    mid = np.zeros(len(var[0]))
-    for k in xrange(var.shape[1]):
-        c = var[:, k]
-        print k, c
-        mid[k] = np.mean(c)
-        span[k] = (np.max(c) - np.min(c)) / 2
-
-    print "I_2", I_2
-    print "mid", mid
-    print "span", span
+    )
 
     pl.clf()
     pl.grid(True)
     pl.errorbar(I_2, transfer, xerr=I_2_err, label="gemessen", yerr=transfer_err, **plotargs)
-    pl.errorbar(I_2, mid.T, xerr=I_2_err, yerr=span.T, label="errechnet", **plotargs)
+    pl.errorbar(I_2, U2U1, xerr=I_2_err, yerr=U2U1_err, label="errechnet", **plotargs)
     pl.title(u"Spannungsübertragung")
     pl.xlabel(ur"$I_2 / \mathrm{A}$")
     pl.ylabel(ur"$U_2 / U_1$")
