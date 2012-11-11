@@ -268,7 +268,7 @@ def c():
         c = var[:, k]
         print k, c
         mid[k] = np.mean(c)
-        span[k] = (np.max(c) - np.min(c)) / 2
+        span[k] = (np.max(c) - np.min(c)) / 4
 
     print "I_2", I_2
     print "mid", mid
