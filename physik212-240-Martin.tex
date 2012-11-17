@@ -1,9 +1,10 @@
 % Copyright © 2012 Martin Ueding <dev@martin-ueding.de>
 %
-\documentclass[11pt,german]{article}
+\documentclass[11pt, ngerman]{article}
 
 \usepackage[a4paper, left=3cm, right=2cm, top=2cm, bottom=2cm]{geometry}
 \usepackage[activate]{pdfcprot}
+\usepackage[iso]{isodate}
 \usepackage[ngerman]{babel}
 \usepackage[parfill]{parskip}
 \usepackage[T1]{fontenc}
@@ -17,6 +18,8 @@
 \usepackage{hyperref}
 \usepackage{setspace}
 \usepackage{units}
+
+\usepackage[charter]{mathdesign}
 
 \definecolor{darkblue}{rgb}{0,0,.5}
 
@@ -48,7 +51,7 @@
 \setcounter{tocdepth}{2}
 
 \title{physik212 -- Versuch 240 \\ Gleichströme, Spannungsquellen und Widerstände}
-\author{Martin Ueding}
+\author{Martin Ueding \\ {\small \href{mailto:mu@uni-bonn.de}{mu@uni-bonn.de}}}
 
 \begin{document}
 
@@ -58,7 +61,12 @@
 
 \vfill
 
-Stellen in \textcolor{blue}{blau} werden bei der Versuchsdurchführung eingetragen. Zum Beispiel werden Messwerte mit „$\messwert$“ markiert. Stellen in \textcolor{red}{rot} müssen noch vor Versuchsbeginn vervollständigt werden.
+\begin{small}
+	Stellen in \textcolor{blue}{blau} werden bei der Versuchsdurchführung
+	eingetragen. Zum Beispiel werden Messwerte mit „$\messwert$“ markiert.
+	Stellen in \textcolor{red}{rot} müssen noch vor Versuchsbeginn
+	vervollständigt werden.
+\end{small}
 
 \newpage
 
@@ -80,16 +88,26 @@ Materialien ausmessen.
 
 \section{Theorie}
 
-Eine reale Spannungsquellen hat einen Innenwiderstand, so dass die Spannung mit dem entnommenen Strom abnimmt wie:
+Eine reale Spannungsquellen hat einen Innenwiderstand, so dass die Spannung mit
+dem entnommenen Strom abnimmt wie:
 \[ U = U_0 - R_i I \]
 
-In den ersten Versuchsteilen benutzen wir ein Potentiometer, das ein variabler Spannungsteiler ist. Ein solcher besteht aus zwei Widerständen, über denen die gesamte Spannung der Spannungsquelle abfällt. In der Mitte kann eine Teilspannung entnommen werden.
+In den ersten Versuchsteilen benutzen wir ein Potentiometer, das ein variabler
+Spannungsteiler ist. Ein solcher besteht aus zwei Widerständen, über denen die
+gesamte Spannung der Spannungsquelle abfällt. In der Mitte kann eine
+Teilspannung entnommen werden.
 
-Dies ermöglicht Schaltungen wie das belastete Potentiometer in \ref{durchführung-d} und \ref{durchführung-f}. Oder auch die Kompensationsschaltung nach Poggendorf in \ref{durchführung-h} sowie die Wheatstonesche Brücke in \ref{durchführung-k}.
+Dies ermöglicht Schaltungen wie das belastete Potentiometer in
+\ref{durchführung-d} und \ref{durchführung-f}. Oder auch die
+Kompensationsschaltung nach Poggendorf in \ref{durchführung-h} sowie die
+Wheatstonesche Brücke in \ref{durchführung-k}.
 
-Im letzten Teil betrachten wie die Temperaturabhängigkeit von Widerständen. Bei Metallen nimmt die Leitfähigkeit aufgrund der Brownschen Bewegung des restlichen Metalls ab und somit steigt der Widerstand.
+Im letzten Teil betrachten wir die Temperaturabhängigkeit von Widerständen. Bei
+Metallen nimmt die Leitfähigkeit aufgrund der Brownschen Bewegung des
+restlichen Metalls ab und somit steigt der Widerstand.
 
-Der Widerstand skaliert mit $R(\theta) = R_0 (1 + \alpha \theta)$, wobei $\alpha$ vom Material abhängt.
+Der Widerstand skaliert mit $R(\theta) = R_0 (1 + \alpha \theta)$, wobei
+$\alpha$ vom Material abhängt.
 
 Bei einem Halbleiter führt die thermische Bewegung erst dazu, dass sich
 überhaupt Elektronen im Leiterband befinden. Je höher die Temperatur ist, desto
@@ -100,9 +118,14 @@ Der Widerstand eines Halbleiters skaliert wie
 \[ R(T) = R_0 \exp \left( \frac{E_G}{2 k T} \right), \]
 wobei $E_G$ die Energie der Bandlücke ist.
 
-Als Messgerät benutzen wir das Mavometer, mit dem Spannungen im Voltbereich und Ströme im Milliampèrebereich gemessen werden können. Um den Messbereich einstellen zu können, müssen wir Vorwiderstände oder Shunts benutzen. Erstere senken die zu messende Spannung herab, letztere verbrennen den Großteil des Stroms, so dass das Messgerät nicht überlastet wird.
+Als Messgerät benutzen wir das Mavometer, mit dem Spannungen im Voltbereich und
+Ströme im Milliampèrebereich gemessen werden können. Um den Messbereich
+einstellen zu können, müssen wir Vorwiderstände oder Shunts benutzen. Erstere
+senken die zu messende Spannung herab, letztere verbrennen den Großteil des
+Stroms, so dass das Messgerät nicht überlastet wird.
 
-Teilweise benutzen wir ein Digitalmultimeter, das im Prinzip ähnlich funktioniert, allerdings die Vorwiderstände und Shunts schon eingebaut hat.
+Teilweise benutzen wir ein Digitalmultimeter, das im Prinzip ähnlich
+funktioniert, allerdings die Vorwiderstände und Shunts schon eingebaut hat.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                  Aufgaben                                   %
@@ -114,12 +137,14 @@ Teilweise benutzen wir ein Digitalmultimeter, das im Prinzip ähnlich funktionie
 
 Eine ideale Stromquelle hat keinen Innenwiderstand.
 
+\textcolor{red}{Ersatzschaltbild malen.}
+
 \subsection{Aufgabe B: Messvorschrift}
 
-Da über dem Innenwiderstand $R_i$ eine Spannung $R_i I$ abfällt, kann
-mit dem Strom und der gemessenen Spannung zurückgerechnet werden, groß
-die Leerlaufspannung $U_0$ ist. Um den Widerstand zu bestimmen, müssen
-allerdings zwei Messungen mit verschiedenen Ströme durchgeführt werden.
+Da über dem Innenwiderstand $R_i$ eine Spannung $R_i I$ abfällt, kann mit dem
+Strom und der gemessenen Spannung zurückgerechnet werden, wie groß die
+Leerlaufspannung $U_0$ ist. Um den Widerstand zu bestimmen, müssen allerdings
+zwei Messungen mit verschiedenen Ströme durchgeführt werden.
 
 Also zweimal $I$ und $U$ messen, dann gilt folgendes Gleichungssystem:
 \begin{align*}
@@ -210,7 +235,7 @@ der Widerstand des Potentiometers.
 
 \label{durchführung-a}
 
-Wir vermessen die erste Schaltung, Schaltung A.
+Wir vermessen die erste Schaltung, Schaltung A. Dabei können wir den Strom variieren, indem wir den Regelwiderstand einstellen.
 
 Als Vorwiderstand für das Voltmeter benutzen wir $\unit[(\messwert \pm
 \messwert)] \Omega$ und für das Ampèremeter $\unit[(\messwert \pm \messwert)]
@@ -226,8 +251,10 @@ Als Vorwiderstand für das Voltmeter benutzen wir $\unit[(\messwert \pm
 	\end{tabular}
 \end{center}
 
-Dabei sind die Fehler in der Spannung und Strom:
+Dabei sind die Fehler in Spannung und Strom:
 \[ \Delta V = \unit[\messwert]V, \quad \Delta A = \unit[\messwert] A \]
+
+Diese Daten werte ich in \ref{auswertung-a} aus.
 
 \subsection{Aufgabe c: $R_x$ mit Multimeter}
 
@@ -273,9 +300,12 @@ Innenwiderstand des Mavometers benutzen soll.}
 
 \label{durchführung-f}
 
-Wir ersetzen nun den Spannungsteiler mit seinen beiden Widerständen durch ein Helipot.
+Wir ersetzen nun den Spannungsteiler mit seinen beiden Widerständen durch ein
+Helipot.
 
-Nun messen wir für einige Einstellungen $x$ die Spannung. Dafür klemmen wir an den Abgriff des Helipots ein Mavometer als Voltmeter. Das Helipot hat $l = \messwert$ Skalenteile.
+Nun messen wir für einige Einstellungen $x$ die Spannung. Dafür klemmen wir an
+den Abgriff des Helipots ein Mavometer als Voltmeter. Das Helipot hat $l =
+\messwert$ Skalenteile.
 
 \begin{center}
 	\begin{tabular}{cc}
@@ -287,7 +317,8 @@ Nun messen wir für einige Einstellungen $x$ die Spannung. Dafür klemmen wir an
 	\end{tabular}
 \end{center}
 
-Wir wiederholen die Messung mit einem Lastwiderstand von $R_a = \unit[20] \Omega$.
+Wir wiederholen die Messung mit einem Lastwiderstand von $R_a = \unit[20]
+\Omega$.
 
 \begin{center}
 	\begin{tabular}{cc}
@@ -418,14 +449,28 @@ Sowie für den Heißleiter:
 
 \subsection{Aufgabe a: $U$-$I$-Abhängigkeit}
 
-Die Schaltung besteht aus den Widerständen des Ampèremeters $R_I$, des Voltmeters $R_U$, des unbekannten Widerstands $R_x$ und des Potentiometers $R_P$.  Der Ersatzwiderstand ist einfach:
-\[ R_A = R_I + \left( \frac{1}{R_X} + \frac 1{R_U} \right)^{-1} + R_P \]
+\label{auswertung-a}
 
-Den Strom $I$ können wir direkt messen.
+In \ref{durchführung-a} haben wir die $U$-$I$-Abhängigkeit der Schaltung A ausgemessen.
 
-\fehlt
+Die Schaltung besteht aus den Widerständen des Ampèremeters $R_I$, des Voltmeters $R_U$ und des unbekannten Widerstands $R_x$. Dabei muss ich noch den Vorwiderstand $R_V$ und Shunt $R_S$ einrechnen:
+\[
+	R_I = \left( \frac 1{R_{I, i}} + \frac 1{R_S}  \right),
+	\quad
+	R_U = R_V + R_{I, i}
+\]
+
+Der Ersatzwiderstand ist dann zusammengesetzt:
+\[ R_A = R_I + \left( \frac{1}{R_X} + \frac 1{R_U} \right)^{-1} \]
+
+Die Messdaten sind in Abbildung \ref{fig:A}
+
+Mit einem Fit kann ich $R_A$ bestimmen zu:
+\[ R_A = \unit[\emesswert] \Omega \]
 
 \subsection{Aufgabe b: wahrer Wert $R_x$}
+
+\label{auswertung-b}
 
 Die Spannung, die wir über dem unbekannten Widerstand gemessen haben, spiegelt jedoch nur den um den Innenwiderstand des Voltmeters reduzierten Strom dar. Daher muss ich noch die Stromteilerregel anwenden und erhalte:
 \[ U_x = \frac{R_U^2}{R_x + R_U} I \]
@@ -444,18 +489,15 @@ erhalte ich als echten Widerstand:
 
 \subsection{Aufgabe e: neue Spannungsquelle}
 
+\label{auswertung-e}
+
 Mit den Daten aus \ref{durchführung-d} errechne ich hier den Innenwiderstand
 $R_i^s$ und Leerlaufspannung $U_0^s$ der neuen Spannungsquelle, die das
 Potentiometer einschließt.
 
-Dazu erzeuge ich ein $U$-$I$-Diagramm der Messwerte und fitte diese mit einem linearen Modell:
+Dazu erzeuge ich ein $U$-$I$-Diagramm (Abbildung \ref{fig:e}) der Messwerte und
+fitte diese mit einem linearen Modell:
 \[ U = U_0^s - R_i^s I \]
-
-\begin{figure}[h!]
-	\centering
-	\fehlt
-	\caption{$U$-$I$-Diagramm}
-\end{figure}
 
 Die Steigung gibt mir $R_i^s$, der Schnittpunkt mit der $U$-Achse gibt mir $U_0^s$. Der Fit liefert:
 \[
@@ -481,13 +523,11 @@ kurzgeschlossen.
 
 \subsection{Aufgabe f: Helipot}
 
-Hier werte ich die Daten, die in \ref{durchführung-f} gemessen worden sind, aus. Ich stelle die drei Messreihen in einem $U_1$-$x$-Diagramm dar.
+\label{auswertung-f}
 
-\begin{figure}[h!]
-	\centering
-	\fehlt
-	\caption{$U_1$-$x$-Diagramm}
-\end{figure}
+Hier werte ich die Daten, die in \ref{durchführung-f} gemessen worden sind,
+aus. Ich stelle die drei Messreihen in einem $U_1$-$x$-Diagramm (Abbildung
+\ref{fig:f}) dar.
 
 \fehlt
 
@@ -496,13 +536,7 @@ Hier werte ich die Daten, die in \ref{durchführung-f} gemessen worden sind, aus
 Die Leistung im Widerstand ist:
 \[ P(x) = U I = \frac{U^2}R \]
 
-Dies trage ich in einem Plot auf.
-
-\begin{figure}[h!]
-	\centering
-	\fehlt
-	\caption{$P$-$x$-Diagramm}
-\end{figure}
+Dies trage ich in einem Plot auf, siehe Abbildung \ref{fig:g}.
 
 Das Maximum liegt bei $x = \messwert$. Für die Widerstände $R_1$ und $R_2$ gilt:
 \begin{align*}
@@ -542,23 +576,22 @@ Batterie und Weston-Element tauschen, wäre dies jedoch möglich.
 
 \subsection{Aufgabe l: Widerstand $R$}
 
+\label{auswertung-l}
+
 Der Widerstand $R$ sollte ungefähr $\unit[\messwert] \Omega$ haben. \textcolor{red}{Warum?}
 
 \fehlt
 
 \subsection{Aufgabe n: $R(T)$}
 
+\label{auswertung-n}
+
 Hier werte ich die Daten aus \ref{durchführung-m} aus.
 
 \subsubsection{metallische Leiter}
 
-Ich plotte die Messwerte für die beiden Metalle in einem Widerstand-gegen-Temperatur-Diagramm:
-
-\begin{figure}[h!]
-	\centering
-	\fehlt
-	\caption{$R$-$\theta$-Diagramm für die Metalle}
-\end{figure}
+Ich plotte die Messwerte für die beiden Metalle in einem
+Widerstand-gegen-Temperatur-Diagramm (Abbildung \ref{fig:metall}).
 
 An diesen Plot habe ich folgende Funktion mit Least-Squares gefittet:
 \[ R(T) = R_0 \left( 1 - \alpha \theta \right) \]
@@ -574,13 +607,8 @@ Wenn die Temperatur gegen den absoluten Nullpunkt geht, \textcolor{blue}{ist $R$
 
 \subsubsection{Halbleiter}
 
-Für den Halbleiter plotte ich den Widerstand $R$ gegen die absolute Temperatur $T$. Dabei setze ich die $R$-Achse logarithmisch.
-
-\begin{figure}[h!]
-	\centering
-	\fehlt
-	\caption{$R$-$T$-Diagramm für die Metalle}
-\end{figure}
+Für den Halbleiter plotte ich (Abbildung \ref{fig:rt}) den Widerstand $R$ gegen
+die absolute Temperatur $T$. Dabei setze ich die $R$-Achse logarithmisch.
 
 An die Messdaten fitte ich folgende Funktion:
 \[ R(T) = R_0 \exp \left( \frac{E_G}{2 k T} \right) \]
@@ -609,6 +637,58 @@ Im Theorieteil sind einige Gap-Energien gegeben. Am besten passt \textcolor{blue
 \section{Diskussion}
 
 \fehlt
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                    Plots                                    %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+
+\section{Plots}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[height=0.42\textheight]{A.pdf}
+	\caption{$U$-$I$-Abhängigkeit von Schaltung A}
+	\label{fig:A}
+\end{figure}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[height=0.42\textheight]{e.pdf}
+	\caption{$U$-$I$-Diagramm}
+	\label{fig:e}
+\end{figure}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[height=0.42\textheight]{f.pdf}
+	\caption{$U_1$-$x$-Diagramm}
+	\label{fig:f}
+\end{figure}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[height=0.42\textheight]{Heissleiter.pdf}
+	\caption{$R$-$T$-Diagramm für den Heißleiter}
+	\label{fig:rt}
+\end{figure}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[height=0.42\textheight]{Metall.pdf}
+	\caption{$R$-$\theta$-Diagramm für die Metalle}
+	\label{fig:metall}
+\end{figure}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[height=0.42\textheight]{g.pdf}
+	\caption{$P$-$x$-Diagramm}
+	\label{fig:g}
+\end{figure}
+
 
 \end{document}
 
