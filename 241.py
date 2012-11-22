@@ -195,24 +195,22 @@ def aufgabe_e():
     print y_tief
 
     pl.clf()
-    pl.loglog(x_tief, y_tief, marker="+", label="Tiefpass", **plotargs)
+    pl.loglog(x_tief, y_tief, marker="o", label="Tiefpass", **plotargs)
     ax1 = pl.subplot(111)
     ax2 = pl.twinx()
-    pl.plot(x_tief, db_tief, marker="x", **plotargs)
+    pl.plot(x_tief, db_tief, **plotargs)
     pl.title("Tiefpass")
     pl.legend(loc="best")
     ax1.grid(True)
     ax1.set_ylabel(ur"Übertragungsfunktion")
     ax1.set_xlabel(ur"$\nu / \nu_\mathrm{gr}$")
     ax2.set_ylabel(ur"Übertragung in dB")
-    ax1.set_ylim(np.min(y_tief), np.max(y_tief))
-    ax2.set_ylim(np.min(db_tief), np.max(db_tief))
-
-
+    ax1.set_ylim(np.min(y_tief), 1)
+    ax2.set_ylim(np.min(db_tief), 0)
     pl.savefig("e_tief.pdf")
 
     pl.clf()
-    pl.loglog(x_hoch, y_hoch, marker="+", label="Hochpass", **plotargs)
+    pl.loglog(x_hoch, y_hoch, marker="o", label="Hochpass", **plotargs)
     ax1 = pl.subplot(111)
     ax2 = pl.twinx()
     pl.plot(x_hoch, db_hoch, **plotargs)
@@ -223,10 +221,12 @@ def aufgabe_e():
     ax1.set_ylabel(ur"Übertragungsfunktion")
     ax1.set_xlabel(ur"$\nu / \nu_\mathrm{gr}$")
     ax2.set_ylabel(ur"Übertragung in dB")
+    ax1.set_ylim(np.min(y_hoch), np.max(y_hoch))
+    ax2.set_ylim(np.min(db_hoch), np.max(db_hoch))
     pl.savefig("e_hoch.pdf")
 
     pl.clf()
-    pl.loglog(x_sperr, y_sperr, marker="+", label="Sperrfilter", **plotargs)
+    pl.loglog(x_sperr, y_sperr, marker="o", label="Sperrfilter", **plotargs)
     ax1 = pl.subplot(111)
     ax2 = pl.twinx()
     pl.plot(x_sperr, db_sperr, **plotargs)
@@ -237,6 +237,8 @@ def aufgabe_e():
     ax1.set_ylabel(ur"Übertragungsfunktion")
     ax1.set_xlabel(ur"$\nu / \nu_\mathrm{gr}$")
     ax2.set_ylabel(ur"Übertragung in dB")
+    ax1.set_ylim(np.min(y_sperr), np.max(y_sperr))
+    ax2.set_ylim(np.min(db_sperr), np.max(db_sperr))
     pl.savefig("e_sperr.pdf")
 
 def aufgabe_i():
