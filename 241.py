@@ -198,19 +198,33 @@ def aufgabe_e():
 
     x_tief = e_nu_tief / nu_gr
     y_tief = e_UA_tief / e_UE_val
+    y_tief_err = np.sqrt(
+        (e_UA_tief / (e_UE_val**2) * e_UA_err)**2
+        + (1 / e_UE_val * e_UA_err)**2
+    )
     db_tief = 10.0 * np.log(y_tief) / np.log(10)
 
     x_hoch = e_nu_hoch / nu_gr
     y_hoch = e_UA_hoch / e_UE_val
+    y_hoch_err = np.sqrt(
+        (e_UA_hoch / (e_UE_val**2) * e_UA_err)**2
+        + (1 / e_UE_val * e_UA_err)**2
+    )
     db_hoch = 10.0 * np.log(y_hoch) / np.log(10)
 
     x_sperr = e_nu_sperr / 675.0
     y_sperr = e_UA_sperr / e_UE_val
+    y_sperr_err = np.sqrt(
+        (e_UA_sperr / (e_UE_val**2) * e_UA_err)**2
+        + (1 / e_UE_val * e_UA_err)**2
+    )
     db_sperr = 10.0 * np.log(y_sperr) / np.log(10)
 
     pl.clf()
-    pl.loglog(x_tief, y_tief, marker="o", label="Tiefpass", **plotargs)
+    pl.errorbar(x_tief, y_tief, yerr=y_tief_err, marker="+", label="Tiefpass", linestyle="-")
     ax1 = pl.subplot(111)
+    ax1.set_xscale("log")
+    ax1.set_yscale("log")
     ax2 = pl.twinx()
     pl.plot(x_tief, db_tief, **plotargs)
     pl.title("Tiefpass")
@@ -224,8 +238,10 @@ def aufgabe_e():
     pl.savefig("e_tief.pdf")
 
     pl.clf()
-    pl.loglog(x_hoch, y_hoch, marker="o", label="Hochpass", **plotargs)
+    pl.errorbar(x_hoch, y_hoch, yerr=y_hoch_err, marker="+", label="Hochpass", linestyle="-")
     ax1 = pl.subplot(111)
+    ax1.set_xscale("log")
+    ax1.set_yscale("log")
     ax2 = pl.twinx()
     pl.plot(x_hoch, db_hoch, **plotargs)
     pl.title("Hochpass")
@@ -240,8 +256,10 @@ def aufgabe_e():
     pl.savefig("e_hoch.pdf")
 
     pl.clf()
-    pl.loglog(x_sperr, y_sperr, marker="o", label="Sperrfilter", **plotargs)
+    pl.errorbar(x_sperr, y_sperr, yerr=y_sperr_err, marker="+", label="Sperrfilter", linestyle="-")
     ax1 = pl.subplot(111)
+    ax1.set_xscale("log")
+    ax1.set_yscale("log")
     ax2 = pl.twinx()
     pl.plot(x_sperr, db_sperr, **plotargs)
     pl.title("Sperrfilter")
