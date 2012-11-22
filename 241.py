@@ -148,6 +148,8 @@ def main():
     print
     aufgabe_b()
     print
+    aufgabe_d()
+    print
     aufgabe_e()
     print
     aufgabe_i()
@@ -173,6 +175,19 @@ def aufgabe_b():
     )
 
     print "L_x = {val} ± {err} H".format(val=Lx_val, err=Lx_err)
+
+def aufgabe_d():
+    print "Aufgabe d"
+
+    with open("d_zeiger.tex", "w") as f:
+        f.write(r"\begin{tikzpicture}[scale=30]")
+
+        for UC, UR in zip(d_UC_val, d_UR_val):
+            a = np.arctan2(UC, UR) * 180 / np.pi
+            f.write(r"\draw[->] (0, 0) -- ++({a}:{UR}) node[midway, above] {{$U_R$}};".format(a=a, UR=UR))
+            f.write(r"\draw[->] ({a}:{UR}) -- ++({b}:{UC}) node[midway, above] {{$U_C$}};".format(a=a, UR=UR, b=a-90, UC=UC))
+
+        f.write(r"\end{tikzpicture}")
 
 def aufgabe_e():
     print "Aufgabe e"
