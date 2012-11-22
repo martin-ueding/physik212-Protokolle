@@ -198,13 +198,17 @@ def aufgabe_e():
     pl.loglog(x_tief, y_tief, marker="+", label="Tiefpass", **plotargs)
     ax1 = pl.subplot(111)
     ax2 = pl.twinx()
-    pl.plot(x_tief, db_tief, **plotargs)
+    pl.plot(x_tief, db_tief, marker="x", **plotargs)
     pl.title("Tiefpass")
     pl.legend(loc="best")
     ax1.grid(True)
     ax1.set_ylabel(ur"Übertragungsfunktion")
     ax1.set_xlabel(ur"$\nu / \nu_\mathrm{gr}$")
     ax2.set_ylabel(ur"Übertragung in dB")
+    ax1.set_ylim(np.min(y_tief), np.max(y_tief))
+    ax2.set_ylim(np.min(db_tief), np.max(db_tief))
+
+
     pl.savefig("e_tief.pdf")
 
     pl.clf()
