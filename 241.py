@@ -208,9 +208,6 @@ def aufgabe_e():
     y_sperr = e_UA_sperr / e_UE_val
     db_sperr = 10.0 * np.log(y_sperr) / np.log(10)
 
-    print x_tief
-    print y_tief
-
     pl.clf()
     pl.loglog(x_tief, y_tief, marker="o", label="Tiefpass", **plotargs)
     ax1 = pl.subplot(111)
