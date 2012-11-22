@@ -106,7 +106,7 @@ i_C = 1.5e-6
 i_nu_val = np.array([ 1, 10, 50, 100, 200, 300, 400, 450, 500, 530, 560, 590,
                      620, 640, 650, 655, 658, 662, 665, 668, 670, 672, 674,
                      675, 676, 678, 683, 690, 700, 710, 720, 730, 770, 820,
-                     880, 960, 1100, 1400, 1700, 2000 ]) * 2 * np.pi
+                     880, 960, 1100, 1400, 1700, 2000 ])
 
 i_UE_val = np.array([104.0e-3, 383.0e-3, 402.0e-3, 403.6e-3, 404.4e-3,
                      404.7e-3, 404.7e-3, 404.7e-3, 404.7e-3, 404.4e-3,
@@ -280,7 +280,7 @@ def aufgabe_i():
     Q = popt[2]
     Q_err = np.diag(pconv)[2]
 
-    print "ω₀ = {0} ± {1} rad/s".format(omega0, omega0_err)
+    print "f₀ = {0} ± {1} Hz".format(omega0, omega0_err)
     print "μ = {0} ± {1}".format(mu, mu_err)
     print "Q = {0} ± {1}".format(Q, Q_err)
 
@@ -291,7 +291,7 @@ def aufgabe_i():
     pl.plot(plot_x, plot_y, label="Fit")
     pl.errorbar(x, y, yerr=y_err, marker="+", label="Messdaten", **plotargs)
     pl.legend(loc="best")
-    pl.xlabel(ur"$\nu \, / \, \mathrm{rad/s}$")
+    pl.xlabel(ur"$\nu \, / \, \mathrm{Hz}$")
     pl.ylabel(ur"")
     pl.grid(True)
 
