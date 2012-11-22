@@ -194,6 +194,8 @@ def aufgabe_e():
 
     nu_gr = 1 / (e_R * e_C * 2 * np.pi)
 
+    print "ν_gr =", nu_gr, "Hz"
+
     x_tief = e_nu_tief / nu_gr
     y_tief = e_UA_tief / e_UE_val
     db_tief = 10.0 * np.log(y_tief) / np.log(10)
