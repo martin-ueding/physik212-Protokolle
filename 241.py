@@ -184,8 +184,8 @@ def aufgabe_d():
 
         for UC, UR in zip(d_UC_val, d_UR_val):
             a = np.arctan2(UC, UR) * 180 / np.pi
-            f.write(r"\draw[->] (0, 0) -- ++({a}:{UR}) node[midway, above] {{$U_R$}};".format(a=a, UR=UR))
-            f.write(r"\draw[->] ({a}:{UR}) -- ++({b}:{UC}) node[midway, above] {{$U_C$}};".format(a=a, UR=UR, b=a-90, UC=UC))
+            f.write(r"\draw[->] (0, 0) -- ++({a}:{UR});".format(a=a, UR=UR))
+            f.write(r"\draw[->] ({a}:{UR}) -- ++({b}:{UC});".format(a=a, UR=UR, b=a-90, UC=UC))
 
         f.write(r"\end{tikzpicture}")
 
