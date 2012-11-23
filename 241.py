@@ -99,6 +99,8 @@ e_UA_err = 0.2e-3
 
 e_UE_val = 403.9e-3
 
+e_nu_gr = 675.0
+
 # Schwingkreis
 
 i_C = 1.5e-6
@@ -137,9 +139,8 @@ i_U_err = np.array([3.0e-3, 3.0e-3, 3.0e-3, 0.5e-3, 0.5e-3, 0.5e-3, 0.5e-3,
 ###############################################################################
 
 plotargs = {
-    #"color": "black",
-    "linestyle": "None",
-    #"markeredgecolor": "black",
+    "color": "black",
+    "markeredgecolor": "black",
     #"markersize": 7
 }
 
@@ -151,6 +152,8 @@ def main():
     aufgabe_d()
     print
     aufgabe_e()
+    print
+    aufgabe_g()
     print
     aufgabe_i()
 
@@ -202,7 +205,7 @@ def aufgabe_e():
         (e_UA_tief / (e_UE_val**2) * e_UA_err)**2
         + (1 / e_UE_val * e_UA_err)**2
     )
-    db_tief = 10.0 * np.log(y_tief) / np.log(10)
+    db_tief = 20.0 * np.log(y_tief) / np.log(10)
 
     x_hoch = e_nu_hoch / nu_gr
     y_hoch = e_UA_hoch / e_UE_val
@@ -210,23 +213,24 @@ def aufgabe_e():
         (e_UA_hoch / (e_UE_val**2) * e_UA_err)**2
         + (1 / e_UE_val * e_UA_err)**2
     )
-    db_hoch = 10.0 * np.log(y_hoch) / np.log(10)
+    db_hoch = 20.0 * np.log(y_hoch) / np.log(10)
 
-    x_sperr = e_nu_sperr / 675.0
+    x_sperr = e_nu_sperr / e_nu_gr
     y_sperr = e_UA_sperr / e_UE_val
     y_sperr_err = np.sqrt(
         (e_UA_sperr / (e_UE_val**2) * e_UA_err)**2
         + (1 / e_UE_val * e_UA_err)**2
     )
-    db_sperr = 10.0 * np.log(y_sperr) / np.log(10)
+    db_sperr = 20.0 * np.log(y_sperr) / np.log(10)
 
     pl.clf()
-    pl.errorbar(x_tief, y_tief, yerr=y_tief_err, marker="+", label="Tiefpass", linestyle="-")
+    pl.errorbar(x_tief, y_tief, yerr=y_tief_err, marker="+", label="Tiefpass", linestyle="-", **plotargs)
     ax1 = pl.subplot(111)
     ax1.set_xscale("log")
     ax1.set_yscale("log")
     ax2 = pl.twinx()
     pl.plot(x_tief, db_tief, **plotargs)
+    pl.plot([min(x_tief), max(x_tief)], [-3.0, -3.0], label=ur"$-3 \, \mathrm{dB}$", linestyle="--", **plotargs)
     pl.title("Tiefpass")
     pl.legend(loc="best")
     ax1.grid(True)
@@ -238,12 +242,13 @@ def aufgabe_e():
     pl.savefig("e_tief.pdf")
 
     pl.clf()
-    pl.errorbar(x_hoch, y_hoch, yerr=y_hoch_err, marker="+", label="Hochpass", linestyle="-")
+    pl.errorbar(x_hoch, y_hoch, yerr=y_hoch_err, marker="+", label="Hochpass", linestyle="-", **plotargs)
     ax1 = pl.subplot(111)
     ax1.set_xscale("log")
     ax1.set_yscale("log")
     ax2 = pl.twinx()
     pl.plot(x_hoch, db_hoch, **plotargs)
+    pl.plot([min(x_hoch), max(x_hoch)], [-3.0, -3.0], label=ur"$-3 \, \mathrm{dB}$", linestyle="--", **plotargs)
     pl.title("Hochpass")
     pl.legend(loc="best")
     pl.xlabel(ur"$\nu / \nu_\mathrm{gr}$")
@@ -256,12 +261,13 @@ def aufgabe_e():
     pl.savefig("e_hoch.pdf")
 
     pl.clf()
-    pl.errorbar(x_sperr, y_sperr, yerr=y_sperr_err, marker="+", label="Sperrfilter", linestyle="-")
+    pl.errorbar(x_sperr, y_sperr, yerr=y_sperr_err, marker="+", label="Sperrfilter", linestyle="-", **plotargs)
     ax1 = pl.subplot(111)
     ax1.set_xscale("log")
     ax1.set_yscale("log")
     ax2 = pl.twinx()
     pl.plot(x_sperr, db_sperr, **plotargs)
+    pl.plot([min(x_sperr), max(x_sperr)], [-3.0, -3.0], label=ur"$-3 \, \mathrm{dB}$", linestyle="--", **plotargs)
     pl.title("Sperrfilter")
     pl.legend(loc="best")
     pl.xlabel(ur"$\nu / \nu_\mathrm{gr}$")
@@ -273,10 +279,17 @@ def aufgabe_e():
     ax2.set_ylim(np.min(db_sperr), np.max(db_sperr))
     pl.savefig("e_sperr.pdf")
 
+def aufgabe_g():
+    print "Aufgabe g"
+
+    Qtheo = 1 / (2 * np.pi * e_nu_gr * e_R * e_C)
+
+    print "Q_theo =", Qtheo
+
 def aufgabe_i():
     print "Aufgabe i"
 
-    x = i_nu_val
+    x = i_nu_val * 2 * np.pi
     y = i_UC_val / i_UE_val
     y_err = np.sqrt(
         (1 / i_UE_val * i_U_err)**2
@@ -304,12 +317,16 @@ def aufgabe_i():
     plot_x = np.linspace(min(x), max(x), 1000)
     plot_y = resonanz(plot_x, *popt)
 
+    export = np.column_stack([i_nu_val, i_UC_val, i_UE_val, i_U_err, x, y, y_err])
+
+    np.savetxt("i_Daten.csv", export, fmt="%f")
+
     pl.clf()
-    pl.plot(plot_x, plot_y, label="Fit")
-    pl.errorbar(x, y, yerr=y_err, marker="+", label="Messdaten", **plotargs)
+    pl.plot(plot_x, plot_y, label="Fit", **plotargs)
+    pl.errorbar(x, y, yerr=y_err, marker="+", label="Messdaten", linestyle="none", **plotargs)
     pl.legend(loc="best")
     pl.xlabel(ur"$\nu \, / \, \mathrm{Hz}$")
-    pl.ylabel(ur"")
+    pl.ylabel(ur"$U_A / U_E$")
     pl.grid(True)
 
     pl.savefig("i.pdf")
