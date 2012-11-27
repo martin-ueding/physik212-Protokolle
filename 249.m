@@ -37,10 +37,10 @@ faden.U.err = 2.0;
 faden.r.err = 0.003;
 faden.I.err = 0.02;
 
-R.val = 2.1;
+R.val = 0.2;
 R.err = 0;
 
-n.val = 20;
+n.val = 14 * 11;
 
 mu0.val = 4 * pi * 10^-7;
 
