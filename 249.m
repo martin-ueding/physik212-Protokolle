@@ -142,9 +142,17 @@ printf("\n");
 #                         Rechnungen Fadenstrahlrohr                          #
 ###############################################################################
 
-plot_x = faden.data(:, 1) .^2 .* (0.5 .* (faden.data(:, 2) + faden.data(:, 3))) .^2;
+plot_x = faden.data(:, 1) .^2 .* (0.5 .* (faden.data(:, 3) + faden.data(:, 4))) .^2;
 plot_y = faden.data(:, 2);
 plot_error = ones(size(faden.data(:, 1))) * faden.U.err;
+plot_x_err = sqrt(
+		(2 * faden.data(:, 1) .* (0.5 .* (faden.data(:, 3) + faden.data(:, 4))) .^2 * 0.001).^2
+		+(faden.data(:, 1) .^2 .* (faden.data(:, 3) + faden.data(:, 4)) * 0.001).^2
+);
+
+export = [faden.data(:, 1) faden.data(:, 2) faden.data(:, 3) faden.data(:, 4) plot_x plot_y plot_x_err plot_error];
+
+save faden.csv export
 
 function U = faden_funktion(rIsq, par)
 	U = par(1) * rIsq;
@@ -165,7 +173,7 @@ function_y = faden_funktion(function_x, par);
 alpha1.val = par(1);
 alpha1.err = sqrt(diag(covp))(1);
 
-B_E.list = 0.5 .* (faden.data(:, 2) + faden.data(:, 3));
+B_E.list = 0.714 * mu0.val * n.val * 0.5 .* (faden.data(:, 3) + faden.data(:, 4)) / R.val;
 B_E.val = mean(B_E.list);
 B_E.err = std(B_E.list) / length(B_E.list);
 
@@ -179,7 +187,7 @@ printf("B_E = %.2e ± %.2e (%.1e) T\n", B_E.val, B_E.err, rel_error(B_E));
 clf;
 hold on;
 
-p1 = errorbar(plot_x, plot_y, plot_error, "~.k");
+p1 = errorbar(plot_x, plot_y, plot_x_err, plot_error, "~>.k");
 p2 = plot(function_x, function_y, "-k");
 
 set(gca(), "fontsize", 20);
@@ -417,10 +425,12 @@ printf("\n");
 for k = 1:length(div)
 	div(k).n.val = div(k).a * v / div(k).b;
 	div(k).es.val = div(k).q.val / div(k).n.val;
+	div(k).es.err = div(k).q.err / div(k).n.val;
 
-	printf("k = %d, e_S = %.3g C, n = %d, r = %.3g ± %.3g\n",
+	printf("k = %d, e_S = %.3g ± %.3g C, n = %d, r = %.3g ± %.3g\n",
 			k,
 			div(k).es.val,
+			div(k).es.err,
 			div(k).n.val,
 			div(k).r.val,
 			div(k).r.err
@@ -439,7 +449,7 @@ printf("\n");
 
 for k = 1:length(div)
 	er.val(k, :) = [div(k).es.val div(k).r.val];
-	er.err(k, :) = [0             div(k).r.err];
+	er.err(k, :) = [div(k).es.err div(k).r.err];
 end
 
 function y = cunningham(x, par)
@@ -447,10 +457,13 @@ function y = cunningham(x, par)
 end
 
 plot_x = (1 ./ er.val(:, 2));
+plot_x_err = abs(1 ./ (er.val(:, 2).^2) .* er.err(:, 2)) ;
 plot_y = (er.val(:, 1).^(2/3));
 plot_error = abs(2/3 .* (er.val(:, 1)).^(2/3-1) .* er.err(:, 1));
 
-[plot_x plot_y]
+plot_data = [plot_x plot_y plot_x_err plot_error];
+
+save cunningham.txt plot_data
 
 [f, par, cvg, iter, corp, covp, covr, stdredid] = leasqr(
 		plot_x,
@@ -467,8 +480,12 @@ alpha0.err = sqrt(diag(covp))(1);
 alpha1.val = par(2);
 alpha1.err = sqrt(diag(covp))(2);
 
+# Daten aus gnuplot
+alpha0.val = 1.07032e-12;
+alpha0.err = 3.937e-14;
+
 printf("α₀ = %.2e ± %.2e (%.1e)\n", alpha0.val, alpha0.err, rel_error(alpha0));
-printf("α₁ = %.2e ± %.2e (%.1e)\n", alpha1.val, alpha1.err, rel_error(alpha1));
+#printf("α₁ = %.2e ± %.2e (%.1e)\n", alpha1.val, alpha1.err, rel_error(alpha1));
 
 e.val = abs(alpha0.val)^(3.0/2.0);
 e.err = abs(3/2 * abs(alpha0.val)^(3/2-1) * alpha0.err);
