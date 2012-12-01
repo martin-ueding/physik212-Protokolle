@@ -141,6 +141,7 @@ def main():
     aufgabe_f()
     aufgabe_g()
     aufgabe_h()
+    aufgabe_k()
     aufgabe_l()
     aufgabe_n()
 
@@ -160,7 +161,7 @@ def aufgabe_a():
 
     global RA_val, RA_err
     RA_val = popt[0]
-    RA_err = np.sqrt(pconv.diagonal()[0]**2 + RA_val + a_I_err)
+    RA_err = np.sqrt(pconv.diagonal()[0] + (RA_val * a_I_err)**2)
 
     x = np.linspace(min(I), max(I), 100)
     y = fit(x, *popt)
@@ -199,7 +200,7 @@ def aufgabe_e():
 
     global RA_val, RA_err
     U0s_val, Ris_val = popt
-    U0s_err, Ris_err = pconv.diagonal()
+    U0s_err, Ris_err = np.sqrt(pconv.diagonal())
 
     U0s_err = np.sqrt(U0s_err**2 + d_U_err**2)
     Ris_err = np.sqrt(Ris_err**2 + (Ris_val * d_I_err)**2)
@@ -312,16 +313,42 @@ def aufgabe_h():
 
     print "Spannung Batterie", UB, "±", UB_err, "V"
 
+def aufgabe_k():
+    print("Aufgabe k")
+
+    R1 = 100 - 82.62
+    R1_err = 0.1
+
+    R2 = 82.62
+    R2_err = 0.1
+
+    R0 = 101.4
+    R0_err = 1.0
+
+    Rx = R1/R2 * R0
+
+    Rx_err = np.sqrt(
+        (1/R2 * R0 * R1_err)**2
+        + (R1/(R2**2) * R0 * R2_err)**2
+        + (R1/R2 * R0_err)**2
+    )
+
+    print "Unbekannter Widerstand:", Rx, "±", Rx_err, "Ω"
+
 def aufgabe_l():
     print("Aufgabe l")
 
-    U = 3
+    U = 4
     U_max = 0.04
     R_innen = 100
 
     I_max = U_max / R_innen
 
-    print("Maximaler Strom für das Galvanometer:", I_max)
+    print "Maximaler Strom für das Galvanometer:", I_max
+
+    R_min = U / I_max
+
+    print "Widerstand für vollständigen Schutz", R_min
 
 def aufgabe_n():
     print("Aufgabe n")
@@ -342,7 +369,13 @@ def aufgabe_n():
     popt, pconv = op.curve_fit(R, x1, y1)
 
     R01, alpha1 = popt
-    R01_err, alpha1_err = pconv.diagonal()
+    R01_err, alpha1_err = np.sqrt(pconv.diagonal())
+
+    print "Platin:"
+    print "R0 =", R01, "±", R01_err
+    print "alpha =", alpha1, "±", alpha1_err
+
+    print "R(0 K) =", R(-273.15, *popt)
 
     x = np.linspace(min(x2), max(x2), 100)
     y = R(x, *popt)
@@ -351,14 +384,20 @@ def aufgabe_n():
     popt, pconv = op.curve_fit(R, x2, y2)
 
     R02, alpha2 = popt
-    R02_err, alpha2_err = pconv.diagonal()
+    R02_err, alpha2_err = np.sqrt(pconv.diagonal())
+
+    print "Manganin:"
+    print "R0 =", R02, "±", R02_err
+    print "alpha =", alpha2, "±", alpha2_err
+
+    print "R(0 K) =", R(-273.15, *popt)
 
     x = np.linspace(min(x2), max(x2), 100)
     y = R(x, *popt)
     pl.plot(x, y, label="Fit Manganin", color="black", linestyle="--")
 
     pl.errorbar(x1, y1, xerr=x1_err, yerr=y1_err, label="Platin", marker="+", **plotargs)
-    pl.errorbar(x2, y2, xerr=x2_err, yerr=y2_err, label="Manganin", marker="+", **plotargs)
+    pl.errorbar(x2, y2, xerr=x2_err, yerr=y2_err, label="Manganin", marker="*", **plotargs)
     pl.title(ur"$R$-$\theta$-Abhängigkeit")
     pl.xlabel(ur"$\theta / ^\circ \mathrm{C}$")
     pl.ylabel(ur"$R$")
@@ -379,11 +418,28 @@ def aufgabe_n():
     y_err = np.abs(1/m_Heissleiter_R_val * m_Heissleiter_R_err)
 
     k = 1.3806488e-23
+    e = 1.609e-19
 
     def RH(T, a, b):
         return a * T + b
 
     popt, pconv = op.curve_fit(RH, x, y, sigma=y_err)
+
+    a = popt[0]
+    a_err = np.sqrt(pconv.diagonal()[0] + (a * np.mean(x_err))**2)
+
+    b = popt[1]
+    b_err = np.sqrt(pconv.diagonal()[1] + (np.mean(y_err))**2)
+
+    print u"Heißleiter:"
+    print "a =", a, "±", a_err
+    print "b =", b, "±", b_err
+
+    EG = 2 * k * a
+    EG_err = np.abs(2 * k * a_err)
+
+    print "EG =", EG, "±", EG_err, "J"
+    print "EG =", EG / e, "±", EG_err / e, "eV"
 
     fit_x = np.linspace(min(x), max(x), 100)
     fit_y = RH(fit_x, *popt)
