@@ -79,7 +79,7 @@ d_U_err = 0.5e-3
 # Filter
 
 e_R = 100.0
-e_C = 1.5e-6
+e_C = 20e-6
 
 e_nu_tief = np.array([200, 275, 380, 525, 724, 1000, 1379, 1903, 2626, 3623,
                       5000])
@@ -160,7 +160,7 @@ def main():
 def aufgabe_a():
     print "Aufgabe a"
 
-    Cx_val = a_x_val / a_l_val * a_C0_val
+    Cx_val = a_x_val / (a_l_val - a_x_val) * a_C0_val
     Cx_err = np.sqrt(
         (a_x_val / a_l_val * a_C0_err)**2
         + (1 / a_l_val * a_C0_val * a_x_err)**2
@@ -171,7 +171,7 @@ def aufgabe_a():
 def aufgabe_b():
     print "Aufgabe b"
 
-    Lx_val = b_x_val / b_l_val * b_L0_val
+    Lx_val = b_x_val / (b_l_val - b_x_val) * b_L0_val
     Lx_err = np.sqrt(
         (b_x_val / b_l_val * b_L0_err)**2
         + (1 / b_l_val * b_L0_val * b_x_err)**2
@@ -256,8 +256,11 @@ def aufgabe_e():
     ax1.set_ylabel(ur"Übertragungsfunktion")
     ax1.set_xlabel(ur"$\nu / \nu_\mathrm{gr}$")
     ax2.set_ylabel(ur"Übertragung in dB")
-    ax1.set_ylim(np.min(y_hoch), np.max(y_hoch))
-    ax2.set_ylim(np.min(db_hoch), np.max(db_hoch))
+    m1 = np.min(1/np.sqrt(2), np.min(y_hoch))
+    m2 = np.min(-3, np.min(db_hoch))
+    print m1, m2
+    ax1.set_ylim(m1, 1)
+    ax2.set_ylim(m2, 0)
     pl.savefig("e_hoch.pdf")
 
     pl.clf()
