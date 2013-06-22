@@ -18,7 +18,7 @@
 #                                  Messdaten                                  #
 ###############################################################################
 
-phi.err = 4;
+phi.err = 5;
 
 # Widerstand R in [Ohm] und φ in [rad].
 c.data.val = [
@@ -34,13 +34,13 @@ c.data.val = [
 ];
 
 c.R1.val = 1000;
-c.R1.err = 1;
+c.R1.err = 10;
 
 c.R2.val = 50;
 c.R2.err = 1;
 
 c.U0.val = 2.01;
-c.U0.err = 0.01;
+c.U0.err = 0.1;
 
 # Zeit in [s] und φ in [rad].
 h.data.val = [
@@ -69,6 +69,9 @@ end
 plot_x = c.data.val(:, 1);
 plot_y = 1 ./ c.data.val(:, 2);
 plot_error = 1 ./ c.data.val(:, 2).^2 * phi.err;
+
+plot_data = [c.data.val plot_x plot_y plot_error];
+save c.csv plot_data
 
 [f, par, cvg, iter, corp, covp, covr, stdredid] = leasqr(
 		plot_x,
@@ -102,7 +105,10 @@ c.alpha.val = par(1);
 c.alpha.err = sqrt(diag(covp))(1);
 
 c.Rg.val = par(2) / c.alpha.val;
-c.Rg.err = sqrt(diag(covp))(2) / c.alpha.val;
+c.Rg.err = sqrt(
+(sqrt(diag(covp))(2) / c.alpha.val)^2
++ (par(2) / (c.alpha.val^2) * c.alpha.err)^2
+);
 
 c.cI.val =  (c.R1.val + c.R2.val) / (c.alpha.val * c.U0.val * c.R2.val);
 c.cI.err = sqrt(
@@ -112,15 +118,17 @@ c.cI.err = sqrt(
 		+ ((c.R1.val + c.R2.val) / (c.alpha.val * c.U0.val^2 * c.R2.val) * c.U0.err)^2
 		);
 
-printf("α = %.2g ± %.2g\n", c.alpha.val, c.alpha.err);
-printf("R_g = %.2g ± %.2g\n", c.Rg.val, c.Rg.err);
-printf("c_I = %.2g ± %.2g\n", c.cI.val, c.cI.err);
+printf("α = %.3g ± %.2g\n", c.alpha.val, c.alpha.err);
+printf("R_g = %.3g ± %.2g\n", c.Rg.val, c.Rg.err);
+printf("c_I = %.3g ± %.2g\n", c.cI.val, c.cI.err);
 
 printf("\n");
 
 ###############################################################################
 #                                  Aufgabe h                                  #
 ###############################################################################
+
+disp("Aufgabe h")
 
 function y = plot_h(t, par)
 	y = par(1) - t / par(2);
@@ -130,8 +138,9 @@ plot_x = h.data.val(:, 1);
 plot_y = log(h.data.val(:, 2));
 plot_error = abs(1 ./ h.data.val(:, 2) * phi.err);
 
-pl = [plot_x plot_y plot_error];
-save test.dat pl
+plot_data = [h.data.val plot_x plot_y plot_error];
+save h.csv plot_data
+
 
 [f, par, cvg, iter, corp, covp, covr, stdredid] = leasqr(
 		plot_x,
@@ -173,6 +182,6 @@ h.R.err = sqrt(
 		+ (h.RC.val/h.C.val^2 * h.C.err)^2
 		);
 
-printf("Q_0 = %.2g ± %.2g\n", h.Q0.val, h.Q0.err);
-printf("RC = %.2g ± %.2g\n", h.RC.val, h.RC.err);
-printf("R = %.2g ± %.2g\n", h.R.val, h.R.err);
+printf("Q_0 = %.3g ± %.2g\n", h.Q0.val, h.Q0.err);
+printf("RC = %.3g ± %.2g\n", h.RC.val, h.RC.err);
+printf("R = %.3g ± %.2g\n", h.R.val, h.R.err);
