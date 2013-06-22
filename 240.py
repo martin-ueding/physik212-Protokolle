@@ -136,13 +136,21 @@ def main():
     options = _parse_args()
 
     aufgabe_a()
+    print
     aufgabe_b()
+    print
     aufgabe_e()
+    print
     aufgabe_f()
+    print
     aufgabe_g()
+    print
     aufgabe_h()
+    print
     aufgabe_k()
+    print
     aufgabe_l()
+    print
     aufgabe_n()
 
 def aufgabe_a():
@@ -171,7 +179,7 @@ def aufgabe_a():
     pl.errorbar(I, U, yerr=uerr, xerr=ierr, **plotargs)
     pl.grid(True)
     pl.plot(x, y, color="black")
-    pl.title(ur"$U$-$I$-Abhängigkeit")
+    pl.title(ur"$U$-$I$-Abhängigkeit von Schaltung A")
     pl.ylabel(ur"$U$ / [V]")
     pl.xlabel(ur"$I$ / [A]")
 
@@ -193,14 +201,23 @@ def aufgabe_e():
     ierr = np.ones(len(I)) * d_I_err
     uerr = np.ones(len(U)) * d_U_err
 
+    e_export = np.column_stack((I, U, ierr, uerr))
+    np.savetxt("e_export.csv", e_export, fmt="%f")
+
     def fit(I_val, U0s_val, Ris_val):
         return U0s_val - I_val * Ris_val
 
     popt, pconv = op.curve_fit(fit, I, U)
 
+
     global RA_val, RA_err
     U0s_val, Ris_val = popt
     U0s_err, Ris_err = np.sqrt(pconv.diagonal())
+
+    print U0s_val, Ris_val
+    print U0s_err, Ris_err
+
+    print "ΔR =", Ris_val * d_I_err
 
     U0s_err = np.sqrt(U0s_err**2 + d_U_err**2)
     Ris_err = np.sqrt(Ris_err**2 + (Ris_val * d_I_err)**2)
@@ -212,7 +229,7 @@ def aufgabe_e():
     y = fit(x, *popt)
 
     pl.errorbar(I, U, yerr=uerr, xerr=ierr, **plotargs)
-    pl.title(ur"$U_1$-$I$-Abhängigkeit")
+    pl.title(ur"$U_1$-$I$-Abhängigkeit der neuen Spannungsquelle")
     pl.grid(True)
     pl.plot(x, y, color="black")
     pl.ylabel(ur"$U$ / [V]")
@@ -237,6 +254,9 @@ def aufgabe_f():
     errx = np.ones(len(x1)) * f_x_err
     erry = np.ones(len(y1)) * f_U_err
 
+    export_f = np.column_stack((x1, y1, x2, y2, x3, y3, errx, erry))
+    np.savetxt("f_export.csv", export_f, "%f")
+
     pl.errorbar(x1, y1, xerr=errx, yerr=erry, label=ur"Leerlauf", marker="+", **plotargs)
     pl.errorbar(x3, y3, xerr=errx, yerr=erry, label=ur"$50 \, \mathrm{\Omega}$", marker="+", **plotargs)
     pl.errorbar(x2, y2, xerr=errx, yerr=erry, label=ur"$20 \, \mathrm{\Omega}$", marker="+", **plotargs)
@@ -254,35 +274,38 @@ def aufgabe_g():
     print("Aufgabe g")
 
     x1 = f_x_0_val
-    y1 = f_U1_0_val**2 / f_R_val
+    y1 = f_U1_0_val**2 / np.inf
 
     y1_err = np.sqrt(
-        (2 * f_U1_0_val / f_R_val * f_U_err)**2
-        + (f_U1_0_val**2 / f_R_val**2 * f_R_err)**2
+        (2 * f_U1_0_val / np.inf * f_U_err)**2
+        + (f_U1_0_val**2 / np.inf**2 * f_R_err)**2
     )
 
     x2 = f_x_20_val
-    y2 = f_U1_20_val**2 / f_R_val
+    y2 = f_U1_20_val**2 / 20
 
     y2_err = np.sqrt(
-        (2 * f_U1_20_val / f_R_val * f_U_err)**2
-        + (f_U1_20_val**2 / f_R_val**2 * f_R_err)**2
+        (2 * f_U1_20_val / 20 * f_U_err)**2
+        + (f_U1_20_val**2 / 20**2 * f_R_err)**2
     )
 
     x3 = f_x_50_val
-    y3 = f_U1_50_val**2 / f_R_val
+    y3 = f_U1_50_val**2 / 50
 
     y3_err = np.sqrt(
-        (2 * f_U1_50_val / f_R_val * f_U_err)**2
-        + (f_U1_50_val**2 / f_R_val**2 * f_R_err)**2
+        (2 * f_U1_50_val / 50 * f_U_err)**2
+        + (f_U1_50_val**2 / 50**2 * f_R_err)**2
     )
 
     errx = np.ones(len(x1)) * f_x_err
+    
+    export_g = np.column_stack((x1, errx, y1, y1_err, y2, y2_err, y3, y3_err))
+    np.savetxt("g_export.csv", export_g, "%f")
 
     pl.grid(True)
     pl.errorbar(x1, y1, xerr=errx, yerr=y1_err, label=ur"Leerlauf", marker="+", **plotargs)
-    pl.errorbar(x3, y3, xerr=errx, yerr=y2_err, label=ur"$50 \, \mathrm{\Omega}$", marker="+", **plotargs)
     pl.errorbar(x2, y2, xerr=errx, yerr=y3_err, label=ur"$20 \, \mathrm{\Omega}$", marker="+", **plotargs)
+    pl.errorbar(x3, y3, xerr=errx, yerr=y2_err, label=ur"$50 \, \mathrm{\Omega}$", marker="+", **plotargs)
     pl.title(ur"$P$-$x$-Abhängigkeit")
     pl.xlabel(ur"$x$")
     pl.ylabel(ur"$P$ / [W]")
@@ -353,23 +376,26 @@ def aufgabe_l():
 def aufgabe_n():
     print("Aufgabe n")
 
+    def R(T, R0, alpha):
+        return R0 * (1 - alpha * T)
+
+
+###############################################################################
+#                                   Platin                                    #
+###############################################################################
+
     x1 = np.array(m_Platin_T_val)
     x1_err = np.ones(x1.shape) * m_T_err
     y1 = m_Platin_R_val
     y1_err = np.ones(y1.shape) * m_R_err
 
-    x2 = np.array(m_Manganin_T_val)
-    x2_err = np.ones(x2.shape) * m_T_err
-    y2 = m_Manganin_R_val
-    y2_err = np.ones(y2.shape) * m_R_err
-
-    def R(T, R0, alpha):
-        return R0 * (1 - alpha * T)
-
     popt, pconv = op.curve_fit(R, x1, y1)
 
     R01, alpha1 = popt
     R01_err, alpha1_err = np.sqrt(pconv.diagonal())
+
+    R01_err = np.sqrt(R01_err**2 + m_R_err**2)
+    alpha1_err = np.sqrt(alpha1_err**2 + (alpha1*m_T_err)**2)
 
     print "Platin:"
     print "R0 =", R01, "±", R01_err
@@ -377,16 +403,39 @@ def aufgabe_n():
 
     print "R(0 K) =", R(-273.15, *popt)
 
-    x = np.linspace(min(x2), max(x2), 100)
+    x = np.linspace(min(x1), max(x1), 100)
     y = R(x, *popt)
+    pl.errorbar(x1, y1, xerr=x1_err, yerr=y1_err, label="Platin", marker="+", **plotargs)
     pl.plot(x, y, label="Fit Platin", color="black")
+
+    pl.title(ur"$R$-$\theta$-Abhängigkeit für Platin")
+    pl.xlabel(ur"$\theta / ^\circ \mathrm{C}$")
+    pl.ylabel(ur"$R$")
+
+    pl.grid(True)
+
+    pl.savefig("n_Platin.pdf")
+
+    pl.clf()
+
+###############################################################################
+#                                  Manganin                                   #
+###############################################################################
+
+    x2 = np.array(m_Manganin_T_val)
+    x2_err = np.ones(x2.shape) * m_T_err
+    y2 = m_Manganin_R_val
+    y2_err = np.ones(y2.shape) * m_R_err
 
     popt, pconv = op.curve_fit(R, x2, y2)
 
     R02, alpha2 = popt
     R02_err, alpha2_err = np.sqrt(pconv.diagonal())
 
+
     print "Manganin:"
+    print "R0 =", R02, "±", R02_err
+    R02_err = np.sqrt(R02_err**2 + m_R_err**2)
     print "R0 =", R02, "±", R02_err
     print "alpha =", alpha2, "±", alpha2_err
 
@@ -394,22 +443,22 @@ def aufgabe_n():
 
     x = np.linspace(min(x2), max(x2), 100)
     y = R(x, *popt)
-    pl.plot(x, y, label="Fit Manganin", color="black", linestyle="--")
+    pl.errorbar(x2, y2, xerr=x2_err, yerr=y2_err, label="Manganin", marker="+", **plotargs)
+    pl.plot(x, y, label="Fit Manganin", color="black")
 
-    pl.errorbar(x1, y1, xerr=x1_err, yerr=y1_err, label="Platin", marker="+", **plotargs)
-    pl.errorbar(x2, y2, xerr=x2_err, yerr=y2_err, label="Manganin", marker="*", **plotargs)
-    pl.title(ur"$R$-$\theta$-Abhängigkeit")
+    pl.title(ur"$R$-$\theta$-Abhängigkeit für Manganin")
     pl.xlabel(ur"$\theta / ^\circ \mathrm{C}$")
     pl.ylabel(ur"$R$")
 
     pl.grid(True)
-    pl.legend(loc="best")
 
-    pl.savefig("Metall.pdf")
+    pl.savefig("n_Manganin.pdf")
 
     pl.clf()
 
-    # Heißleiter
+###############################################################################
+#                                 Heißleiter                                 #
+###############################################################################
 
     x = 1/(m_Heissleiter_T_val + 273.15)
     y = np.log(m_Heissleiter_R_val)
@@ -423,7 +472,7 @@ def aufgabe_n():
     def RH(T, a, b):
         return a * T + b
 
-    popt, pconv = op.curve_fit(RH, x, y, sigma=y_err)
+    popt, pconv = op.curve_fit(RH, x, y)
 
     a = popt[0]
     a_err = np.sqrt(pconv.diagonal()[0] + (a * np.mean(x_err))**2)
@@ -443,19 +492,25 @@ def aufgabe_n():
 
     fit_x = np.linspace(min(x), max(x), 100)
     fit_y = RH(fit_x, *popt)
-    pl.plot(fit_x, fit_y, label=u"Fit Heißleiter", color="black", linestyle="--")
+    pl.plot(fit_x, fit_y, label=u"Fit Heißleiter", color="black")
 
     pl.errorbar(x, y, xerr=x_err, yerr=y_err, label=u"Heißleiter", marker="+", **plotargs)
-    pl.title(ur"$R$-$T$-Abhängigkeit")
+    pl.title(ur"$R$-$T$-Abhängigkeit für Heißleiter")
     pl.xlabel(ur"$1/T \, / \, 1/ \mathrm{K}$")
     pl.ylabel(ur"$\ln\left(R / \mathrm{\Omega}\right)$")
 
     pl.grid(True)
-    pl.legend(loc="best")
 
-    pl.savefig("Heissleiter.pdf")
+    pl.savefig("n_Heissleiter.pdf")
 
     pl.clf()
+
+    n_export_1 = np.column_stack((x1, x1_err, y1, y1_err))
+    n_export_2 = np.column_stack((x2, x2_err, y2, y2_err))
+    n_export_3 = np.column_stack((m_Heissleiter_T_val, x, x_err, m_Heissleiter_R_val, y, y_err))
+    np.savetxt("n_export_1.csv", n_export_1, "%f")
+    np.savetxt("n_export_2.csv", n_export_2, "%f")
+    np.savetxt("n_export_3.csv", n_export_3, "%f")
 
 def _parse_args():
     """
