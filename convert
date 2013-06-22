@@ -1,0 +1,22 @@
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+
+# Copyright © 2012 Martin Ueding <dev@martin-ueding.de>
+
+import sys
+
+__docformat__ = "restructuredtext en"
+
+def main():
+    with open(sys.argv[1]) as f:
+        for line in f:
+            if line.startswith("#"):
+                continue
+
+            words = line.split()
+            print(' & '.join(["${0:.3g}$".format(float(w)) for w in words]) + r"\\")
+
+
+
+if __name__ == "__main__":
+    main()
