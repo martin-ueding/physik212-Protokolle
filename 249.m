@@ -423,7 +423,7 @@ printf("v = %d\n", v);
 printf("\n");
 
 for k = 1:length(div)
-	div(k).n.val = div(k).a * v / div(k).b;
+	div(k).n.val = round(div(k).q.val / 1.609e-19);
 	div(k).es.val = div(k).q.val / div(k).n.val;
 	div(k).es.err = div(k).q.err / div(k).n.val;
 
