@@ -271,6 +271,26 @@ def c():
 
     )
 
+    dtype = [(x, "f8") for x in [
+        "U2", "U2_err",
+        "I2", "I2_err",
+        "R", "R_err",
+        "U2U1", "U2U1_err",
+    ]]
+
+    export = np.zeros(I_2.shape, dtype=dtype)
+
+    export["I2"] = I_2
+    export["I2_err"] = I_2_err
+    export["U2"] = U_2
+    export["U2_err"] = U_2_err
+    export["R"] = R
+    export["R_err"] = R_err
+    export["U2U1"] = U2U1
+    export["U2U1_err"] = U2U1_err
+
+    np.savetxt("g.csv", export, fmt="%f")
+
     pl.clf()
     pl.grid(True)
     pl.errorbar(I_2, transfer, xerr=I_2_err, label="gemessen", yerr=transfer_err, **plotargs)
