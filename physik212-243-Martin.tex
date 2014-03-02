@@ -1,0 +1,541 @@
+% Copyright © 2012 Martin Ueding <dev@martin-ueding.de>
+%
+\documentclass[11pt, ngerman]{article}
+
+\usepackage[a4paper, left=3cm, right=2cm, top=2cm, bottom=2cm]{geometry}
+\usepackage[activate]{pdfcprot}
+\usepackage[iso]{isodate}
+\usepackage[parfill]{parskip}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{babel}
+\usepackage{color}
+\usepackage{commath}
+\usepackage{epstopdf}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{setspace}
+\usepackage{units}
+
+\usepackage[charter]{mathdesign}
+
+\definecolor{darkblue}{rgb}{0,0,.5}
+\definecolor{darkgreen}{rgb}{0,.5,0}
+
+\hypersetup{
+	breaklinks=false,
+	citecolor=darkgreen,
+	colorlinks=true,
+	linkcolor=black,
+	menucolor=black,
+	urlcolor=darkblue,
+}
+
+\setlength{\columnsep}{2cm}
+
+\DeclareMathOperator{\arcsinh}{arsinh}
+\DeclareMathOperator{\arsinh}{arsinh}
+\DeclareMathOperator{\asinh}{arsinh}
+\DeclareMathOperator{\card}{card}
+\DeclareMathOperator{\diam}{diam}
+
+\newcommand{\emesswert}{\left(\messwert \pm \messwert \right)}
+\newcommand{\e}[1]{\cdot 10^{#1}}
+\newcommand{\fehlt}{\textcolor{red}{Hier fehlen noch Inhalte.}}
+\newcommand{\half}{\frac{1}{2}}
+\newcommand{\laplace}{\vnabla^2}
+\newcommand{\messwert}{\textcolor{blue}{\square}}
+\newcommand{\vnabla}{\vec{\nabla}}
+
+\renewcommand{\d}{\, \mathrm d}
+
+\title{physik212 -- Versuch 243 \\ Galvanometer zur Strom- und Ladungsmessung}
+\author{Martin Ueding \\ {\small \href{mailto:mu@uni-bonn.de}{mu@uni-bonn.de}}}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\vfill
+
+\begin{small}
+	Stellen in \textcolor{blue}{blau} werden bei der Versuchsdurchführung
+	eingetragen. Zum Beispiel werden Messwerte mit „$\messwert$“ markiert.
+	Stellen in \textcolor{red}{rot} müssen noch vor Versuchsbeginn
+	vervollständigt werden.
+\end{small}
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                 Einleitung                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Einleitung}
+
+In diesem Versuch benutzen wir ein Galvanometer. Zuerst betrachten wir nur die
+Schwingungen, die es um die Ruhelage vollzieht. Dann messen wir mit einem
+Spannungsteiler den Innenwiderstand und die Empfindlichkeit. Zuletzt beschweren
+wir das Galvanometer mit Zusatzgewichten und vermessen einen großen Widerstand.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                   Theorie                                   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Theorie}
+
+Das Drehspulgalvanometer besteht aus einer Spule mit $n$ Windungen, die im
+Rechteck $a \times b$ um einen Rotor gewickelt ist. Der Rotor ist mit einem
+Torsionsdraht mit Richtmoment $D$ verbunden und liegt in einem (zumindest die
+beiden Hälften) isotropen Magnetfeld.
+
+Die Drehmomente, die auftreten, sind das rückstellende Moment des Drahtes, die
+Reibung, das Drehmoment durch den Strom sowie den Drehmoment durch den
+Induktionsstrom. Dabei ist $G := abnB$ eine Konstante des Galvanometers. Alle
+diese Kräfte beschleunigen den Rotor.
+\[
+	N
+	= \Theta \ddot \phi
+	= - D \phi - \rho \dot \phi + G I - \frac{G^2}{R_g + R_a} \dot \phi
+\]
+
+Für eine konstante Stromstärke $I$ vereinfacht sich die Differentialgleichung
+zu:
+\[ \phi = \underbrace{\frac GD}_{c_I} I \]
+
+Diese hängt jetzt nur noch vom Strom und von der Empfindlichkeit $c_I$ ab.
+
+Um die Ruhelage schwingt der Rotor harmonisch, mit den Parametern:
+\[
+	2 \beta = \frac 1 \Theta \left( \rho + \frac{G^2}{R_a + R_g} \right)
+	, \quad
+	\omega_0^2 = \frac D \Omega
+\]
+
+Damit es genau zu einer kritisch gedämpften Schwingung kommt, muss der
+Außenwiederstand entsprechend gewählt werden:
+%
+\begin{equation}
+	\label{eq:243.17}
+	R_a = \frac{G^2}{2 \sqrt{\Theta D} - \rho} - R_g =: R_\text{Gr}
+\end{equation}
+
+Über einem Widerstand entlädt sich ein Kondensator exponentiell, da der
+fließende Strom proportional zur noch verbleibenden Ladung ist.
+
+Wenn man eine sehr kurze Stromspitze misst, so wird die komplette Kraft in
+Bewegungsenergie umgewandelt, da die Reibung und rückstellende Kraft erst
+später groß wird. Damit lässt sich aus der kinetischen Energie die Gesamtladung
+messen.
+
+Am Maximalausschlag $\phi_m$ ist die gesamte kinetische Energie in potentielle
+Energie (im Draht) umgewandelt worden. Dann gilt:
+\[ \phi_m = \frac G{\sqrt{D \Theta}} Q \]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                  Aufgaben                                   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Aufgaben}
+
+\subsection{Aufgabe A: Kräfte}
+
+Die Kräfte auf die Spule sind reine Lorentzkräfte. Je nach Lage der Spule sind
+diese allerdings in der Spulenebene und erzeugen so kein Drehmoment.
+Sinnigerweise ist die Ruhelage so, dass Spulenebene und Magnetfeld parallel
+sind. Die Auslenkung aus der Ruhelagen nenne ich $\phi$. Somit ist die Kraft
+bei einer Spulenhöhe $a$, einer Spulenbreite $b$ und einem Strom $I$:
+\[ N_e = 2 n a I B \half b = abIBn \]
+
+Dabei tragen nur die beiden Stücke, die senkrecht zum Magnetfeld sind, zur
+Kraft bei. Die beiden (oder eins und zwei halbe) Stücke, die parallel zum
+Magnetfeld sind, tragen kein Drehmoment bei.
+
+Es gibt keinen $\cos(\phi)$ Term, weil das Magnetfeld durch den Weicheisenkern
+isotrop gemacht wird.
+
+\subsection{Aufgabe B: induzierte Spannung}
+
+Das Induktionsgesetz besagt:
+\[ U = - \dot \Phi = - \od{}{t} n B A = n \left( \dot B A + B \dot A \right) \]
+
+Hier ist \( A(t) = \hat A \cos(\omega t) \) und somit \( \dot A(t) = - \hat A
+\omega \sin(\omega t) \). Daraus folgt direkt, dass
+\[
+	\hat U := U \csc(\omega t) \propto \omega.
+\]
+
+\subsection{Aufgabe C: magnetischer Fluss}
+
+Hier gilt:
+\[ \Phi = n A B = n a b B \]
+
+Es geht also ein:
+
+\begin{enumerate}
+	\item Breite $b$
+	\item Höhe $a$
+	\item Wicklungszahl $n$
+	\item magnetische Flussdichte $B$
+\end{enumerate}
+
+\subsection{Aufgabe D: Selbstinduktion}
+
+Die Spule mit der Induktivität $L$ wird bei einer Stromänderung $\dot I$ noch
+eine Spannung $U = - L \dot I$ erzeugen, durch die dann wieder ein Strom \[ I_L
+= - \frac{L \dot I}{R_g + R_a} \] erzeugt wird. Wir gehen wohl davon aus, dass
+der außen anliegende Strom relativ konstant ist und/oder dass die Induktivität
+klein ist.
+
+Der Term würde lauten:
+\[ - \frac{L G \dot I}{R_g + R_a} \]
+
+\subsection{Aufgabe E: ebene Polschuhe}
+
+Ohne den Weicheisenkern ist das Magnetfeld einfach homogen, und somit kommt
+noch ein $\cos(\phi)$ Term hinein.
+
+\subsection{Aufgabe F: Dimensionen}
+
+Die Einheit von $\Theta$ ist $\unit{kg \cdot m^2}$. Die Dämpfungskonstante
+$\rho$ hat die Einheit $\unitfrac{N \cdot m \cdot s}{rad}$. Zusammen mit
+$\unit{N} = \unitfrac{kg \cdot m}{s^2}$ ergibt sich als Einheit für $\beta$
+$\unitfrac{rad}s$.
+
+Die Richtkonstante $D$ hat die Einheit $\unitfrac{N \cdot m}{rad}$. Durch
+$\Theta$ bleibt dann $\unitfrac{rad^2}{s^2}$. Die Wurzel daraus ist $\omega_0$
+mit der Einheit $\unitfrac{rad}{s}$. Lässt man das $\unit{rad}$ weg, ist es
+eine inverse Zeit.
+
+\subsection{Aufgabe G: Grenzwiderstand}
+
+Wenn man $R_\text{Gr}$ kennt, kann man den Widerstand des ganzen Messgerätes so
+wählen, dass es möglichst schnell zur Ruhe kommt. Man wählt einen leicht
+größeren Widerstand, damit es noch etwas ruhiger schwingt und nicht die
+langsamer zerfallende Komponente $t \exp(\lambda t)$ auftritt.
+
+\subsection{Aufgabe H: Empfindlichkeit}
+
+Man kann die Empfindlichkeit steigern, indem man …
+
+\begin{itemize}
+	\item … die Anzahl der Windungen erhöht.
+	\item … die magnetische Flussdichte erhöht.
+	\item … die Fläche der Spule erhöht.
+	\item … einen weniger starren Draht verwendet.
+\end{itemize}
+
+\subsection{Aufgabe I: Grenzen}
+
+Irgendwann stößt man an Grenzen. Etwa, weil die Spule zu klobig wird oder das
+Feld nicht mehr zu erhöhen ist. Oder der Draht ist derart weich, dass schon
+kleinste Erschütterungen die Spule auslenken.
+
+\subsection{Aufgabe J: Einheit}
+
+Da \( \phi = c_I I \) gelten soll, sollte die Einheit von $c_I$
+$\unitfrac{rad}{A}$ sein.
+
+\subsection{Aufgabe K: andere Messverfahren}
+
+Zum Messen von Widerständen können wir dies einfach mit einem Multimeter
+messen. Wenn der Widerstand allerdings zu groß ist, fließt fast kein messbarer
+Strom.
+
+Die Wheatstonesche Brücke funktioniert auch nur, wenn man auf beiden Seiten
+etwa gleich große Widerstände hat. Dann fließt aber auch wieder fast kein
+Strom, was ebenfalls ein extrem empfindliches Messgerät erfordert.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                          Aufbau und Durchführung                           %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Aufbau und Durchführung}
+
+\subsection{Aufgabe a: Dämpfung}
+
+\label{Durchführung-a}
+
+Zuerst betrachten wir nur ein Galvanometer. Diese können wir kurzschließen.
+
+Wir drehen die Spule des Galvanometers vorsichtig, einmal mit und einmal ohne
+kurzgeschlossenen äußeren Stromkreis.
+
+\subsection{Aufgabe b: Grenzwiderstand}
+
+Wir schließen das Galvanometer aus \ref{Durchführung-a} an einen Widerstand
+(Stöpselwiderstand). Dann variieren wir den Widerstand so lange, bis das
+Galvanometer bei manueller Auslenkung den aperiodischen Grenzfall erreicht hat.
+
+Den Widerstand messen wir:
+\[ R_\text{Gr} = \unit[\emesswert] \Omega \]
+
+Nun bringen wir Zusatzgewichte an und messen erneut.
+
+\begin{table}[h!]
+	\centering
+
+	\begin{tabular}{cc}
+		Gewicht $m$ in $\unit{kg}$ & Grenzwiderstand $R_\text{Gr}$ in $\unit \Omega$ \\
+		\hline
+		$\messwert$ & $\emesswert$ \\
+		\vdots & \vdots
+	\end{tabular}
+\end{table}
+
+Dies wird in \ref{Auswertung-b} erklärt.
+
+\subsection{Aufgabe c: linearer Zusammenhang}
+
+\label{Durchführung-c}
+
+Nun bauen wir einen Spannungsteiler mit $R_1$ und $R_2$ an einer Stromquelle
+$U_0$ auf. An den Spannungsteiler schließen wir in Reihe einen Regelwiderstand
+$R$ und ein Galvanometer an, letzteres können wir mit einem Taster überbrücken.
+
+\textcolor{blue}{Zeichnung einfügen.}
+
+\[
+	U_0 = \unit[\emesswert] V
+	, \quad
+	R_1 = \unit[\emesswert] \Omega
+	, \quad
+	R_2 = \unit[\emesswert] \Omega
+\]
+
+Wir variieren $R$ und messen $\phi$.
+
+\begin{table}[h!]
+	\centering
+
+	\begin{tabular}{cc}
+		$R$ in $\unit \Omega$ & $\phi$ in $\unit{rad}$ \\
+		\hline
+		$\messwert$ & $\messwert$ \\
+		\vdots & \vdots
+	\end{tabular}
+\end{table}
+
+Dabei sind die Fehler:
+\[
+	\Delta R = \unit[\messwert] \Omega
+	, \quad
+	\Delta \phi = \unit[\messwert]{rad}
+\]
+
+Diese Daten werte ich in \ref{Auswertung-d} aus.
+
+\subsection{Aufgabe f: Widerstand direkt gemessen}
+
+Wir messen den Widerstand $R_g$ aus \ref{Durchführung-c} der Galvanometerspule
+direkt mit einem dafür geeigneten Messgerät:
+\[ R_g = \unit[\emesswert] \Omega \]
+
+\subsection{Aufgabe g: verschiedene Zusatzgewichte}
+
+Wir messen den Ausschlag $\phi$ des Galvanometers im Aufbau aus
+\ref{Durchführung-c} für ein bestimmtes $R$ mit verschiedenen Zusatzgewichten.
+
+\begin{table}[h!]
+	\centering
+
+	\begin{tabular}{cc}
+		$m$ in $\unit{kg}$ & $\phi$ in $\unit{rad}$ \\
+		\hline
+		$\messwert$ & $\messwert$ \\
+		\vdots & \vdots
+	\end{tabular}
+\end{table}
+
+\subsection{Aufgabe h: großer Widerstand}
+
+Wir vermessen einen großen Widerstand. Dazu laden wir den Kondensator $C$
+zuerst auf. Dann entladen wir ihn eine Zeit $t$ über dem unbekannten Widerstand
+$R_x$. Anschließend messen wir die Restladung mit dem Galvanometer.
+
+\textcolor{blue}{Skizze einfügen}
+
+\begin{table}[h!]
+	\centering
+
+	\begin{tabular}{cc}
+		$t$ in $\unit{s}$ & $\phi$ in $\unit{rad}$ \\
+		\hline
+		$\messwert$ & $\messwert$ \\
+		\vdots & \vdots
+	\end{tabular}
+\end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                 Auswertung                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Auswertung}
+
+\subsection{Aufgabe b: Grenzwiderstand}
+
+\label{Auswertung-b}
+
+Laut Gleichung \eqref{eq:243.17} hängt der Grenzwiderstand von $\Theta$ ab,
+welches sich durch das Anbringen von Zusatzgewichten erhöht. Somit wird der
+Grenzwiderstand kleiner.
+
+\subsection{Aufgabe d: Stromempfindlichkeit}
+
+\label{Auswertung-d}
+
+Ich fitte die Daten aus \ref{Durchführung-c} mit:
+\[
+	\frac 1 \phi
+	= \underbrace{\frac{R_1 + R_2}{c_I U_0 R_2}}_{\alpha} (R_g + R)
+\]
+
+Ich erhalte:
+\[
+	\alpha = \emesswert
+	, \quad
+	R_g = \unit[\emesswert] \Omega
+\]
+
+Daraus errechne ich:
+\[
+	c_I = \frac{R_1 + R_2}{\alpha U_0 R_2}
+\]
+
+Und den Fehler:
+\[
+	\Delta c_I
+	= \sqrt{
+		\left( \frac{R_1 + R_2}{\alpha^2 U_0 R_2} \Delta \alpha \right)^2
+		+ \left( \frac{1}{\alpha U_0 R_2} \Delta R_1 \right)^2
+		+ \left( \frac{\alpha U_0 R_2 - (R_1 + R_2)\alpha U_0}{\alpha^2 U_0^2 R_2^2} \Delta R_2 \right)^2
+		+ \left( \frac{R_1 + R_2}{\alpha U_0^2 R_2} \Delta U_0 \right)^2
+	}
+\]
+
+Ich erhalte:
+\[ c_I = \unitfrac[\emesswert]{rad}{A} \]
+
+\subsection{Aufgabe e: Widerstand der Galvanometerspule}
+
+Aus dem Fit in \ref{Auswertung-d} ist bereits $R_g$ herausgefallen:
+\[
+	R_g = \unit[\emesswert] \Omega
+\]
+
+\subsection{Aufgabe f: Widerstand direkt gemessen}
+
+Die beiden Werte liegen $\messwert$ auseinander.
+
+\subsection{Aufgabe g: verschiedene Zusatzgewichte}
+
+Der Ausschlag hat sich nicht geändert. Dadurch, dass nur die Geschwindigkeit
+vom Trägheitsmoment, nicht aber der Ausschlag davon abhängt, spielen die
+Gewichte beim Maximalausschlag keine Rolle.
+
+\subsection{Aufgabe h: großer Widerstand}
+
+In der Anleitung stand noch die Frage, warum wir $\phi_m$ nicht in die
+Restladung $Q$ umrechnen müssen. Die Antwort steckt in
+\[ \phi_m = \frac{G}{\sqrt{D \Theta}} Q. \]
+
+Durch die halblogarithmische Darstellung wird der Vorfaktor zu einer additiven
+Konstante, die die Steigung der Geraden nicht beeinflusst. Daher kann diese
+Vernachlässigt werden.
+
+Ich fitte die Daten $\phi_m(t)$ mit der Funktion:
+\[ \phi_m(t) = Q_0 \exp \left( - \frac{t}{RC} \right) \]
+
+Dabei erhalte ich aus dem Fit:
+\[
+	RC = \unit[\emesswert] s
+	, \quad
+	R = \unit[\messwert] \Omega
+	, \quad
+	\Delta R = \sqrt{
+		\left( \frac{1}{C} \Delta R \right)^2
+		+ \left( \frac{R}{C^2} \Delta C \right)^2
+	} = \unit[\messwert] \Omega
+\]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                  Resultat                                   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Resultat}
+
+Wir haben den Grenzwiderstand des Galvanometers bestimmt auf:
+\[ R_\text{Gr} = \unit[\emesswert] \Omega \]
+
+Wir haben außerdem den Innenwiderstand und die Stromempfindlichkeit bestimmt
+zu:
+\[
+	R_g = \unit[\emesswert] \Omega
+	, \quad
+	c_I = \unitfrac[\emesswert]{rad}{A}
+\]
+
+Den Innenwiderstand haben wir außerdem direkt bestimmt zu:
+\[ R_g = \unit[\emesswert] \Omega \]
+
+Wir haben festgestellt, dass der Ausschlag bei einem bestimmten Strom nicht von
+Zusatzgewichten abhängt.
+
+Einen großen Widerstand haben wir vermessen auf:
+\[ R_x = \unit[\emesswert] \Omega \]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                 Diskussion                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Diskussion}
+
+%\bibliography{../../zentrale_BibTeX/Central}
+%\bibliographystyle{plain}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                    Plots                                    %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+
+\section{Plots}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[height=0.4\textheight]{plot-empfindlichkeit.pdf}
+	\caption{Plot der inversen Auslenkung gegen den Widerstand}
+\end{figure}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[height=0.4\textheight]{plot-widerstand.pdf}
+	\caption{Plot der Auslenkung gegen die Zeit}
+\end{figure}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{rr|rrr}
+		$R$ in $\unit{\Omega}$ & $\phi$ & $R$ & $1/\phi$ & $\Delta (1/\phi) = 1/(\phi^2) \Delta \phi$ \\
+		\hline
+		\input{c.tex}
+	\end{tabular}
+\end{table}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{rr|rrr}
+		$t$ in $\unit{s}$ & $\phi$ & $t$ & $\ln(\phi)$ & $\Delta(\ln(\phi)) = |\ln(\phi)| \Delta \phi$ \\
+		\hline
+		\input{h.tex}
+	\end{tabular}
+\end{table}
+
+\end{document}
+
+% vim: spell spelllang=de
