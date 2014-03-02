@@ -1,0 +1,201 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[      5145,        191]
+NotebookOptionsPosition[      3873,        139]
+NotebookOutlinePosition[      4383,        161]
+CellTagsIndexPosition[      4299,        156]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{"?", "Log"}]], "Input",
+ CellChangeTimes->{{3.562578627014744*^9, 3.562578627737892*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox["\<\"\!\(\*RowBox[{\\\"Log\\\", \\\"[\\\", StyleBox[\\\"z\\\", \
+\\\"TI\\\"], \\\"]\\\"}]\) gives the natural logarithm of \
+\!\(\*StyleBox[\\\"z\\\", \\\"TI\\\"]\) (logarithm to base \
+\!\(\*StyleBox[\\\"e\\\", \\\"TI\\\"]\)). \\n\!\(\*RowBox[{\\\"Log\\\", \\\"[\
+\\\", RowBox[{StyleBox[\\\"b\\\", \\\"TI\\\"], \\\",\\\", StyleBox[\\\"z\\\", \
+\\\"TI\\\"]}], \\\"]\\\"}]\) gives the logarithm to base \!\(\*StyleBox[\\\"b\
+\\\", \\\"TI\\\"]\). \"\>", "MSG"], "\[NonBreakingSpace]", 
+  ButtonBox[
+   StyleBox["\[RightSkeleton]", "SR"],
+   Active->True,
+   BaseStyle->"Link",
+   ButtonData->"paclet:ref/Log"]}]], "Print", "PrintUsage",
+ CellChangeTimes->{3.562578633565639*^9},
+ CellTags->"Info3562582233-6798135"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"10", 
+  RowBox[{"Log", "[", 
+   RowBox[{"10", ",", 
+    RowBox[{"1", "/", 
+     RowBox[{"Sqrt", "[", "2", "]"}]}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.56257860670472*^9, 3.562578659676787*^9}}],
+
+Cell[BoxData[
+ RowBox[{"-", 
+  FractionBox[
+   RowBox[{"5", " ", 
+    RowBox[{"Log", "[", "2", "]"}]}], 
+   RowBox[{"Log", "[", "10", "]"}]]}]], "Output",
+ CellChangeTimes->{3.5625786602859583`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"N", "[", "%", "]"}]], "Input",
+ CellChangeTimes->{{3.562578662045289*^9, 3.5625786628514442`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"-", "1.5051499783199058`"}]], "Output",
+ CellChangeTimes->{3.562578663246472*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"1", "/", "0.6"}]], "Input",
+ CellChangeTimes->{{3.562580955474729*^9, 3.562580956891685*^9}}],
+
+Cell[BoxData["1.6666666666666667`"], "Output",
+ CellChangeTimes->{3.562580957180243*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"15.5", "/", 
+  RowBox[{"Sqrt", "[", "2", "]"}]}]], "Input",
+ CellChangeTimes->{{3.562581667820973*^9, 3.562581671399865*^9}}],
+
+Cell[BoxData["10.960155108391486`"], "Output",
+ CellChangeTimes->{3.56258167180048*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"675", "/", "45"}]], "Input",
+ CellChangeTimes->{{3.562582495105595*^9, 3.562582499177928*^9}}],
+
+Cell[BoxData["15"], "Output",
+ CellChangeTimes->{3.562582499481813*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"675", "*", "2", "*", "Pi", "*", 
+  RowBox[{
+   RowBox[{"36", "/", "1000"}], "/", "9.5"}]}]], "Input",
+ CellChangeTimes->{{3.562582564997395*^9, 3.5625825768025427`*^9}, {
+  3.562583055297289*^9, 3.562583057913377*^9}}],
+
+Cell[BoxData["16.071726627838306`"], "Output",
+ CellChangeTimes->{3.562582577060172*^9, 3.562583058461978*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Solve", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"2", "Pi", " ", "675"}], " ", "==", " ", 
+    RowBox[{"1", "/", 
+     RowBox[{"Sqrt", "[", 
+      RowBox[{
+       RowBox[{"1.5", "/", "1000000"}], " ", "l"}], "]"}]}]}], ",", "l"}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.562582675721222*^9, 3.562582704894857*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"{", 
+   RowBox[{"l", "\[Rule]", "0.03706307586368093`"}], "}"}], "}"}]], "Output",
+ CellChangeTimes->{3.562582705502486*^9}]
+}, Open  ]]
+},
+WindowSize->{740, 867},
+WindowMargins->{{Automatic, 123}, {Automatic, 132}},
+ShowSelection->True,
+FrontEndVersion->"8.0 for Linux x86 (64-bit) (February 23, 2011)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "Info3562582233-6798135"->{
+  Cell[694, 26, 748, 15, 63, "Print",
+   CellTags->"Info3562582233-6798135"]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"Info3562582233-6798135", 4197, 150}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 112, 2, 30, "Input"],
+Cell[694, 26, 748, 15, 63, "Print",
+ CellTags->"Info3562582233-6798135"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1479, 46, 224, 6, 30, "Input"],
+Cell[1706, 54, 198, 6, 50, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1941, 65, 122, 2, 30, "Input"],
+Cell[2066, 69, 105, 2, 30, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2208, 76, 117, 2, 30, "Input"],
+Cell[2328, 80, 88, 1, 30, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2453, 86, 149, 3, 30, "Input"],
+Cell[2605, 91, 87, 1, 30, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2729, 97, 118, 2, 30, "Input"],
+Cell[2850, 101, 71, 1, 30, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2958, 107, 242, 5, 30, "Input"],
+Cell[3203, 114, 110, 1, 30, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3350, 120, 340, 10, 30, "Input"],
+Cell[3693, 132, 164, 4, 30, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+
