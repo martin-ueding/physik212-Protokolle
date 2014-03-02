@@ -1,0 +1,16 @@
+TAU/Ueding-Vorversuch-1.txt: OK
+TAU/Ueding-Vorversuch-2.txt: OK
+TAU/Ueding-Versuch-1.txt: OK
+TAU/messung 248.txt: OK
+TAU/RECYCLER/S-5-3-42-2819952290-8240758988-879315005-3665/jwgkvsq.vmx: Worm.Downadup-113 FOUND
+TAU/Ueding-Hysterese.txt: OK
+
+----------- SCAN SUMMARY -----------
+Known viruses: 1317007
+Engine version: 0.97.6
+Scanned directories: 3
+Scanned files: 6
+Infected files: 1
+Data scanned: 2.02 MB
+Data read: 1.54 MB (ratio 1.31:1)
+Time: 2.719 sec (0 m 2 s)

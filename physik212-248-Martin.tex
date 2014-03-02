@@ -1,0 +1,301 @@
+% Copyright © 2012 Martin Ueding <dev@martin-ueding.de>
+%
+\documentclass[11pt, ngerman]{article}
+
+\usepackage[a4paper, left=3cm, right=2cm, top=2cm, bottom=2cm]{geometry}
+\usepackage[activate]{pdfcprot}
+\usepackage[iso]{isodate}
+\usepackage[parfill]{parskip}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{babel}
+\usepackage{color}
+\usepackage{epstopdf}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{setspace}
+\usepackage{units}
+
+\usepackage[charter]{mathdesign}
+
+\definecolor{darkblue}{rgb}{0,0,.5}
+\definecolor{darkgreen}{rgb}{0,.5,0}
+
+\hypersetup{
+	breaklinks=false,
+	citecolor=darkgreen,
+	colorlinks=true,
+	linkcolor=black,
+	menucolor=black,
+	urlcolor=darkblue,
+}
+
+\setlength{\columnsep}{2cm}
+
+\DeclareMathOperator{\arcsinh}{arsinh}
+\DeclareMathOperator{\arsinh}{arsinh}
+\DeclareMathOperator{\asinh}{arsinh}
+\DeclareMathOperator{\card}{card}
+\DeclareMathOperator{\diam}{diam}
+
+\newcommand{\emesswert}{\left(\messwert \pm \messwert \right)}
+\newcommand{\e}[1]{\cdot 10^{#1}}
+\newcommand{\fehlt}{\textcolor{red}{Hier fehlen noch Inhalte.}}
+\newcommand{\half}{\frac{1}{2}}
+\newcommand{\laplace}{\vnabla^2}
+\newcommand{\messwert}{\textcolor{blue}{\square}}
+\newcommand{\vnabla}{\vec{\nabla}}
+
+\renewcommand{\d}{\, \mathrm d}
+
+\title{physik212 – Versuch 248 \\ Hysterese der Magnetisierung von Eisen}
+\author{Martin Ueding \\ {\small \href{mailto:mu@uni-bonn.de}{mu@uni-bonn.de}}}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\vfill
+
+\begin{small}
+	Stellen in \textcolor{blue}{blau} werden bei der Versuchsdurchführung
+	eingetragen. Zum Beispiel werden Messwerte mit „$\messwert$“ markiert.
+	Stellen in \textcolor{red}{rot} müssen noch vor Versuchsbeginn
+	vervollständigt werden.
+\end{small}
+
+\newpage
+
+\section{Einleitung}
+
+In diesem Versuch wollen wir das ferromagnetische Verhalten von Eisen
+untersuchen. Dazu betrachten wie die Hysterese und vermessen $B$-Felder mit
+einer Hallsonde.
+
+\section{Theorie}
+
+Ich benutze $X_E$ anstelle von $X_\text{Fe}$ für die Größen innerhalb des
+Eisenkerns.
+
+\subsection{Hysterese}
+
+Der Eisenkern ist etwas träge und behält seine Magnetisierung auch ohne
+weiteren Strom durch die Spulen bei. Dieses Eigenfeld nennt man „Remanenz“
+$B_R$. Kehrt man die Stromrichtung um, so sind für eine Zeit magnetische
+Erregung und Flussdichte des Eises gegeneinander, so dass keine magnetische
+Flussdichte herrscht. Diesen Punkt nennt man „Koerzitivfeld“ $H_K$.
+
+Durch zyklische Magnetisierung kann man den Eisenkern aufschaukeln oder langsam
+wieder auf $B=0$ zurückfahren.
+
+\subsection{Eisenkern}
+
+Wir benutzen einen Eisenkern wie aus einem Transformator, um den zwei Spulen mit insgesamt $N = 1000$ Windungen. Uns interessiert die magnetische Erregung innerhalb des Eisens. Für diese gilt:
+%
+\begin{align*}
+	\oint_{\partial A} \left\langle \vec H, \d \vec S \right\rangle
+	&= \int_A \left\langle \vec j, \d \vec A \right\rangle \\
+	%
+	H_E l + H_L + H_L d &= N I
+\end{align*}
+
+Nun ist das magnetische Feld innerhalb und außerhalb des Eisens das gleiche, also $B_E = B_L$. Die magnetische Erregung ist für $\mu_r \approx 1$ einfach $H = \frac 1{\mu_0} B$. Somit kann $H_E$ durch die messbare magnetische Flussdichte in Luft ausgedrückt werden:
+%
+\begin{equation}
+	\label{eq:HFe}
+	H_E = \frac{NI}{l} - \frac{d B_E}{\mu_0 l}
+\end{equation}
+
+\subsection{Hallsonde}
+
+Die zentrale Idee der Hallsonde ist, dass ein senkrecht zur Stromrichtung angreifendes magnetisches Feld die Ladungen an eine der Oberflächen drückt und somit eine Spannung an den Seiten des Leiters erzeugt. Dabei verschieben sich so lange Ladungen, bis das durch diese Ladungen erzeugte elektrische Feld diese Lorentzkraft aufhebt:
+%
+\begin{align*}
+	q v_d B &= E q \\
+	q v_d B b &= U_H q \\
+	v_d B b &= U_H \\
+	\intertext{Einsetzen des Stroms $I = n q v_d A$.}
+	I B b &= U_H n q A \\
+	\intertext{Einsetzen von $A = bd$.}
+	I B &= U_H n q d \\
+	\underbrace{\underbrace{\frac{1}{n q}}_{A_H} \frac Id}_{S_H} B &= U_H
+\end{align*}
+
+\section{Aufgaben}
+
+\subsection{Umpolschalter}
+
+In Aufgabe a wird gefragt, ob wir den Umpolschalter brauchen.
+
+Dabei benötigen wir den Umpolschalter nicht, weil schon eine Wechselspannung
+anliegt und so die Hysterese automatisch durchführt.
+
+\section{Aufbau}
+
+Wir haben einen Eisenkern wie aus einem Transformator, um den zwei Spulen mit je 500 Windungen gewickelt sind. In einem kleinen Spalt ist Platz um mit einer Hallsonde das Magnetfeld zu messen.
+
+Der Messwerte für Spulenstrom und das Magnetfeld werden über Cassylab direkt im Computer erfasst.
+
+\begin{figure}[h!]
+	\centering
+	\textcolor{blue}{Zeichnung siehe Anleitung (\url{Anleitung_248.pdf})}
+	\caption{Zeichnung des Versuchsaufbaus}
+\end{figure}
+
+\section{Durchführung}
+
+\subsection{Aufgabe a: Entmagnetisierung}
+
+Als ersten Schritt müssen wir die Restmagnetisierung des Eisenkerns aufheben,
+die noch von vorherigen Versuchen stammen kann. Dazu legen wir eine
+Wechselspannung und fahren den Strom kurz auf $\unit[4]A$ hoch und anschließend
+wieder herunter.
+
+Anschließend kontrollieren wir mit der Hallsonde, ob das Magnetfeld wirklich
+verschwunden ist.
+
+\subsection{Aufgabe b: $B$-Messung}
+
+\label{Durchführung-b}
+
+Wir vermessen $B(I)$. Dabei beginnen wir bei $I = 0$ mit der Neukurve bis zum
+maximal erreichbaren Strom $I_\text{max}$ und gehen dann bis $-I_\text{max}$.
+Die Messwerte sind in Tabelle \ref{table:B(I)}.
+
+\begin{table}[h!]
+	\centering
+
+	\begin{tabular}{cc}
+		$I$ & $B$ \\
+		\hline
+		$\messwert$ & $\messwert$ \\
+		\vdots & \vdots
+	\end{tabular}
+
+	\caption{Messwerte aus \ref{Durchführung-b}}
+	\label{table:B(I)}
+\end{table}
+
+Dabei achten wir darauf, dass $|B| < \unit[1]T$ und $|I| < \unit[3]A$
+eingehalten wird.
+
+Die Fehler sind generell:
+\[
+	\Delta I = \unit[\messwert] A
+	, \quad
+	\Delta B = 0.03 B
+\]
+
+Außerdem bestimmen wir den mittleren Umfang des Transformators:
+\[ l = \unit[\emesswert] m \]
+
+Sowie die Spaltdicke:
+\[ d = \unit[\emesswert] m \]
+
+\section{Auswertung}
+
+\subsection{Aufgabe c}
+
+Mit Gleichung \eqref{eq:HFe} errechne ich zu jedem $I$ und $B$ das
+$H_E$ im Eisenkern. Dann trage ich $B$ gegen $H$ im Diagramm (Abbildung
+\ref{fig:plot}) auf.
+
+Den Fehler errechne ich mit:
+\[
+	\Delta H_E
+	= \sqrt{
+		\left( \frac{N}{l} \Delta I \right)^2
+		+ \left( \left( - \frac{NI}{l^2} + \frac{d B_E}{\mu_0 l^2} \right) \Delta l \right)^2
+		+ \left( \frac{B_E}{\mu_0 l} \Delta d \right)^2
+		+ \left( \frac{d}{\mu_0 l} \Delta B_E \right)^2
+	}
+\]
+
+\subsection{Anfangspermeabilität}
+
+Die Steigung der Neukurve am Ursprung ist $\mu_A$, die Anfangspermeabilität. Diese finde ich, indem ich einen der ersten Messpunkte nehme und rechne:
+\[ \mu_A = \frac{B_1}{H_1} \]
+
+Der Fehler ist:
+\[
+	\Delta \mu_a = \sqrt{
+		\left( \frac{1}{H_1} \Delta B_1 \right)^2
+		+ \left( \frac{B_1}{H_2^2} \Delta H_1 \right)^2
+	}
+\]
+
+Als Wert erhalte ich:
+\[ \mu_A = \emesswert \mu_0 \]
+
+\subsection{maximale Permeabilität}
+
+Die Tangente an die komplette Neukurve gibt mir $\mu_\text{max}$, die maximale
+Permeabilität. Dazu wähle ich einen Messpunkt $i$ aus den Daten so aus, dass
+dieser noch auf der Neukurve liegt, also bevor $I$ wieder zurückgeht, und so,
+dass die Steigung maximal ist.
+\[ \mu_A = \frac{B_i}{H_i} \]
+
+Der Fehler ist:
+\[
+	\Delta \mu_a = \sqrt{
+		\left( \frac{1}{H_i} \Delta B_i \right)^2
+		+ \left( \frac{B_i}{H_2^2} \Delta H_i \right)^2
+	}
+\]
+
+Als Wert erhalte ich:
+\[ \mu_\text{max} = \messwert \mu_0 \]
+
+\section{Resultat}
+
+Wir haben die Anfangspermeabilität auf $\mu_A = \emesswert \mu_0$ und die maximal Permeabilität auf $\mu_\text{max} = \emesswert \mu_0$ bestimmt.
+
+\section{Diskussion}
+
+Für Eisen, das in Transformatoren verwendet wird, habe ich als typische Werte gefunden: \cite{wikipedia.armco}
+\[
+	300 \leq \mu_A \leq 500
+	, \quad
+	3500 \leq \mu_\text{max} \leq 6000
+\]
+
+\textcolor{blue}{Unsere Werte liegen in diesem Bereich.}
+
+\bibliography{../../zentrale_BibTeX/Central}
+\bibliographystyle{plain}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                    Plots                                    %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+
+\section{Plots}
+
+%\begin{figure}[h!]
+%	\centering
+%	\includegraphics[height=0.4\textheight]{hysterese.pdf}
+%	\caption{$B$ gegen $H$ Plot}
+%	\label{fig:plot}
+%\end{figure}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[height=0.45\textheight]{hysterese-1000.pdf}
+	%\caption{$B$ gegen $H$ Plot für $\mu_\text{max}$}
+\end{figure}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[height=0.45\textheight]{hysterese-mua.pdf}
+	%\caption{$B$ gegen $H$ Plot für $\mu_A$}
+\end{figure}
+
+\end{document}
+
+% vim: spell spelllang=de

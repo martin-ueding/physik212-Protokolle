@@ -1,0 +1,151 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[      4072,        142]
+NotebookOptionsPosition[      3288,        109]
+NotebookOutlinePosition[      3626,        124]
+CellTagsIndexPosition[      3583,        121]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{"<<", "PhysicalConstants`"}]], "Input",
+ CellChangeTimes->{{3.560851096456996*^9, 3.560851100637932*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"VacuumPermeability", "::", "shdw"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Symbol \[NoBreak]\\!\\(\\\"VacuumPermeability\\\"\\)\
+\[NoBreak] appears in multiple contexts \
+\[NoBreak]\\!\\({\\\"PhysicalConstants`\\\", \\\"Global`\\\"}\\)\[NoBreak]; \
+definitions in context \
+\[NoBreak]\\!\\(\\\"PhysicalConstants`\\\"\\)\[NoBreak] may shadow or be \
+shadowed by other definitions. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/shdw\\\", ButtonNote -> \
+\\\"PhysicalConstants`VacuumPermeability::shdw\\\"]\\)\"\>"}]], "Message", \
+"MSG",
+ CellChangeTimes->{3.5611185886763573`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{" ", 
+  RowBox[{
+   RowBox[{"0.5", "/", "1000"}], " ", "/", " ", 
+   "VacuumPermeability"}]}]], "Input",
+ CellChangeTimes->{{3.560851103653955*^9, 3.560851156450033*^9}}],
+
+Cell[BoxData[
+ FractionBox[
+  RowBox[{"397.88735772973837`", " ", "Ampere", " ", "Meter"}], 
+  RowBox[{"Second", " ", "Volt"}]]], "Output",
+ CellChangeTimes->{
+  3.560851109032567*^9, {3.5608511412594757`*^9, 3.560851157044529*^9}, 
+   3.561118588819997*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"Sqrt", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"1", "/", "1000"}], " ", "/", " ", "VacuumPermeability"}], " ", 
+   "*", " ", "0.01"}]}]], "Input",
+ CellChangeTimes->{{3.560851327100465*^9, 3.560851364424239*^9}},
+ EmphasizeSyntaxErrors->True],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"0.5", "*", 
+  RowBox[{
+   RowBox[{"(", 
+    RowBox[{"3.1", "-", "0.3"}], ")"}], "/", "3.1"}]}]], "Input",
+ CellChangeTimes->{{3.561118556701618*^9, 3.5611185613800898`*^9}}],
+
+Cell[BoxData["0.4516129032258065`"], "Output",
+ CellChangeTimes->{3.561118588993326*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["0.4516129032258065`"], "Input",
+ CellChangeTimes->{3.561118577439872*^9}],
+
+Cell[BoxData["0.4516129032258065`"], "Output",
+ CellChangeTimes->{{3.5611185775432253`*^9, 3.561118588997776*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"%", "/", "3000"}], "/", "VacuumPermeability"}]], "Input",
+ CellChangeTimes->{{3.560851241125103*^9, 3.560851261163601*^9}, {
+  3.5611185665216293`*^9, 3.5611185862079153`*^9}}],
+
+Cell[BoxData[
+ FractionBox[
+  RowBox[{"119.79404318744812`", " ", "Ampere", " ", "Meter"}], 
+  RowBox[{"Second", " ", "Volt"}]]], "Output",
+ CellChangeTimes->{{3.560851256002318*^9, 3.560851261768197*^9}, {
+  3.5611185685880823`*^9, 3.561118589004099*^9}}]
+}, Open  ]]
+},
+WindowSize->{740, 588},
+WindowMargins->{{150, Automatic}, {Automatic, 52}},
+FrontEndVersion->"8.0 for Linux x86 (64-bit) (February 23, 2011)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 128, 2, 30, "Input"],
+Cell[710, 26, 728, 15, 83, "Message"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1475, 46, 193, 5, 30, "Input"],
+Cell[1671, 53, 258, 6, 47, "Output"]
+}, Open  ]],
+Cell[1944, 62, 267, 7, 30, "Input"],
+Cell[CellGroupData[{
+Cell[2236, 73, 197, 5, 30, "Input"],
+Cell[2436, 80, 88, 1, 30, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2561, 86, 87, 1, 30, InheritFromParent],
+Cell[2651, 89, 114, 1, 30, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2802, 95, 211, 4, 30, "Input"],
+Cell[3016, 101, 256, 5, 47, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
