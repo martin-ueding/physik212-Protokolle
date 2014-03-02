@@ -1,0 +1,582 @@
+% Copyright © 2012 Martin Ueding <dev@martin-ueding.de>
+%
+\documentclass[11pt, ngerman]{article}
+
+\usepackage[a4paper, left=3cm, right=2cm, top=2cm, bottom=2cm]{geometry}
+\usepackage[activate]{pdfcprot}
+\usepackage[cdot, squaren]{SIunits}
+\usepackage[iso]{isodate}
+\usepackage[parfill]{parskip}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{babel}
+\usepackage{color}
+\usepackage{commath}
+\usepackage{epstopdf}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{setspace}
+\usepackage{tikz}
+
+\usepackage[charter]{mathdesign}
+
+\definecolor{darkblue}{rgb}{0,0,.5}
+\definecolor{darkgreen}{rgb}{0,.5,0}
+
+\hypersetup{
+	breaklinks=false,
+	citecolor=darkgreen,
+	colorlinks=true,
+	linkcolor=black,
+	menucolor=black,
+	urlcolor=darkblue,
+}
+
+\setlength{\columnsep}{2cm}
+
+\DeclareMathOperator{\arcsinh}{arsinh}
+\DeclareMathOperator{\arsinh}{arsinh}
+\DeclareMathOperator{\asinh}{arsinh}
+\DeclareMathOperator{\card}{card}
+\DeclareMathOperator{\diam}{diam}
+
+\newcommand{\emesswert}{\left(\messwert \pm \messwert \right)}
+\newcommand{\e}[1]{\cdot 10^{#1}}
+\newcommand{\fehlt}{\textcolor{red}{Hier fehlen noch Inhalte.}}
+\newcommand{\half}{\frac{1}{2}}
+\newcommand{\laplace}{\vnabla^2}
+\newcommand{\messwert}{\textcolor{blue}{\square}}
+\newcommand{\vnabla}{\vec{\nabla}}
+
+\title{physik212 -- Versuch 241 \\ Wechselstromwiderstände, Phasenschieber, RC-Glieder und Schwingungen}
+\author{Martin Ueding \\ {\small \href{mailto:mu@uni-bonn.de}{mu@uni-bonn.de}}}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\vfill
+
+\begin{small}
+	Stellen in \textcolor{blue}{blau} werden bei der Versuchsdurchführung
+	eingetragen. Zum Beispiel werden Messwerte mit „$\messwert$“ markiert.
+	Stellen in \textcolor{red}{rot} müssen noch vor Versuchsbeginn
+	vervollständigt werden.
+\end{small}
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                 Einleitung                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Einleitung}
+
+In diesem Versuch vermessen wir Wechselstromwiderstände, erzeugen
+Lissajousfiguren mit einem Phasenschieber untersuchen frequenzabhängige
+Spannungsteiler sowie den elektrischen Schwingkreis.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                   Theorie                                   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Theorie}
+
+\subsection{Messen von Wechselstromwiderständen}
+
+Kapazitäten können mit einer Art Wheatstoneschen Brücke vermessen werden, dabei
+wird ein Oszillograph als Nullinstrument verwendet. Die Abgleichbedingung
+lautet für den verlustfreien Kondensator:
+\[ \frac{R_1}{R_2} = \frac{Z_0}{Z_x} = \frac{iC_x}{iC_0} \]
+
+Für Induktivitäten geht dies ähnlich, allerdings benötigt man ein zweites
+Potentiometer, damit man die Widerstände der Spulen ausgleichen kann. Die
+Abgleichbedingung lautet:
+\[ \frac{R_1}{R_2} = \frac{L_x}{L_0} = \frac{R_x + R'}{R_0 + R''} \]
+
+\subsection{Phasenschieber}
+
+Ein Phasenschieber kann eine Spannung von $\approx \unit0\rad$ bis $\approx
+\unit\pi\rad$ verschieben, ohne dass die Amplitude sich verändert. Dazu muss
+allerdings $R_1 = R_2$ gelten.
+
+\textcolor{red}{Hier Zeichnung abmalen.}
+
+\subsection{Schwingkreis}
+
+Der (angetriebene) Schwingkreis entspricht dem (angetriebenen) Drehpendel der
+Mechanik (siehe \ref{Aufgabe D}). Die Spannungen an den jeweiligen Bauteilen
+können als Funktionen der Ladung (oder Strom $I=\dot q$) ausgedrückt werden:
+\[ L \ddot q + R \dot q + \frac 1c q = U_E \cos(\omega t) \]
+
+Analog zum Drehpendel gibt es die Schwingungsgrößen:
+\[
+	\omega_0^2 = \frac{1}{LC}
+	, \quad
+	Q = \omega_0 \frac LC
+	, \quad
+	\omega_\text{max} = \omega_0 \sqrt{1 - \frac{1}{2 Q^2}}
+\]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                  Aufgaben                                   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Aufgaben}
+
+\subsection{Aufgabe A}
+
+Mit den zusätzlichen Widerständen $R'$ und $R''$ werden die Widerstände $R_x$
+und $R_0$ so verlängert, dass $L_x$ und $L_0$ das gleiche Verhältnis wie die
+Widerstände haben.
+
+\textcolor{red}{Phasendiagramm einfügen.}
+
+\subsection{Aufgabe B}
+
+Die beiden parallelen Pfade werden über die Spannung gleichgesetzt. Somit
+müssen die Gesamtspannung beider Teile entlang $U_E$ liegen. Zwischen den
+Punkten $A$ und $B$ liegt die Ausgangsspannung $U_{AB}$.
+
+Wenn $R_1 \neq R_2$, dann funktioniert das ganze weiterhin, allerdings ist
+$\abs{U_{AB}}$ dann abhängig vom Winkel $\phi$.
+
+Das ganze wird mit zwei Spulen oder Kondensatoren nicht so direkt
+funktionieren.
+
+Für $\phi \approx \unit 0 \rad$ muss $R \gg \frac 1{\omega C}$ und für $\phi
+\approx \unit \pi \rad$ muss $R \ll \frac 1{\omega C}$ gelten. Somit sollte $R$
+zwischen $0.1 \frac 1{\omega C}$ und $10 \frac 1{\omega C}$ verstellbar sein.
+
+Ein einzelner Kondensator oder Spule in Reihe können die Phase auch
+verschieben. Dabei ist die Amplitude jedoch von $C$ oder $L$ abhängig und man
+kann nur bis $\phi \approx \frac \pi 2$ schieben.
+
+\subsection{Aufgabe C}
+
+Der Maximalstrom im $R$-$C$-Zweig ist:
+\[
+	I_2 = \frac{U_E}{R} \tan(\theta)
+	, \quad
+	\tan(\theta) = \frac{|Z_C|}{|Z_R|} = \frac 1{\omega C R}
+\]
+
+\subsection{Aufgabe D}
+
+\label{Aufgabe D}
+
+Die Differentialgleichung für das Drehpendel:
+\[ I \ddot \phi + r \dot \phi + D \phi = F_0 \cos(\omega t) \]
+
+\subsection{Aufgabe E}
+
+\[
+	L \triangleq I
+	, \quad
+	R \triangleq r
+	, \quad
+	\frac 1C \triangleq D
+	, \quad
+	U_E \triangleq F_0
+\]
+
+Die Auslenkung $\phi$ entspricht der Ladung $q$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                    Aufbau, Durchführung und Auswertung                     %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Aufbau, Durchführung und Auswertung}
+
+Ohne Trenntrafo würde es zu einem Kurzschluss kommen, wenn $R_1 = \unit0\ohm$
+eingestellt wird. Dann würde Strom von einem Pol des Sinusgenerators zum
+Potentiometerabgriff, von dort zum Oszillograph, dort in die Erde und von der
+Erde wieder zum Sinusgenerator fließen, ohne einen Widerstand dazwischen.
+
+\subsection{Messung von Wechselstromwiderständen}
+
+\subsubsection{Aufgabe a}
+
+\label{Aufgabe a}
+
+\paragraph{Aufbau}
+
+Wir benutzen eine Art Wheatstonesche Brücke, um die Kapazität eines
+Kondensators zu bestimmen. Dazu benutzen wir einen bekannten Kondensator mit
+$C_0 = \unit \emesswert \farad$.
+
+\paragraph{Durchführung}
+
+Wir verstellen das Helipot (1000 Skalenteile), bis auf dem Oszillographen ein
+verschwindender Ausschlag angezeigt wird. Dies ist bei $x = \messwert$
+Skalenteilen erreicht.
+
+\paragraph{Auswertung}
+
+Die Abgleichbedingung liefert:
+\begin{equation}
+	\label{eq:a}
+	C_x = \frac{x}{1000} C_0 = \unit \emesswert \farad
+\end{equation}
+
+\subsubsection{Aufgabe b}
+
+\label{Aufgabe b}
+
+\paragraph{Aufbau}
+
+Wie in \ref{Aufgabe a} verwenden wir die Wheatstonesche Brücke, diesmal
+allerdings mit zwei Spulen und einem zweiten Helipot ($\messwert$ Skalenteile).
+Dabei hat die bekannte Spule eine Induktivität von $L_0 = \unit \emesswert
+\henry$.
+
+\paragraph{Durchführung}
+
+Wir stellen wieder das erste Helipot so ein, dass keine Spannung mehr fließt.
+Dies ist bei $x = \messwert$ erreicht.
+
+\paragraph{Auswertung}
+
+Analog zu \ref{Aufgabe a} liefert die Abgleichbedingung:
+
+\begin{equation}
+	\label{eq:b}
+	L_x = \frac{x}{1000} L_0 = \unit \emesswert \henry
+\end{equation}
+
+\subsubsection{Aufgabe c}
+
+\label{Aufgabe c}
+
+\paragraph{Aufbau}
+
+Wir schalten die Spule aus \ref{Aufgabe b} mit einem Spannungsmesser parallel
+und das ganze hinter einen Strommesser.
+
+\paragraph{Durchführung}
+
+Wir messen den Spulenwiderstand mit einem Digitalmultimeter auf: $R = \unit
+\emesswert \ohm$. Dann messen wir für eine gegebene Eingangswechselspannung
+($\omega = \unit \emesswert \radianpersecond)$) Spannung und Strom:
+\[
+	U = \unit \emesswert \volt
+	, \quad
+	I = \unit \emesswert \ampere
+\]
+
+Den Innenwiderstand der Messgeräte bestimmen wir auf:
+\[
+	R_U = \unit \emesswert \ohm
+	, \quad
+	R_I = \unit \emesswert \ohm
+\]
+
+\paragraph{Auswertung}
+
+Das Zeigerdiagramm ist in Abbildung \ref{fig:Aufgabe c} dargestellt. Dabei ist
+der Strom $I$ die reelle Achse. \textcolor{red}{Einwirkung der Messgeräte.}
+
+\begin{figure}[h!]
+	\centering
+	\begin{tikzpicture}
+		\draw[->] (0, 0) -- (6, 0) node[label=90:$U_R$] {};
+		\draw[->] (0, 0) -- (0, 4) node[label=0:$U_L$] {};
+		\draw[->] (0, 0) -- (6, 4) node[label=0:$U$] {};
+	\end{tikzpicture}
+	\caption{Zeigerdiagramm für \ref{Aufgabe c}}
+	\label{fig:Aufgabe c}
+\end{figure}
+
+Im Idealfall stehen Strom und Spannung folgendermaßen in Beziehung:
+\[ U = \sqrt{R^2 + \del{\omega L}^2} I \]
+
+Dies kann ich auflösen:
+\[
+L = \sqrt{\frac 1\omega \del{\del{\frac UI}^2 - R^2}}
+= \unit \emesswert \henry
+\]
+
+Aus dem Zeigerdiagramm folgt für die Phasenverschiebung:
+\[
+	\tan\del\phi = \frac{\abs{\omega L}}{\abs{U_R}}
+	, \quad
+	\tan = \unit \emesswert \rad
+\]
+
+\subsection{Phasenschieber}
+
+\subsubsection{Aufgabe d}
+
+\paragraph{Aufbau}
+
+Wir benutzen den Phasenschieber aus der Aufgabenstellung.
+
+\textcolor{blue}{Hier die Zeichnung aus der Aufgabenstellung abmalen.}
+
+Dabei lassen wir auf der einen Achse des Oszillographen die Eingangsspannung,
+auf der anderen Achse die Ausgangsspannung anzeigen.
+
+\paragraph{Durchführung}
+
+Wir variieren $R$ von $0$ bis $R_\text{max}$ und messen $U_R$ und $U_C$.
+Zuletzt entfernen wir den Widerstand $R$ um $R = \infty$ zu erreichen.
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{ccc}
+		$R$ & $U_R$ & $U_C$ \\
+		\hline
+		$\messwert$ & $\messwert$ & $\messwert$ \\
+			 \vdots & 	 \vdots & \vdots \\
+		$\infty$ & $\messwert$ & $\messwert$ \\
+	\end{tabular}
+\end{table}
+
+\paragraph{Auswertung}
+
+Ich zeichne ein maßstabsgetreues Zeigerdiagramm mit $U_E$ (Abbildung
+\ref{fig:Aufgabe d}). Jedes Paar $U_R$ und $U_C$ zeichne ich ein.
+
+Auf dem Oszillographen sehen wir diverse Lissajousfiguren. Dabei ist die
+Frequenz bei beiden Eingängen gleich, die Phase allerdings verschieden. Somit
+sind alle Figuren nur eine Ellipse.
+
+\paragraph{Lissajous-Figur}
+
+Eine Lissajous-Kurve $\mathcal L$ ist:
+\[
+	\mathcal L\del{\hat x, \hat y, \omega_x, \omega_y, \phi_x, \phi_y} =
+	\set{
+		(x, y) \in \mathbb R^2
+		\colon x = \hat x \cos\del{\omega_x t + \phi_x}
+		\wedge y = \hat y \cos\del{\omega_y t + \phi_y}
+		\wedge t \in \mathbb R
+	}
+\]
+
+Wenn $\frac{\omega_x}{\omega_y}$ eine rationale Zahl ist, ist die Kurve
+geschlossen und füllt nicht den gesamten Raum aus.
+
+Auf einem Oszillographen kann man diese sichtbar machen, in dem man einen
+Sinusgenerator an $x$, einen zweiten an $y$ anschließt.
+
+\subsection{frequenzabhängige Spannungsteiler}
+
+\subsubsection{Aufgabe e}
+
+\paragraph{Aufbau}
+
+Wir bauen nacheinander einen Tiefpass, einen Hochpass und einen Sperrfilter
+auf. An den Eingang schließen wir einen Signalgenerator, an den Ausgang hängen
+wir ein Spannungsmessgerät.
+
+Der Widerstand ist $R = \unit{100}\ohm$, die Kapazität ist $C = \unit{1.5}{\micro\farad}$.
+
+\paragraph{Durchführung}
+
+Für jede Schaltung messen wir die Ausgangsspannung in Abhängigkeit von der
+Eingangsfrequenz $\nu \in \unit{[200, 5000]}\hertz$. Dabei machen wir für jede
+Schaltung 11 Messpunkte, so dass die Eingangsspannung exponentiell wächst.
+Dabei halten wir die Eingangsspannung konstant.
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{cccc}
+		$\nu$ & $U_A$ & $U_A$ & $U_A$ \\
+		\hline
+		$\unit{ 200}\hertz$ & $\messwert$ & $\messwert$ & $\messwert$ \\
+		$\unit{ 275}\hertz$ & $\messwert$ & $\messwert$ & $\messwert$ \\
+		$\unit{ 380}\hertz$ & $\messwert$ & $\messwert$ & $\messwert$ \\
+		$\unit{ 525}\hertz$ & $\messwert$ & $\messwert$ & $\messwert$ \\
+		$\unit{ 724}\hertz$ & $\messwert$ & $\messwert$ & $\messwert$ \\
+		$\unit{1000}\hertz$ & $\messwert$ & $\messwert$ & $\messwert$ \\
+		$\unit{1379}\hertz$ & $\messwert$ & $\messwert$ & $\messwert$ \\
+		$\unit{1903}\hertz$ & $\messwert$ & $\messwert$ & $\messwert$ \\
+		$\unit{2626}\hertz$ & $\messwert$ & $\messwert$ & $\messwert$ \\
+		$\unit{3623}\hertz$ & $\messwert$ & $\messwert$ & $\messwert$ \\
+		$\unit{5000}\hertz$ & $\messwert$ & $\messwert$ & $\messwert$ \\
+	\end{tabular}
+\end{table}
+
+\paragraph{Auswertung}
+
+Für die Diagramme normiere ich die Frequenzen und Ausgangsspannungen wir folgt.
+Für Tief- (Abbildung \ref{fig:Aufgabe e Tiefpass}) und Hochpass (Abbildung
+\ref{fig:Aufgabe e Hochpass}) wird die Abszisse auf $\Omega = \nu R C$ normiert
+und die Ordinate auf $A = \frac{U_A}{U_E}$.
+
+Für den Sperrfilter (Abbildung \ref{fig:Aufgabe e Sperrfilter}) wir die
+Abszisse auf $\Omega = \frac{\nu}{\nu_0}$ gesetzt, dabei ist $\nu_0$ beim
+Minimum, das bei $\nu_0 = \unit{\messwert}{\hertz}$ liegt.
+
+Für die Ordinate lege ich außerdem noch eine $\deci\bel$-Skala fest. Bei $U_A =
+U_E$ sind es $\unit0{\deci\bel}$, bei der Hälfte der Spannungsamplitude
+(Viertel der Leistung) sind es nur noch ungefähr $\unit{-6}{\deci\bel}$. Für
+den Pegel gilt:
+\[ L = \unit{20 \log_{10} \del{\frac{U_A}{U_E}}}{\deci\bel} \]
+
+\subsubsection{Aufgabe f}
+
+Zu Tief- und Hochpass bestimme ich die Grenzfrequenz, die ich aus dem Diagramm
+ablese.
+\[
+	\nu_{\text{gr},\text{TP}} = \unit\emesswert\hertz
+	, \quad
+	\nu_{\text{gr},\text{HP}} = \unit\emesswert\hertz
+\]
+
+Die theoretische Grenzfrequenz sollte sein:
+\[
+	2 \pi \nu_\text{gr} = \omega_\text{gr} = \frac1{RC}
+	, \quad
+	\nu_\text{gr} = \unit{1061}\hertz
+\]
+
+\subsubsection{Aufgabe g}
+
+Aus dem Diagramm für den Sperrfilter kann ich die Unterdrückungsgüte ablesen.
+Dabei ist $\Delta \nu$ die Breite, innerhalb derer $U_A < \frac{U_A}{\sqrt{2}}$
+gilt.
+\[
+	Q'_\text{exp} = \frac{\nu_0}{\Delta \nu} = \frac{\emesswert}{\emesswert} = \emesswert
+\]
+
+Der theoretische Wert ist:
+\[
+	Q'_\text{theo} = \frac{1}{\omega_0 R C} = \messwert
+\]
+
+\textcolor{blue}{Die beiden Werte liegen (oder auch nicht) nah beieinander}.
+
+\subsubsection{Aufgabe h}
+
+Wenn die Frequenz, die abgeschwächt werden soll, nicht verändert werden soll,
+kann nur noch über den Widerstand die Unterdrückungsgüte eingestellt werden.
+Der Spulenwiderstand verschlechtert die Güte zusätzlich.
+
+\subsection{elektrischer Schwingkreis}
+
+\subsubsection{Aufgabe i}
+
+\paragraph{Aufbau}
+
+Wir benutzen einen Seriellschwingkreis aus realer Spule mit Widerstand $R_L$
+und einem Kondensator ($C = \unit{1.5}{\micro\farad}$). Der Schwingkreis wird
+mit einem Signalgenerator, der über einen Transformator angeschlossen ist,
+angetrieben. Über dem Kondensator wird die Spannung $U_C$ abgegriffen. Die
+Eingangsspannung $U_E$ messen wir mit einem Spannungsmessgerät.
+
+\paragraph{Durchführung}
+
+Wir messen die Resonanzkurve im Bereich von $\unit0\hertz$ bis
+$\unit{2000}\hertz$. Dabei achten wir daraus, dass die Amplitude der
+Eingangsspannung $U_E$ konstant bleibt. Außerdem vermessen wir den Resonanzbereich genauer als die Flanken.
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{cc}
+		$\nu$ & $U_C$ \\
+		\hline
+		$\messwert$ & $\messwert$ \\
+				\vdots & \vdots
+	\end{tabular}
+\end{table}
+
+\paragraph{Auswertung}
+
+Ich trage die Messwerte in ein $U_C$ gegen $\nu$ Diagramm (Abbildung \ref{fig:Aufgabe i}).
+
+Aus dem Diagramm bestimme ich $Q$ aus der Resonanzüberhöhung:
+\[
+	Q = \frac{U_A\del{\omega_\text{max}}}{U_A(0)} = \emesswert
+\]
+
+Sowie $Q$ aus der Resonanzbreite:
+\[
+	Q = \frac{\omega_0}{\Delta \omega} = \emesswert
+\]
+
+Außerdem bestimme ich $\omega_\text{max}$ aus $\omega_0$:
+\[
+	\omega_\text{max} = \omega_0 \sqrt{1 - \frac{1}{2 Q^2}} = \unit\emesswert\radianpersecond
+\]
+
+Sowie $L$:
+\[
+	L = \frac{1}{\omega_0^2 C} = \unit\emesswert\henry
+\]
+
+Und die Güte noch einmal:
+\[
+	Q = \omega_0 \frac{L}{R_L} = \emesswert
+\]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                  Resultat                                   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Resultat}
+
+\fehlt
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                 Diskussion                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Diskussion}
+
+\fehlt
+
+%\bibliography{../../zentrale_BibTeX/Central}
+%\bibliographystyle{plain}
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                    Plots                                    %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%\begin{figure}[h]
+%	\centering
+%	\input{d_zeiger.tex}
+%	\caption{Zeigerdiagramm, der erste Pfeil ist immer $U_R$, der zweite Pfeil $U_C$.}
+%	\label{fig:Aufgabe d}
+%\end{figure}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[height=0.4\textheight]{e_tief.pdf}
+	\caption{Tiefpass}
+	\label{fig:Aufgabe e Tiefpass}
+\end{figure}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[height=0.4\textheight]{e_hoch.pdf}
+	\caption{Hochpass}
+	\label{fig:Aufgabe e Hochpass}
+\end{figure}
+
+%\begin{figure}[h]
+%	\centering
+%	\includegraphics[height=0.45\textheight]{e_sperr.pdf}
+%	\caption{Sperrfilter}
+%	\label{fig:Aufgabe e Sperrfilter}
+%\end{figure}
+
+%\begin{figure}[h]
+%	\centering
+%	\includegraphics[height=0.45\textheight]{i.pdf}
+%	\caption{Resonanzkurve Schwingkreis}
+%	\label{fig:Aufgabe i}
+%\end{figure}
+
+\end{document}
+
+% vim: spell spelllang=de
